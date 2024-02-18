@@ -8,7 +8,9 @@ using GasMatic.Client.Core.Messages;
 
 namespace GasMatic.Client.Core.ViewModels;
 
-public partial class GasVolumeHistoryViewModel : ObservableObject
+public partial class GasVolumeHistoryViewModel : ObservableObject,
+    IRecipient<CalculationCompletedMessage>,
+    IRecipient<GasVolumeDataDeletedMessage>
 {
     private readonly IGasVolumeDatabase _gasVolumeDatabase;
 
@@ -27,8 +29,26 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
         _gasVolumeDatabase = gasVolumeDatabase;
 
         _items = [];
+        SubscribeToMessages();
         LoadRecordsFromDatabase();
-        SubscribeToMessenger();
+    }
+
+    private void SubscribeToMessages()
+    {
+        WeakReferenceMessenger.Default.Register<GasVolumeDataDeletedMessage>(this);
+        WeakReferenceMessenger.Default.Register<CalculationCompletedMessage>(this);
+    }
+
+    void IRecipient<CalculationCompletedMessage>.Receive(CalculationCompletedMessage message)
+    {
+        InsertRecord(message.Record);
+    }
+
+    void IRecipient<GasVolumeDataDeletedMessage>.Receive(GasVolumeDataDeletedMessage _) => Items.Clear();
+
+    private void InsertRecord(GasVolumeRecord record)
+    {
+        Items.Insert(0, new GasVolumeItemViewModel(record));
     }
 
     private async void LoadRecordsFromDatabase()
@@ -43,23 +63,6 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
         Items = new ObservableCollection<GasVolumeItemViewModel>(viewModels);
 
         IsLoading = false;
-    }
-
-    private void SubscribeToMessenger()
-    {
-        WeakReferenceMessenger.Default.Register<CalculationCompletedMessage>(
-            this,
-            (_, message) => InsertRecord(message.Record)
-        );
-        WeakReferenceMessenger.Default.Register<GasVolumeDataDeletedMessage>(
-            this,
-            (_, _) => Items.Clear()
-        );
-    }
-
-    private void InsertRecord(GasVolumeRecord record)
-    {
-        Items.Insert(0, new GasVolumeItemViewModel(record));
     }
 
     [RelayCommand]
