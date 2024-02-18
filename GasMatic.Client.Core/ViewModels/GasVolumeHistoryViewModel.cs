@@ -12,9 +12,9 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
 {
     private readonly IGasVolumeDatabase _gasVolumeDatabase;
 
-    private ObservableCollection<GasVolumeViewModel> _items;
+    private ObservableCollection<GasVolumeItemViewModel> _items;
 
-    public ObservableCollection<GasVolumeViewModel> Items
+    public ObservableCollection<GasVolumeItemViewModel> Items
     {
         get => _items;
         set => SetProperty(ref _items, value);
@@ -37,10 +37,10 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
 
         var calculations = await _gasVolumeDatabase.FetchGasVolumeCalculationsAsync();
         var viewModels = calculations
-            .Select(record => new GasVolumeViewModel(record))
+            .Select(record => new GasVolumeItemViewModel(record))
             .OrderByDescending(record => record.CalculatedDate)
             .ToList();
-        Items = new ObservableCollection<GasVolumeViewModel>(viewModels);
+        Items = new ObservableCollection<GasVolumeItemViewModel>(viewModels);
 
         IsLoading = false;
     }
@@ -59,11 +59,11 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
 
     private void InsertRecord(GasVolumeRecord record)
     {
-        Items.Insert(0, new GasVolumeViewModel(record));
+        Items.Insert(0, new GasVolumeItemViewModel(record));
     }
 
     [RelayCommand]
-    private async Task Delete(GasVolumeViewModel vm)
+    private async Task Delete(GasVolumeItemViewModel vm)
     {
         await _gasVolumeDatabase.DeleteGasVolumeCalculationById(vm.Id);
         Items.Remove(vm);

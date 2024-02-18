@@ -2,7 +2,7 @@ using GasMatic.Client.Core.Features.GasVolume.Domain;
 
 namespace GasMatic.Client.Core.ViewModels;
 
-public class GasVolumeViewModel(GasVolumeRecord record)
+public class GasVolumeItemViewModel(GasVolumeRecord record)
 {
     public int Id => record.Id;
     public string NominalPipeSize => NominalPipeSizeExtensions.Label((NominalPipeSize)record.NominalPipeSize);
