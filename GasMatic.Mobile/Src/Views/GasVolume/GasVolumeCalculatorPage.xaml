@@ -2,7 +2,8 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:devExpressControls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:controls="clr-namespace:GasMatic.Mobile.Views.GasVolume.Controls"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
              x:Class="GasMatic.Mobile.Views.GasVolume.GasVolumeCalculatorPage"
              x:DataType="viewModels:GasVolumeCalculatorViewModel"
@@ -13,24 +14,8 @@
                              Spacing="10">
 
             <!-- Nominal Pipe Size -->
-            <Label FontSize="20">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            Nominal Pipe Size - DN (
-                        </Span>
-                        <Span TextColor="MediumPurple"
-                              FontAttributes="Bold">
-                            mm
-                        </Span>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            )
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <controls:MeasurementLabel MeasurementType="Nominal Pipe Size - DN"
+                                       Unit="mm" />
 
             <Border Style="{StaticResource CustomBorder}">
                 <Border.StrokeShape>
@@ -54,7 +39,7 @@
             </Border>
 
             <!-- NPS Bottom Sheet -->
-            <controls:BottomSheet State="{Binding NpsSheetState }">
+            <devExpressControls:BottomSheet State="{Binding NpsSheetState }">
                 <CollectionView ItemsSource="{Binding  NominalPipeSizeChoices}"
                                 SelectionMode="None">
 
@@ -90,8 +75,8 @@
 
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer
-                                        Command="{Binding 
-                                        Source={RelativeSource AncestorType={x:Type viewModels:GasVolumeCalculatorViewModel}}, 
+                                        Command="{Binding
+                                        Source={RelativeSource AncestorType={x:Type viewModels:GasVolumeCalculatorViewModel}},
                                         Path=SelectNominalPipeSizeCommand}"
                                         CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
@@ -99,27 +84,11 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </controls:BottomSheet>
+            </devExpressControls:BottomSheet>
 
             <!-- Length -->
-            <Label FontSize="20">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            Length (
-                        </Span>
-                        <Span TextColor="MediumPurple"
-                              FontAttributes="Bold">
-                            m
-                        </Span>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            )
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <controls:MeasurementLabel MeasurementType="Length"
+                                       Unit="m" />
 
             <Border Style="{StaticResource CustomBorder}">
                 <Border.StrokeShape>
@@ -134,24 +103,8 @@
             </Border>
 
             <!-- Pressure -->
-            <Label FontSize="20">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            Pressure (
-                        </Span>
-                        <Span TextColor="MediumPurple"
-                              FontAttributes="Bold">
-                            mbar
-                        </Span>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            )
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <controls:MeasurementLabel MeasurementType="Pressure"
+                                       Unit="mbar" />
 
 
             <FlexLayout Direction="Row"
@@ -213,7 +166,7 @@
             </Border>
 
             <!-- NPS Bottom Sheet -->
-            <controls:BottomSheet State="{Binding PressureSheetState }">
+            <devExpressControls:BottomSheet State="{Binding PressureSheetState }">
                 <CollectionView ItemsSource="{Binding  PressureChoices}"
                                 SelectionMode="None">
 
@@ -259,7 +212,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </controls:BottomSheet>
+            </devExpressControls:BottomSheet>
 
             <!-- Gas Volume -->
             <Button Text="Calculate"
@@ -272,25 +225,9 @@
                     Margin="0,10"
                     Command="{Binding SubmitCommand}" />
 
-            <Label FontSize="20"
-                   HorizontalOptions="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            Gas Volume (
-                        </Span>
-                        <Span TextColor="MediumPurple"
-                              FontAttributes="Bold">
-                            m³
-                        </Span>
-                        <Span TextColor="Silver"
-                              FontAttributes="Bold">
-                            )
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+            <controls:MeasurementLabel MeasurementType="Gas Volume"
+                                       Unit="m³"
+                                       HorizontalOptions="Center" />
 
             <Label HorizontalOptions="Center"
                    FontSize="24"
