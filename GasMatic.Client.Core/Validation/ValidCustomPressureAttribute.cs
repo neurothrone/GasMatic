@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using GasMatic.Client.Core.ViewModels;
 
-namespace GasMatic.Client.Core.Validators;
+namespace GasMatic.Client.Core.Validation;
 
 public class ValidCustomPressureAttribute : ValidationAttribute
 {
