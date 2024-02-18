@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMatic.Mobile", "GasMatic.Mobile\GasMatic.Mobile.csproj", "{3D43F6FE-5D85-48AB-83D2-8EB3A244CF72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMatic.Client.Core", "GasMatic.Client.Core\GasMatic.Client.Core.csproj", "{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{3D43F6FE-5D85-48AB-83D2-8EB3A244CF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D43F6FE-5D85-48AB-83D2-8EB3A244CF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D43F6FE-5D85-48AB-83D2-8EB3A244CF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
