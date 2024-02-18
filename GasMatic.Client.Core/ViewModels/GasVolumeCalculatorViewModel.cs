@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -15,8 +14,8 @@ namespace GasMatic.Client.Core.ViewModels;
 
 public partial class GasVolumeCalculatorViewModel : ObservableValidator
 {
-    private readonly IGasVolumeDatabase _gasVolumeDatabase = new GasVolumeDatabase();
-    private readonly IGasVolumeService _gasVolumeService = new GasVolumeService();
+    private readonly IGasVolumeDatabase _gasVolumeDatabase;
+    private readonly IGasVolumeService _gasVolumeService;
 
     private const int RoundToDecimals = 3;
     public const string DoubleValueRegex = @"^\d+(\.\d+)?$";
@@ -68,8 +67,13 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator
 
     public AsyncRelayCommand SubmitCommand { get; }
 
-    public GasVolumeCalculatorViewModel()
+    public GasVolumeCalculatorViewModel(
+        IGasVolumeDatabase gasVolumeDatabase,
+        IGasVolumeService gasVolumeService)
     {
+        _gasVolumeDatabase = gasVolumeDatabase;
+        _gasVolumeService = gasVolumeService;
+
         SelectedNominalPipeSize = NominalPipeSizeChoices.First();
         SelectedPressure = PressureChoices.First();
 

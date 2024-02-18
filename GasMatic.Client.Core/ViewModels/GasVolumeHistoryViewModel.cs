@@ -10,7 +10,7 @@ namespace GasMatic.Client.Core.ViewModels;
 
 public partial class GasVolumeHistoryViewModel : ObservableObject
 {
-    private readonly IGasVolumeDatabase _gasVolumeDatabase = new GasVolumeDatabase();
+    private readonly IGasVolumeDatabase _gasVolumeDatabase;
 
     private ObservableCollection<GasVolumeViewModel> _items;
 
@@ -22,8 +22,10 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
 
     [ObservableProperty] private bool _isLoading;
 
-    public GasVolumeHistoryViewModel()
+    public GasVolumeHistoryViewModel(IGasVolumeDatabase gasVolumeDatabase)
     {
+        _gasVolumeDatabase = gasVolumeDatabase;
+
         _items = [];
         LoadRecordsFromDatabase();
         SubscribeToMessenger();
@@ -36,7 +38,7 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
         var calculations = await _gasVolumeDatabase.FetchGasVolumeCalculationsAsync();
         var viewModels = calculations
             .Select(record => new GasVolumeViewModel(record))
-            .OrderByDescending(record => record.CalculatedAt)
+            .OrderByDescending(record => record.CalculatedDate)
             .ToList();
         Items = new ObservableCollection<GasVolumeViewModel>(viewModels);
 

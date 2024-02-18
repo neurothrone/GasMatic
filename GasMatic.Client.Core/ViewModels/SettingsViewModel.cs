@@ -10,13 +10,21 @@ namespace GasMatic.Client.Core.ViewModels;
 
 public partial class SettingsViewModel : ObservableObject
 {
-    private readonly IAppInteractionsService _appInteractionsService = new AppInteractionsService();
-    private const string NominalPipeSizeUrl = "https://en.wikipedia.org/wiki/Nominal_Pipe_Size";
+    private readonly IAppInteractionsService _appInteractionsService;
+    private readonly IGasVolumeDatabase _gasVolumeDatabase;
 
-    private readonly IGasVolumeDatabase _gasVolumeDatabase = new GasVolumeDatabase();
+    private const string NominalPipeSizeUrl = "https://en.wikipedia.org/wiki/Nominal_Pipe_Size";
 
     [ObservableProperty] private BottomSheetState _deleteDataSheetState = BottomSheetState.Hidden;
     [ObservableProperty] private double _deleteSliderValue;
+
+    public SettingsViewModel(
+        IAppInteractionsService appInteractionsService,
+        IGasVolumeDatabase gasVolumeDatabase)
+    {
+        _appInteractionsService = appInteractionsService;
+        _gasVolumeDatabase = gasVolumeDatabase;
+    }
 
     [RelayCommand]
     private async Task OpenNpsWebLink() => await _appInteractionsService.OpenBrowserAsync(NominalPipeSizeUrl);

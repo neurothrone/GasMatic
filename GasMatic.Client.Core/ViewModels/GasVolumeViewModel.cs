@@ -9,9 +9,9 @@ public class GasVolumeViewModel(GasVolumeRecord record)
     public double Length => record.Length;
     public double Pressure => record.Pressure;
     public double GasVolume => record.GasVolume;
-    public DateTime CalculatedAt => record.CalculatedDate;
+    public DateTime CalculatedDate => record.CalculatedDate;
 
 
     // Format: Feb 10, 2024
-    public string CalculatedAtFormatted => CalculatedAt.ToString("MMM d, yyyy");
+    public string CalculatedAtFormatted => CalculatedDate.ToString("MMM d, yyyy");
 }
