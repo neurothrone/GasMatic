@@ -5,18 +5,18 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using DevExpress.Maui.Controls;
+using GasMatic.Client.Core.Features.GasVolume;
+using GasMatic.Client.Core.Features.GasVolume.Database;
+using GasMatic.Client.Core.Features.GasVolume.Domain;
 using GasMatic.Client.Core.Messages;
-using GasMatic.Client.Core.Services.Database;
-using GasMatic.Client.Core.Services.Domain;
-using GasMatic.Client.Core.Services.GasVolume;
 using GasMatic.Client.Core.Validation;
 
 namespace GasMatic.Client.Core.ViewModels;
 
 public partial class GasVolumeCalculatorViewModel : ObservableValidator
 {
-    private readonly IGasVolumeRepository _gasVolumeRepository = new GasVolumeRepository();
-    private readonly GasVolumeService _gasVolumeService = new();
+    private readonly IGasVolumeDatabase _gasVolumeDatabase = new GasVolumeDatabase();
+    private readonly IGasVolumeService _gasVolumeService = new GasVolumeService();
 
     private const int RoundToDecimals = 3;
     public const string DoubleValueRegex = @"^\d+(\.\d+)?$";
@@ -143,7 +143,7 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator
         double gasVolume
     )
     {
-        var savedRecord = await _gasVolumeRepository.SaveGasVolumeRecord(
+        var savedRecord = await _gasVolumeDatabase.SaveGasVolumeRecord(
             new GasVolumeRecord(
                 (int)nominalPipeSize,
                 length,

@@ -2,9 +2,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using DevExpress.Maui.Controls;
+using GasMatic.Client.Core.Features.GasVolume.Database;
 using GasMatic.Client.Core.Messages;
 using GasMatic.Client.Core.Services;
-using GasMatic.Client.Core.Services.Database;
 
 namespace GasMatic.Client.Core.ViewModels;
 
@@ -13,7 +13,7 @@ public partial class SettingsViewModel : ObservableObject
     private readonly IAppInteractionsService _appInteractionsService = new AppInteractionsService();
     private const string NominalPipeSizeUrl = "https://en.wikipedia.org/wiki/Nominal_Pipe_Size";
 
-    private readonly IGasVolumeRepository _gasVolumeRepository = new GasVolumeRepository();
+    private readonly IGasVolumeDatabase _gasVolumeDatabase = new GasVolumeDatabase();
 
     [ObservableProperty] private BottomSheetState _deleteDataSheetState = BottomSheetState.Hidden;
     [ObservableProperty] private double _deleteSliderValue;
@@ -32,7 +32,7 @@ public partial class SettingsViewModel : ObservableObject
     {
         // TODO: use loading?
         // await delete
-        await _gasVolumeRepository.DeleteAllAsync();
+        await _gasVolumeDatabase.DeleteAllAsync();
 
         DeleteDataSheetState = BottomSheetState.Hidden;
         DeleteSliderValue = 0;

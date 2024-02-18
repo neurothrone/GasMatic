@@ -1,5 +1,7 @@
+using GasMatic.Client.Core.Features.GasVolume.Domain;
+
 namespace GasMatic.Client.Core.Messages;
 
-public record CalculationCompletedMessage(Services.Domain.GasVolumeRecord Record);
+public record CalculationCompletedMessage(GasVolumeRecord Record);
 
 public record GasVolumeDataDeletedMessage();

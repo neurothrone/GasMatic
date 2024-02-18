@@ -1,8 +1,8 @@
-using GasMatic.Client.Core.Services.Domain;
+using GasMatic.Client.Core.Features.GasVolume.Domain;
 
-namespace GasMatic.Client.Core.Services.Database;
+namespace GasMatic.Client.Core.Features.GasVolume.Database;
 
-public interface IGasVolumeRepository
+public interface IGasVolumeDatabase
 {
     Task<GasVolumeRecord> SaveGasVolumeRecord(GasVolumeRecord record);
     Task<List<GasVolumeRecord>> FetchGasVolumeCalculationsAsync();

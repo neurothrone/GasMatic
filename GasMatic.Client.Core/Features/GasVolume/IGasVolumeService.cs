@@ -1,6 +1,6 @@
-using GasMatic.Client.Core.Services.Domain;
+using GasMatic.Client.Core.Features.GasVolume.Domain;
 
-namespace GasMatic.Client.Core.Services.GasVolume;
+namespace GasMatic.Client.Core.Features.GasVolume;
 
 public interface IGasVolumeService
 {

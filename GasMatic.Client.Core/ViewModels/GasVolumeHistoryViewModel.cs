@@ -2,15 +2,15 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using GasMatic.Client.Core.Features.GasVolume.Database;
+using GasMatic.Client.Core.Features.GasVolume.Domain;
 using GasMatic.Client.Core.Messages;
-using GasMatic.Client.Core.Services.Database;
-using GasMatic.Client.Core.Services.Domain;
 
 namespace GasMatic.Client.Core.ViewModels;
 
 public partial class GasVolumeHistoryViewModel : ObservableObject
 {
-    private readonly IGasVolumeRepository _gasVolumeRepository = new GasVolumeRepository();
+    private readonly IGasVolumeDatabase _gasVolumeDatabase = new GasVolumeDatabase();
 
     private ObservableCollection<GasVolumeViewModel> _items;
 
@@ -33,7 +33,7 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
     {
         IsLoading = true;
 
-        var calculations = await _gasVolumeRepository.FetchGasVolumeCalculationsAsync();
+        var calculations = await _gasVolumeDatabase.FetchGasVolumeCalculationsAsync();
         var viewModels = calculations
             .Select(record => new GasVolumeViewModel(record))
             .OrderByDescending(record => record.CalculatedAt)
@@ -63,7 +63,7 @@ public partial class GasVolumeHistoryViewModel : ObservableObject
     [RelayCommand]
     private async Task Delete(GasVolumeViewModel vm)
     {
-        await _gasVolumeRepository.DeleteGasVolumeCalculationById(vm.Id);
+        await _gasVolumeDatabase.DeleteGasVolumeCalculationById(vm.Id);
         Items.Remove(vm);
     }
 }

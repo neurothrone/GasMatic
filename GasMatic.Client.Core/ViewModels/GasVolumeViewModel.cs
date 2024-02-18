@@ -1,4 +1,4 @@
-using GasMatic.Client.Core.Services.Domain;
+using GasMatic.Client.Core.Features.GasVolume.Domain;
 
 namespace GasMatic.Client.Core.ViewModels;
 
@@ -9,7 +9,7 @@ public class GasVolumeViewModel(GasVolumeRecord record)
     public double Length => record.Length;
     public double Pressure => record.Pressure;
     public double GasVolume => record.GasVolume;
-    public DateTime CalculatedAt => record.CalculatedAt;
+    public DateTime CalculatedAt => record.CalculatedDate;
 
 
     // Format: Feb 10, 2024

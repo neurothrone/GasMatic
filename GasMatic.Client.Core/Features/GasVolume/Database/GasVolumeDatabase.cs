@@ -1,9 +1,9 @@
-using GasMatic.Client.Core.Services.Domain;
+using GasMatic.Client.Core.Features.GasVolume.Domain;
 using SQLite;
 
-namespace GasMatic.Client.Core.Services.Database;
+namespace GasMatic.Client.Core.Features.GasVolume.Database;
 
-public class GasVolumeRepository : IGasVolumeRepository
+public class GasVolumeDatabase : IGasVolumeDatabase
 {
     private SQLiteAsyncConnection _database;
 
@@ -30,7 +30,7 @@ public class GasVolumeRepository : IGasVolumeRepository
             Length = record.Length,
             Pressure = record.Pressure,
             GasVolume = record.GasVolume,
-            CalculatedAt = record.CalculatedAt
+            CalculatedDate = record.CalculatedDate
         };
 
         await _database.InsertAsync(calculation);
@@ -40,7 +40,7 @@ public class GasVolumeRepository : IGasVolumeRepository
             calculation.Length,
             calculation.Pressure,
             calculation.GasVolume,
-            calculation.CalculatedAt,
+            calculation.CalculatedDate,
             calculation.Id
         );
     }
@@ -51,7 +51,7 @@ public class GasVolumeRepository : IGasVolumeRepository
 
         var calculations = await _database.Table<GasVolumeCalculation>().ToListAsync() ?? [];
         return calculations.Select(c =>
-            new GasVolumeRecord(c.NominalPipeSize, c.Length, c.Pressure, c.GasVolume, c.CalculatedAt, c.Id)
+            new GasVolumeRecord(c.NominalPipeSize, c.Length, c.Pressure, c.GasVolume, c.CalculatedDate, c.Id)
         ).ToList();
     }
 

@@ -1,4 +1,4 @@
-namespace GasMatic.Client.Core.Services.Database;
+namespace GasMatic.Client.Core.Features.GasVolume.Database;
 
 public static class DatabaseConstants
 {
