@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:viewmodels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
+             x:Class="GasMatic.Mobile.Views.GasVolumeCalculatorPage"
+             x:DataType="viewmodels:GasVolumeCalculatorViewModel"
+             HideSoftInputOnTapped="True">
+
+    <ScrollView VerticalScrollBarVisibility="{OnIdiom Phone=Never, Default=Always}">
+        <VerticalStackLayout Margin="10"
+                             Spacing="10">
+
+            <!-- Nominal Pipe Size -->
+            <Label FontSize="20">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            Nominal Pipe Size - DN (
+                        </Span>
+                        <Span TextColor="MediumPurple"
+                              FontAttributes="Bold">
+                            mm
+                        </Span>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            )
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Border Style="{StaticResource CustomBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0,45,0,0" />
+                </Border.StrokeShape>
+
+                <FlexLayout Direction="Row"
+                            JustifyContent="SpaceBetween"
+                            AlignItems="Center">
+
+                    <Label Text="{Binding SelectedNominalPipeSize}"
+                           FontSize="18"
+                           Padding="5,0,0,0" />
+                    <ImageButton Source="icon_menu_open.png"
+                                 BackgroundColor="MediumSlateBlue"
+                                 BorderWidth="0"
+                                 Padding="0,10"
+                                 Margin="0,20"
+                                 Command="{Binding ShowNominalPipeSizeSelectionSheetCommand}" />
+                </FlexLayout>
+            </Border>
+
+            <!-- NPS Bottom Sheet -->
+            <controls:BottomSheet State="{Binding NpsSheetState }">
+                <CollectionView ItemsSource="{Binding  NominalPipeSizeChoices}"
+                                SelectionMode="None">
+
+                    <CollectionView.Header>
+                        <VerticalStackLayout Padding="0,10">
+                            <Label Text="Select Nominal Pipe Size"
+                                   TextColor="Silver"
+                                   HorizontalTextAlignment="Center"
+                                   FontSize="20" />
+                        </VerticalStackLayout>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="1" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type x:String}">
+                            <Border Stroke="MediumSlateBlue"
+                                    BackgroundColor="SlateBlue"
+                                    Padding="10,15">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="0" />
+                                </Border.StrokeShape>
+
+                                <Label Text="{Binding .}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center" />
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 
+                                        Source={RelativeSource AncestorType={x:Type viewmodels:GasVolumeCalculatorViewModel}}, 
+                                        Path=SelectNominalPipeSizeCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </controls:BottomSheet>
+
+            <!-- Length -->
+            <Label FontSize="20">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            Length (
+                        </Span>
+                        <Span TextColor="MediumPurple"
+                              FontAttributes="Bold">
+                            m
+                        </Span>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            )
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Border Style="{StaticResource CustomBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0,45,0,0" />
+                </Border.StrokeShape>
+
+                <Entry Placeholder="Enter length in meters"
+                       FontSize="18"
+                       Keyboard="Numeric"
+                       Style="{StaticResource CustomEntry}"
+                       Text="{Binding Length, Mode=TwoWay}" />
+            </Border>
+
+            <!-- Pressure -->
+            <Label FontSize="20">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            Pressure (
+                        </Span>
+                        <Span TextColor="MediumPurple"
+                              FontAttributes="Bold">
+                            mbar
+                        </Span>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            )
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+
+            <FlexLayout Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        AlignItems="Center"
+                        Margin="0,0,0,10">
+
+                <Label Text="Use Custom Pressure?"
+                       TextColor="Silver"
+                       FontSize="16" />
+                <Switch IsToggled="{Binding IsCustomPressure}" />
+            </FlexLayout>
+
+            <!-- Pressure Entry -->
+            <Border Style="{StaticResource CustomBorder}"
+                    IsVisible="{Binding IsCustomPressure}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0,45,0,0" />
+                </Border.StrokeShape>
+
+                <Entry Placeholder="Enter pressure in mbar"
+                       FontSize="18"
+                       Keyboard="Numeric"
+                       Style="{StaticResource CustomEntry}"
+                       IsVisible="{Binding IsCustomPressure}"
+                       Text="{Binding CustomPressure}" />
+            </Border>
+
+            <!-- Pressure Picker -->
+            <Border Style="{StaticResource CustomBorder}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="0,45,0,0" />
+                </Border.StrokeShape>
+
+                <Border.Triggers>
+                    <DataTrigger TargetType="Border"
+                                 Binding="{Binding IsCustomPressure}"
+                                 Value="True">
+                        <Setter Property="IsVisible"
+                                Value="False" />
+                    </DataTrigger>
+                </Border.Triggers>
+
+                <FlexLayout Direction="Row"
+                            JustifyContent="SpaceBetween"
+                            AlignItems="Center">
+
+                    <Label Text="{Binding  SelectedPressure}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           Margin="3,0,0,0" />
+                    <ImageButton Source="icon_menu_open.png"
+                                 BackgroundColor="MediumSlateBlue"
+                                 BorderWidth="0"
+                                 Padding="0,10"
+                                 Margin="0,20"
+                                 Command="{Binding ShowPressureSelectionSheetCommand}" />
+                </FlexLayout>
+            </Border>
+
+            <!-- NPS Bottom Sheet -->
+            <controls:BottomSheet State="{Binding PressureSheetState }">
+                <CollectionView ItemsSource="{Binding  PressureChoices}"
+                                SelectionMode="None">
+
+                    <CollectionView.Header>
+                        <VerticalStackLayout Padding="0,10">
+                            <Label Text="Select Pressure"
+                                   TextColor="Silver"
+                                   HorizontalTextAlignment="Center"
+                                   FontSize="20" />
+                        </VerticalStackLayout>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                           ItemSpacing="1" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="MediumSlateBlue"
+                                    BackgroundColor="SlateBlue"
+                                    Padding="10,15">
+
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="0" />
+                                </Border.StrokeShape>
+
+                                <Label Text="{Binding .}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       HorizontalTextAlignment="Center" />
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding 
+                                        Source={RelativeSource 
+                                        AncestorType={x:Type viewmodels:GasVolumeCalculatorViewModel}}, 
+                                        Path=SelectPressureCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </controls:BottomSheet>
+
+            <!-- Gas Volume -->
+            <Button Text="Calculate"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontFamily="Roboto-Regular"
+                    FontSize="18"
+                    BackgroundColor="MediumSlateBlue"
+                    CornerRadius="20"
+                    Margin="0,10"
+                    Command="{Binding SubmitCommand}" />
+
+            <Label FontSize="20"
+                   HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            Gas Volume (
+                        </Span>
+                        <Span TextColor="MediumPurple"
+                              FontAttributes="Bold">
+                            m³
+                        </Span>
+                        <Span TextColor="Silver"
+                              FontAttributes="Bold">
+                            )
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label HorizontalOptions="Center"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   Text="{Binding GasVolume}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

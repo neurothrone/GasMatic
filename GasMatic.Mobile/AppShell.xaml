@@ -1,15 +1,117 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Shell
-    x:Class="GasMatic.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:GasMatic.Mobile"
-    Shell.FlyoutBehavior="Disabled"
-    Title="GasMatic.Mobile">
+    xmlns:views="clr-namespace:GasMatic.Mobile.Views"
+    x:Class="GasMatic.Mobile.AppShell"
+    FlyoutBehavior="{OnIdiom Phone=Flyout, Default=Locked}"
+    Title="GasMatic"
+    TitleColor="White">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.FlyoutBackground>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,2">
+            <GradientStop Color="{StaticResource OffBlack}"
+                          Offset="0.2" />
+            <GradientStop Color="DarkSlateBlue"
+                          Offset="0.6" />
+            <GradientStop Color="SlateBlue"
+                          Offset="0.9" />
+            <!-- <GradientStop Color="MediumSlateBlue" -->
+            <!--               Offset="1.0" /> -->
+        </LinearGradientBrush>
+    </Shell.FlyoutBackground>
+
+    <!-- This is used to give the illusion that Effect Calculator is disabled -->
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <FlexLayout Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        Margin="14,11">
+                <HorizontalStackLayout Spacing="14">
+                    <Image Source="icon_electric_meter.png"
+                           HeightRequest="22"
+                           WidthRequest="22" />
+
+                    <Label Text="Effect Calculator"
+                           TextColor="Silver"
+                           FontAttributes="Bold"
+                           FontFamily="Roboto-Regular"
+                           VerticalTextAlignment="Center" />
+                </HorizontalStackLayout>
+
+                <Image Source="icon_construction.png"
+                       HeightRequest="22"
+                       WidthRequest="22" />
+            </FlexLayout>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+    <!-- Gas Volume Calculator -->
+    <FlyoutItem Title="Gas Volume Calculator"
+                FlyoutIcon="icon_valve.png">
+
+        <Tab Title="Calculator"
+             Icon="icon_calculate.png">
+            <ShellContent
+                Title="Gas Volume Calculator"
+                ContentTemplate="{DataTemplate views:GasVolumeCalculatorPage}"
+                Route="GasVolumeCalculatorPage" />
+        </Tab>
+        <Tab Title="History"
+             Icon="icon_work_history.png">
+            <ShellContent
+                Title="Gas Volume History"
+                ContentTemplate="{DataTemplate views:GasVolumeHistoryPage}"
+                Route="GasVolumeHistoryPage" />
+        </Tab>
+    </FlyoutItem>
+
+    <!-- Effect Calculator -->
+    <MenuItem Text="Effect Calculator"
+              IconImageSource="icon_electric_meter.png"
+              IsEnabled="False">
+    </MenuItem>
+
+    <!-- <FlyoutItem Title="Effect Calculator" -->
+    <!--             FlyoutIcon="icon_electric_meter.png" -->
+    <!--             IsEnabled="False"> -->
+    <!-- -->
+    <!--     <Tab Title="Calculator" -->
+    <!--          Icon="icon_calculate.png"> -->
+    <!-- -->
+    <!--         <ShellContent -->
+    <!--             Title="Effect Calculator" -->
+    <!--             ContentTemplate="{DataTemplate views:EffectCalculatorPage}" -->
+    <!--             Route="EffectCalculatorPage" /> -->
+    <!--     </Tab> -->
+    <!--     <Tab Title="History" -->
+    <!--          Icon="icon_work_history.png"> -->
+    <!--         <ShellContent -->
+    <!--             Title="Effect History" -->
+    <!--             ContentTemplate="{DataTemplate views:EffectHistoryPage}" -->
+    <!--             Route="EffectHistoryPage" /> -->
+    <!--     </Tab> -->
+    <!-- </FlyoutItem> -->
+
+    <!-- About & Settings -->
+    <FlyoutItem Title="About"
+                FlyoutIcon="icon_info.png">
+
+        <ShellContent
+            Title="About"
+            ContentTemplate="{DataTemplate views:AboutPage}"
+            Route="AboutPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings"
+                FlyoutIcon="icon_settings.png">
+
+        <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate views:SettingsPage}"
+            Route="SettingsPage" />
+    </FlyoutItem>
 
 </Shell>

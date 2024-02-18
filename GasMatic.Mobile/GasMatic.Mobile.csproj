@@ -13,6 +13,9 @@
         either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
+        <!-- Required for DevExpress -->
+        <UseInterpreter>true</UseInterpreter>
+
         <OutputType>Exe</OutputType>
         <RootNamespace>GasMatic.Mobile</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -21,10 +24,10 @@
         <Nullable>enable</Nullable>
 
         <!-- Display name -->
-        <ApplicationTitle>GasMatic.Mobile</ApplicationTitle>
+        <ApplicationTitle>GasMatic</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.gasmatic.mobile</ApplicationId>
+        <ApplicationId>tech.neurothrone.gasmatic</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

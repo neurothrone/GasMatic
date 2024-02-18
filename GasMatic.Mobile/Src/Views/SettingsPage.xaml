@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:converters="clr-namespace:GasMatic.Client.Converters"
+             xmlns:viewmodel="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
+             x:Class="GasMatic.Mobile.Views.SettingsPage"
+             x:DataType="viewmodel:SettingsViewModel">
+
+    <ContentPage.Resources>
+        <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <TableView Intent="Settings">
+            <TableRoot>
+                <TableSection Title="Preferences">
+                    <SwitchCell Text="Dark Mode"
+                                On="True"
+                                OnColor="MediumPurple" />
+                </TableSection>
+                <TableSection Title="Gas Volume">
+                    <ImageCell Text="Learn more about NPS standards"
+                               Detail="This will open a browser"
+                               ImageSource="icon_link.png"
+                               Command="{Binding OpenNpsWebLinkCommand}" />
+                </TableSection>
+                <TableSection Title="Data">
+                    <ImageCell Text="Delete Your Data"
+                               Detail="This will delete all of your data on the device"
+                               ImageSource="icon_folder_delete.png"
+                               Command="{Binding ShowDeleteDataSheetCommand}" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+
+        <controls:BottomSheet State="{Binding DeleteDataSheetState}">
+            <VerticalStackLayout Margin="10" Spacing="10">
+                <Label Text="Delete All Data"
+                       FontSize="22"
+                       FontAttributes="Bold" />
+                <Label Text="Are you sure? This will delete all of your data on the device."
+                       FontSize="16" />
+                <Border Stroke="Transparent"
+                        BackgroundColor="DarkRed"
+                        Padding="10">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15" />
+                    </Border.StrokeShape>
+
+                    <FlexLayout Direction="Row">
+                        <Image Source="icon_info.png" />
+                        <Label Text="You must drag the slider to the end to confirm."
+                               FontSize="14"
+                               VerticalTextAlignment="Center"
+                               Padding="5,0,0,0" />
+                    </FlexLayout>
+
+
+                </Border>
+
+                <Slider x:Name="Slider"
+                        Margin="0,10"
+                        Minimum="0"
+                        Maximum="100"
+                        MinimumTrackColor="Red"
+                        MaximumTrackColor="DarkRed"
+                        Value="{Binding DeleteSliderValue, Mode=TwoWay}" />
+
+                <Button
+                    IsVisible="{Binding Source={x:Reference Slider}, Path=Value,
+                            Converter={StaticResource IntToBoolConverter}}"
+                    Text="Delete All Data"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    BackgroundColor="DarkRed"
+                    TextColor="White"
+                    Command="{Binding DeleteAllDataCommand}" />
+            </VerticalStackLayout>
+        </controls:BottomSheet>
+    </Grid>
+</ContentPage>
