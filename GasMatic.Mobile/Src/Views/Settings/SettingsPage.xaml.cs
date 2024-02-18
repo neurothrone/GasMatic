@@ -1,4 +1,4 @@
-namespace GasMatic.Mobile.Views;
+namespace GasMatic.Mobile.Views.Settings;
 
 public partial class SettingsPage : ContentPage
 {

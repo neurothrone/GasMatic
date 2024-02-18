@@ -69,4 +69,52 @@
       <ProjectReference Include="..\GasMatic.Client.Core\GasMatic.Client.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <MauiXaml Update="Src\Views\Settings\SettingsPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Src\Views\About\AboutPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Src\Views\Effect\EffectCalculatorPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Src\Views\Effect\EffectHistoryPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Src\Views\GasVolume\GasVolumeCalculatorPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+      <MauiXaml Update="Src\Views\GasVolume\GasVolumeHistoryPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Src\Views\Settings\SettingsPage.xaml.cs">
+        <DependentUpon>SettingsPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Src\Views\About\AboutPage.xaml.cs">
+        <DependentUpon>AboutPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Src\Views\Effect\EffectCalculatorPage.xaml.cs">
+        <DependentUpon>EffectCalculatorPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Src\Views\Effect\EffectHistoryPage.xaml.cs">
+        <DependentUpon>EffectHistoryPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Src\Views\GasVolume\GasVolumeCalculatorPage.xaml.cs">
+        <DependentUpon>GasVolumeCalculatorPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Src\Views\GasVolume\GasVolumeHistoryPage.xaml.cs">
+        <DependentUpon>GasVolumeHistoryPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
 </Project>

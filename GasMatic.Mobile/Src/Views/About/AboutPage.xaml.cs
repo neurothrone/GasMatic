@@ -1,4 +1,4 @@
-namespace GasMatic.Mobile.Views;
+namespace GasMatic.Mobile.Views.About;
 
 public partial class AboutPage : ContentPage
 {

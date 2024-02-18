@@ -2,6 +2,10 @@
 using GasMatic.Client.Core.Features.GasVolume;
 using GasMatic.Client.Core.Features.GasVolume.Database;
 using GasMatic.Client.Core.Services;
+using GasMatic.Client.Core.ViewModels;
+using GasMatic.Mobile.Views.About;
+using GasMatic.Mobile.Views.GasVolume;
+using GasMatic.Mobile.Views.Settings;
 using Microsoft.Extensions.Logging;
 
 namespace GasMatic.Mobile;
@@ -26,18 +30,18 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<App>();
 
-        builder.Services.AddTransient<Views.GasVolumeCalculatorPage>();
-        builder.Services.AddTransient<Client.Core.ViewModels.GasVolumeCalculatorViewModel>();
+        builder.Services.AddTransient<GasVolumeCalculatorPage>();
+        builder.Services.AddTransient<GasVolumeCalculatorViewModel>();
 
-        builder.Services.AddTransient<Views.GasVolumeHistoryPage>();
-        builder.Services.AddTransient<Client.Core.ViewModels.GasVolumeHistoryViewModel>();
-        builder.Services.AddTransient<Client.Core.ViewModels.GasVolumeViewModel>();
+        builder.Services.AddTransient<GasVolumeHistoryPage>();
+        builder.Services.AddTransient<GasVolumeHistoryViewModel>();
+        builder.Services.AddTransient<GasVolumeViewModel>();
 
-        builder.Services.AddTransient<Views.SettingsPage>();
-        builder.Services.AddTransient<Client.Core.ViewModels.SettingsViewModel>();
+        builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<SettingsViewModel>();
 
-        builder.Services.AddTransient<Views.AboutPage>();
-        builder.Services.AddTransient<Client.Core.ViewModels.AboutViewModel>();
+        builder.Services.AddTransient<AboutPage>();
+        builder.Services.AddTransient<AboutViewModel>();
 
         builder.Services.AddSingleton<IGasVolumeService, GasVolumeService>();
         builder.Services.AddSingleton<IGasVolumeDatabase, GasVolumeDatabase>();

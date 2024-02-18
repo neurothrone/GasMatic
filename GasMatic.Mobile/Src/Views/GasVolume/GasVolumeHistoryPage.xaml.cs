@@ -1,4 +1,4 @@
-namespace GasMatic.Mobile.Views;
+namespace GasMatic.Mobile.Views.GasVolume;
 
 public partial class GasVolumeHistoryPage : ContentPage
 {

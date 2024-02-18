@@ -3,7 +3,9 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:GasMatic.Mobile.Views"
+    xmlns:about="clr-namespace:GasMatic.Mobile.Views.About"
+    xmlns:gasVolume="clr-namespace:GasMatic.Mobile.Views.GasVolume"
+    xmlns:settings="clr-namespace:GasMatic.Mobile.Views.Settings"
     x:Class="GasMatic.Mobile.AppShell"
     FlyoutBehavior="{OnIdiom Phone=Flyout, Default=Locked}"
     Title="GasMatic"
@@ -56,14 +58,14 @@
              Icon="icon_calculate.png">
             <ShellContent
                 Title="Gas Volume Calculator"
-                ContentTemplate="{DataTemplate views:GasVolumeCalculatorPage}"
+                ContentTemplate="{DataTemplate gasVolume:GasVolumeCalculatorPage}"
                 Route="GasVolumeCalculatorPage" />
         </Tab>
         <Tab Title="History"
              Icon="icon_work_history.png">
             <ShellContent
                 Title="Gas Volume History"
-                ContentTemplate="{DataTemplate views:GasVolumeHistoryPage}"
+                ContentTemplate="{DataTemplate gasVolume:GasVolumeHistoryPage}"
                 Route="GasVolumeHistoryPage" />
         </Tab>
     </FlyoutItem>
@@ -101,7 +103,7 @@
 
         <ShellContent
             Title="About"
-            ContentTemplate="{DataTemplate views:AboutPage}"
+            ContentTemplate="{DataTemplate about:AboutPage}"
             Route="AboutPage" />
     </FlyoutItem>
 
@@ -110,7 +112,7 @@
 
         <ShellContent
             Title="Settings"
-            ContentTemplate="{DataTemplate views:SettingsPage}"
+            ContentTemplate="{DataTemplate settings:SettingsPage}"
             Route="SettingsPage" />
     </FlyoutItem>
 

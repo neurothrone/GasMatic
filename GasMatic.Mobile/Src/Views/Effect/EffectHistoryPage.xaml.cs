@@ -1,4 +1,4 @@
-namespace GasMatic.Mobile.Views;
+namespace GasMatic.Mobile.Views.Effect;
 
 public partial class EffectHistoryPage : ContentPage
 {
