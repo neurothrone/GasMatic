@@ -2,9 +2,9 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using GasMatic.Client.Core.Messages;
 using GasMatic.Client.Core.Services.Database;
 using GasMatic.Client.Core.Services.Domain;
-using GasMatic.Client.Core.Services.Messages;
 
 namespace GasMatic.Client.Core.ViewModels;
 

@@ -5,10 +5,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using DevExpress.Maui.Controls;
+using GasMatic.Client.Core.Messages;
 using GasMatic.Client.Core.Services.Database;
 using GasMatic.Client.Core.Services.Domain;
 using GasMatic.Client.Core.Services.GasVolume;
-using GasMatic.Client.Core.Services.Messages;
 using GasMatic.Client.Core.Validation;
 
 namespace GasMatic.Client.Core.ViewModels;

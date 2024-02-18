@@ -28,7 +28,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Messages\" />
       <Folder Include="Platforms\Android\" />
       <Folder Include="Platforms\iOS\" />
       <Folder Include="Platforms\MacCatalyst\" />
