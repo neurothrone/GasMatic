@@ -9,21 +9,18 @@ using GasMatic.Client.Core.Services.Database;
 using GasMatic.Client.Core.Services.Domain;
 using GasMatic.Client.Core.Services.GasVolume;
 using GasMatic.Client.Core.Services.Messages;
-using GasMatic.Client.Core.Validators;
+using GasMatic.Client.Core.Validation;
 
 namespace GasMatic.Client.Core.ViewModels;
 
 public partial class GasVolumeCalculatorViewModel : ObservableValidator
 {
+    private readonly IGasVolumeRepository _gasVolumeRepository = new GasVolumeRepository();
+    private readonly GasVolumeService _gasVolumeService = new();
+
+    private const int RoundToDecimals = 3;
     public const string DoubleValueRegex = @"^\d+(\.\d+)?$";
-    public const string DoubleValueRegexNegativesAllowed = @"^-?\d+(\.\d+)?$";
-    // public const string RangeDecimalRegex = @"^\d+(\.\d{1,1})?$";
-
-    [ObservableProperty] private string _selectedNominalPipeSize;
-    [ObservableProperty] private string _selectedPressure;
-
-    [ObservableProperty] private BottomSheetState _npsSheetState = BottomSheetState.Hidden;
-    [ObservableProperty] private BottomSheetState _pressureSheetState = BottomSheetState.Hidden;
+    // public const string DoubleValueRegexNegativesAllowed = @"^-?\d+(\.\d+)?$";
 
     private string _length = string.Empty;
 
@@ -59,9 +56,12 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator
     [ObservableProperty] private double _gasVolume;
     [ObservableProperty] private bool _isFormValid;
 
-    private readonly IGasVolumeRepository _gasVolumeRepository = new GasVolumeRepository();
-    private readonly GasVolumeService _gasVolumeService = new();
-    private const int RoundToDecimals = 3;
+    [ObservableProperty] private string _selectedNominalPipeSize;
+    [ObservableProperty] private string _selectedPressure;
+
+    [ObservableProperty] private BottomSheetState _npsSheetState = BottomSheetState.Hidden;
+    [ObservableProperty] private BottomSheetState _pressureSheetState = BottomSheetState.Hidden;
+
 
     public string[] NominalPipeSizeChoices => NominalPipeSizeExtensions.ToStringArray();
     public string[] PressureChoices => PressureExtensions.ToStringList();
@@ -90,64 +90,38 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator
         SubmitCommand.NotifyCanExecuteChanged();
     }
 
-    private Task OnSubmit()
+    private async Task OnSubmit()
     {
-        ValidateAllProperties();
-        if (HasErrors)
-        {
-            var errors = GetErrors();
-            Debug.WriteLine(string.Join("\n", errors.Select(e => e.ErrorMessage)));
-        }
-        else
-        {
-            Debug.WriteLine("All OK");
-        }
+        await CalculateGasVolume();
 
-        return Task.CompletedTask;
+        // ValidateAllProperties();
+        // if (HasErrors)
+        // {
+        //     var errors = GetErrors();
+        //     Debug.WriteLine(string.Join("\n", errors.Select(e => e.ErrorMessage)));
+        // }
+        // else
+        // {
+        //     Debug.WriteLine("All OK");
+        // }
+        //
+        // return Task.CompletedTask;
     }
 
-    [RelayCommand]
-    private void ShowNominalPipeSizeSelectionSheet()
-    {
-        NpsSheetState = BottomSheetState.FullExpanded;
-    }
-
-    [RelayCommand]
-    private void SelectNominalPipeSize(string selection)
-    {
-        NpsSheetState = BottomSheetState.Hidden;
-        SelectedNominalPipeSize = selection;
-    }
-
-    [RelayCommand]
-    private void ShowPressureSelectionSheet()
-    {
-        PressureSheetState = BottomSheetState.HalfExpanded;
-    }
-
-    [RelayCommand]
-    private void SelectPressure(string selection)
-    {
-        PressureSheetState = BottomSheetState.Hidden;
-        SelectedPressure = selection;
-    }
-
-    [RelayCommand]
     private async Task CalculateGasVolume()
     {
-        // Code to calculate gas volume
         var nominalPipeSize = NominalPipeSizeExtensions.FromString(SelectedNominalPipeSize);
 
         if (!double.TryParse(Length, out double length))
         {
-            Console.WriteLine("❌ -> Invalid Length.");
+            // Console.WriteLine("❌ -> Invalid Length.");
             return;
         }
 
         var pressureString = IsCustomPressure ? CustomPressure : SelectedPressure;
         if (!double.TryParse(pressureString, out double pressure))
         {
-            Console.WriteLine("❌ -> Invalid Pressure.");
+            // Console.WriteLine("❌ -> Invalid Pressure.");
             return;
         }
 
@@ -180,5 +154,31 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator
         );
 
         WeakReferenceMessenger.Default.Send(new CalculationCompletedMessage(savedRecord));
+    }
+
+    [RelayCommand]
+    private void ShowNominalPipeSizeSelectionSheet()
+    {
+        NpsSheetState = BottomSheetState.FullExpanded;
+    }
+
+    [RelayCommand]
+    private void SelectNominalPipeSize(string selection)
+    {
+        NpsSheetState = BottomSheetState.Hidden;
+        SelectedNominalPipeSize = selection;
+    }
+
+    [RelayCommand]
+    private void ShowPressureSelectionSheet()
+    {
+        PressureSheetState = BottomSheetState.HalfExpanded;
+    }
+
+    [RelayCommand]
+    private void SelectPressure(string selection)
+    {
+        PressureSheetState = BottomSheetState.Hidden;
+        SelectedPressure = selection;
     }
 }
