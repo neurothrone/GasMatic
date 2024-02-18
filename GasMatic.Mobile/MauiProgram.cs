@@ -35,7 +35,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient<GasVolumeHistoryPage>();
         builder.Services.AddTransient<GasVolumeHistoryViewModel>();
-        builder.Services.AddTransient<GasVolumeViewModel>();
+        builder.Services.AddTransient<GasVolumeItemViewModel>();
 
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<SettingsViewModel>();
