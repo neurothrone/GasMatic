@@ -11,7 +11,7 @@ public class ValidCustomPressureAttribute : ValidationAttribute
         var instance = (GasVolumeCalculatorViewModel)validationContext.ObjectInstance;
         if (!instance.IsCustomPressure)
         {
-            return ValidationResult.Success; // If IsCustomPressure is set to false, skip validation.
+            return ValidationResult.Success;
         }
 
         if (value is string valueAsString)
