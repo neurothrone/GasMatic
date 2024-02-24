@@ -2,8 +2,8 @@ using SQLite;
 
 namespace GasMatic.Client.Core.Features.GasVolume.Database;
 
-[Table(nameof(GasVolumeCalculation) + "s")]
-public class GasVolumeCalculation
+[Table(nameof(GasVolumeEntity))]
+public class GasVolumeEntity
 {
     [PrimaryKey, AutoIncrement]
     [Column(nameof(Id))]

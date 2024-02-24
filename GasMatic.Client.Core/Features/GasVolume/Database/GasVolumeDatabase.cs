@@ -16,7 +16,7 @@ public class GasVolumeDatabase : IGasVolumeDatabase
             DatabaseConstants.DatabasePath,
             DatabaseConstants.Flags
         );
-        await _database.CreateTableAsync<GasVolumeCalculation>();
+        await _database.CreateTableAsync<GasVolumeEntity>();
     }
 
     public async Task<GasVolumeRecord> SaveGasVolumeRecord(GasVolumeRecord record)
@@ -24,7 +24,7 @@ public class GasVolumeDatabase : IGasVolumeDatabase
         await Connect();
 
         // TODO: extension methods to transform GasVolumeCalculation to Record and vice versa?
-        var calculation = new GasVolumeCalculation
+        var calculation = new GasVolumeEntity
         {
             NominalPipeSize = record.NominalPipeSize,
             Length = record.Length,
@@ -35,21 +35,14 @@ public class GasVolumeDatabase : IGasVolumeDatabase
 
         await _database.InsertAsync(calculation);
 
-        return new GasVolumeRecord(
-            calculation.NominalPipeSize,
-            calculation.Length,
-            calculation.Pressure,
-            calculation.GasVolume,
-            calculation.CalculatedDate,
-            calculation.Id
-        );
+        return record with { Id = calculation.Id };
     }
 
     public async Task<List<GasVolumeRecord>> FetchGasVolumeCalculationsAsync()
     {
         await Connect();
 
-        var calculations = await _database.Table<GasVolumeCalculation>().ToListAsync() ?? [];
+        var calculations = await _database.Table<GasVolumeEntity>().ToListAsync() ?? [];
         return calculations.Select(c =>
             new GasVolumeRecord(c.NominalPipeSize, c.Length, c.Pressure, c.GasVolume, c.CalculatedDate, c.Id)
         ).ToList();
@@ -58,12 +51,12 @@ public class GasVolumeDatabase : IGasVolumeDatabase
     public async Task DeleteGasVolumeCalculationById(int id)
     {
         await Connect();
-        await _database.DeleteAsync<GasVolumeCalculation>(id);
+        await _database.DeleteAsync<GasVolumeEntity>(id);
     }
 
     public async Task DeleteAllAsync()
     {
         await Connect();
-        await _database.DeleteAllAsync<GasVolumeCalculation>();
+        await _database.DeleteAllAsync<GasVolumeEntity>();
     }
 }

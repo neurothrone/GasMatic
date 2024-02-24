@@ -6,5 +6,5 @@ public record GasVolumeRecord(
     double Pressure,
     double GasVolume,
     DateTime CalculatedDate,
-    int Id = 0
+    int Id = -1
 );
