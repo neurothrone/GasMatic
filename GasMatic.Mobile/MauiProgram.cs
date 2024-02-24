@@ -24,33 +24,50 @@ public static class MauiProgram
                 // Custom fonts
                 fonts.AddFont("Roboto-Regular.ttf");
                 fonts.AddFont("Roboto-Bold.ttf");
-            })
-            // Register Handlers for DevExpress Components
-            .UseDevExpress();
+            });
 
-        builder.Services.AddSingleton<App>();
-
-        builder.Services.AddTransient<GasVolumeCalculatorPage>();
-        builder.Services.AddTransient<GasVolumeCalculatorViewModel>();
-
-        builder.Services.AddTransient<GasVolumeHistoryPage>();
-        builder.Services.AddTransient<GasVolumeHistoryViewModel>();
-        builder.Services.AddTransient<GasVolumeItemViewModel>();
-
-        builder.Services.AddTransient<SettingsPage>();
-        builder.Services.AddTransient<SettingsViewModel>();
-
-        builder.Services.AddTransient<AboutPage>();
-        builder.Services.AddTransient<AboutViewModel>();
-
-        builder.Services.AddSingleton<IGasVolumeService, GasVolumeService>();
-        builder.Services.AddSingleton<IGasVolumeDatabase, GasVolumeDatabase>();
-        builder.Services.AddSingleton<IAppInteractionsService, AppInteractionsService>();
+        builder.RegisterThirdPartyServices();
+        builder.RegisterAppServices();
+        builder.RegisterViewModels();
+        builder.RegisterViews();
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
 
         return builder.Build();
+    }
+
+    private static void RegisterThirdPartyServices(this MauiAppBuilder builder)
+    {
+        // Register Handlers for DevExpress Components
+        builder.UseDevExpress();
+    }
+
+    private static void RegisterAppServices(this MauiAppBuilder builder)
+    {
+        builder.Services.AddSingleton<IGasVolumeService, GasVolumeService>();
+        builder.Services.AddSingleton<IGasVolumeDatabase, GasVolumeDatabase>();
+        builder.Services.AddSingleton<IAppInteractionsService, AppInteractionsService>();
+    }
+
+    private static void RegisterViewModels(this MauiAppBuilder builder)
+    {
+        builder.Services.AddTransient<GasVolumeCalculatorViewModel>();
+
+        builder.Services.AddTransient<GasVolumeHistoryViewModel>();
+        builder.Services.AddTransient<GasVolumeItemViewModel>();
+
+        builder.Services.AddTransient<SettingsViewModel>();
+
+        builder.Services.AddTransient<AboutViewModel>();
+    }
+
+    private static void RegisterViews(this MauiAppBuilder builder)
+    {
+        builder.Services.AddTransient<GasVolumeCalculatorPage>();
+        builder.Services.AddTransient<GasVolumeHistoryPage>();
+        builder.Services.AddTransient<AboutPage>();
+        builder.Services.AddTransient<SettingsPage>();
     }
 }
