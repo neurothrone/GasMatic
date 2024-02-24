@@ -12,7 +12,7 @@ using GasMatic.Client.Core.Validation;
 
 namespace GasMatic.Client.Core.ViewModels;
 
-public partial class GasVolumeCalculatorViewModel : ObservableValidator
+public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDisposable
 {
     private readonly IGasVolumeDatabase _gasVolumeDatabase;
     private readonly IGasVolumeService _gasVolumeService;
@@ -80,6 +80,11 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator
         SubmitCommand = new AsyncRelayCommand(OnSubmit, () => !HasErrors);
         ResetInputFields();
         ErrorsChanged += GasVolumeCalculatorViewModel_ErrorsChanged;
+    }
+
+    void IDisposable.Dispose()
+    {
+        ErrorsChanged -= GasVolumeCalculatorViewModel_ErrorsChanged;
     }
 
     private void ResetInputFields()
