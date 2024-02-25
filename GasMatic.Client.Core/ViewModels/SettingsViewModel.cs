@@ -47,7 +47,7 @@ public partial class SettingsViewModel(
     private async Task ChangeLanguage(string newLanguage)
     {
         var hasConfirmed = await alertService.ShowConfirmationPromptAsync(
-            resources["ChangeLanguageDialogTitle"],
+            resources["ChangeLanguage"],
             resources["ChangeLanguageDialogMessage"],
             resources["AcceptButton"],
             resources["CancelButton"]);
