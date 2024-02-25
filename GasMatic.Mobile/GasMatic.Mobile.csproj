@@ -68,6 +68,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GasMatic.Client.Core\GasMatic.Client.Core.csproj" />
+      <ProjectReference Include="..\Localization.Maui\Localization.Maui.csproj" />
+      <ProjectReference Include="..\Localization\Localization.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -116,6 +118,26 @@
         <DependentUpon>GasVolumeHistoryPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Resources\Strings\AppResources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AppResources.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Strings\AppResources.sv-SE.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AppResources.sv-SE.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Strings\AppResources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Strings\AppResources.sv-SE.resx">
+        <LastGenOutput>AppResources.sv-SE.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

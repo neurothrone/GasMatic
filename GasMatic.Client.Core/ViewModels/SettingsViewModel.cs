@@ -6,13 +6,15 @@ using GasMatic.Client.Core.Features.GasVolume.Database;
 using GasMatic.Client.Core.Messages;
 using GasMatic.Client.Core.Services.Alerts;
 using GasMatic.Client.Core.Services.Interactions;
+using Localization;
 
 namespace GasMatic.Client.Core.ViewModels;
 
 public partial class SettingsViewModel(
     IAppInteractionsService appInteractionsService,
     IGasVolumeDatabase gasVolumeDatabase,
-    IAlertService alertService) : ObservableObject
+    IAlertService alertService,
+    ILocalizedResourcesProvider resources) : ObservableObject
 {
     private const string NominalPipeSizeUrl = "https://en.wikipedia.org/wiki/Nominal_Pipe_Size";
 
@@ -40,6 +42,6 @@ public partial class SettingsViewModel(
         IsLoading = false;
 
         WeakReferenceMessenger.Default.Send(new GasVolumeDataDeletedMessage());
-        await alertService.ShowSnackbarAsync("Your data has successfully been deleted.");
+        await alertService.ShowSnackbarAsync(resources["DeleteAllDataSuccessMessage"]);
     }
 }

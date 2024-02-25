@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:converters="clr-namespace:GasMatic.Client.Converters"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
              x:Class="GasMatic.Mobile.Views.Settings.SettingsPage"
              x:DataType="viewModels:SettingsViewModel">
@@ -12,23 +13,24 @@
         <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
     </ContentPage.Resources>
 
+    <!-- ReSharper disable Xaml.InvalidType -->
     <Grid>
         <TableView Intent="Settings">
             <TableRoot>
-                <TableSection Title="Preferences">
-                    <SwitchCell Text="Dark Mode"
-                                On="True"
-                                OnColor="MediumPurple" />
+                <TableSection Title="{mauiLoc:Translate PreferencesLabel}">
+                    <!-- <SwitchCell Text="Dark Mode" -->
+                    <!--             On="True" -->
+                    <!--             OnColor="MediumPurple" /> -->
                 </TableSection>
-                <TableSection Title="Gas Volume">
-                    <ImageCell Text="Learn more about NPS standards"
-                               Detail="This will open a browser"
+                <TableSection Title="{mauiLoc:Translate GasVolumeLabel}">
+                    <ImageCell Text="{mauiLoc:Translate NominalPipeSizeLinkLabel}"
+                               Detail="{mauiLoc:Translate BrowserHint}"
                                ImageSource="icon_link.png"
                                Command="{Binding OpenNpsWebLinkCommand}" />
                 </TableSection>
                 <TableSection Title="Data">
-                    <ImageCell Text="Delete Your Data"
-                               Detail="This will delete all of your data on the device"
+                    <ImageCell Text="{mauiLoc:Translate DeleteAllDataLabel}"
+                               Detail="{mauiLoc:Translate DeleteAllDataHint}"
                                ImageSource="icon_folder_delete.png"
                                Command="{Binding ShowDeleteDataSheetCommand}" />
                 </TableSection>
@@ -41,10 +43,10 @@
                     IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}"
                     Margin="10"
                     Spacing="10">
-                    <Label Text="Delete All Data"
+                    <Label Text="{mauiLoc:Translate DeleteAllDataLabel}"
                            FontSize="22"
                            FontAttributes="Bold" />
-                    <Label Text="Are you sure? This will delete all of your data on the device."
+                    <Label Text="{mauiLoc:Translate DeleteAllDataInfoLabel}"
                            FontSize="16" />
 
                     <Border Stroke="Transparent"
@@ -56,7 +58,7 @@
 
                         <FlexLayout Direction="Row">
                             <Image Source="icon_info.png" />
-                            <Label Text="You must drag the slider to the end to confirm."
+                            <Label Text="{mauiLoc:Translate DeleteAllDataSliderLabel}"
                                    FontSize="14"
                                    VerticalTextAlignment="Center"
                                    Padding="5,0,0,0" />
@@ -74,7 +76,7 @@
                     <Button
                         IsVisible="{Binding Source={x:Reference Slider}, Path=Value,
                             Converter={StaticResource IntToBoolConverter}}"
-                        Text="Delete All Data"
+                        Text="{mauiLoc:Translate DeleteAllDataLabel}"
                         FontSize="16"
                         FontAttributes="Bold"
                         BackgroundColor="DarkRed"

@@ -4,18 +4,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:devExpressControls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:controls="clr-namespace:GasMatic.Mobile.Views.GasVolume.Controls"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
              x:Class="GasMatic.Mobile.Views.GasVolume.GasVolumeCalculatorPage"
              x:DataType="viewModels:GasVolumeCalculatorViewModel"
              HideSoftInputOnTapped="True">
 
+    <!-- ReSharper disable Xaml.InvalidType -->
     <ScrollView VerticalScrollBarVisibility="{OnIdiom Phone=Never, Default=Always}">
         <VerticalStackLayout Margin="10"
                              Spacing="10">
 
             <!-- Nominal Pipe Size -->
-            <controls:MeasurementLabel MeasurementType="Nominal Pipe Size - DN"
-                                       Unit="mm" />
+            <!-- <controls:MeasurementLabel MeasurementType="Nominal Pipe Size - DN" -->
+            <!--                            Unit="mm" /> -->
+            <Label FontSize="20">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{mauiLoc:Translate NominalPipeSizeLabel}"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text=" ("
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text="mm"
+                              TextColor="MediumPurple"
+                              FontAttributes="Bold" />
+                        <Span Text=")"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
             <Border Style="{StaticResource CustomBorder}">
                 <Border.StrokeShape>
@@ -45,7 +65,8 @@
 
                     <CollectionView.Header>
                         <VerticalStackLayout Padding="0,10">
-                            <Label Text="Select Nominal Pipe Size"
+                            <!-- ReSharper disable once Xaml.InvalidType -->
+                            <Label Text="{mauiLoc:Translate NominalPipeSizePicker}"
                                    TextColor="Silver"
                                    HorizontalTextAlignment="Center"
                                    FontSize="20" />
@@ -87,15 +108,33 @@
             </devExpressControls:BottomSheet>
 
             <!-- Length -->
-            <controls:MeasurementLabel MeasurementType="Length"
-                                       Unit="m" />
+            <!-- <controls:MeasurementLabel MeasurementType="Length" -->
+            <!--                            Unit="m" /> -->
+            <Label FontSize="20">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{mauiLoc:Translate LengthLabel}"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text=" ("
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text="m"
+                              TextColor="MediumPurple"
+                              FontAttributes="Bold" />
+                        <Span Text=")"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
             <Border Style="{StaticResource CustomBorder}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="0,45,0,0" />
                 </Border.StrokeShape>
 
-                <Entry Placeholder="Enter length in meters"
+                <Entry Placeholder="{mauiLoc:Translate LengthPlaceholder}" 
                        FontSize="18"
                        Keyboard="Numeric"
                        Style="{StaticResource CustomEntry}"
@@ -103,16 +142,34 @@
             </Border>
 
             <!-- Pressure -->
-            <controls:MeasurementLabel MeasurementType="Pressure"
-                                       Unit="mbar" />
+            <!-- <controls:MeasurementLabel MeasurementType="Pressure" -->
+            <!--                            Unit="mbar" /> -->
+            <Label FontSize="20">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{mauiLoc:Translate PressureLabel}"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text=" ("
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text="mbar"
+                              TextColor="MediumPurple"
+                              FontAttributes="Bold" />
+                        <Span Text=")"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
 
             <FlexLayout Direction="Row"
                         JustifyContent="SpaceBetween"
                         AlignItems="Center"
                         Margin="0,0,0,10">
-
-                <Label Text="Use Custom Pressure?"
+                
+                <Label Text="{mauiLoc:Translate UseCustomPressureLabel}"
                        TextColor="Silver"
                        FontSize="16" />
                 <Switch IsToggled="{Binding IsCustomPressure}" />
@@ -124,8 +181,8 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="0,45,0,0" />
                 </Border.StrokeShape>
-
-                <Entry Placeholder="Enter pressure in mbar"
+                
+                <Entry Placeholder="{mauiLoc:Translate PressurePlaceholder}"
                        FontSize="18"
                        Keyboard="Numeric"
                        Style="{StaticResource CustomEntry}"
@@ -172,7 +229,7 @@
 
                     <CollectionView.Header>
                         <VerticalStackLayout Padding="0,10">
-                            <Label Text="Select Pressure"
+                            <Label Text="{mauiLoc:Translate PressurePicker}"
                                    TextColor="Silver"
                                    HorizontalTextAlignment="Center"
                                    FontSize="20" />
@@ -215,7 +272,7 @@
             </devExpressControls:BottomSheet>
 
             <!-- Gas Volume -->
-            <Button Text="Calculate"
+            <Button Text="{mauiLoc:Translate CalculateButton}"
                     TextColor="White"
                     FontAttributes="Bold"
                     FontFamily="Roboto-Regular"
@@ -225,9 +282,28 @@
                     Margin="0,10"
                     Command="{Binding SubmitCommand}" />
 
-            <controls:MeasurementLabel MeasurementType="Gas Volume"
-                                       Unit="m³"
-                                       HorizontalOptions="Center" />
+            <!-- <controls:MeasurementLabel MeasurementType="Gas Volume" -->
+            <!--                            Unit="m³" -->
+            <!--                            HorizontalOptions="Center" /> -->
+            <Label FontSize="20"
+                   HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{mauiLoc:Translate GasVolumeLabel}"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text=" ("
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                        <Span Text="m³"
+                              TextColor="MediumPurple"
+                              FontAttributes="Bold" />
+                        <Span Text=")"
+                              TextColor="Silver"
+                              FontAttributes="Bold" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
             <Label HorizontalOptions="Center"
                    FontSize="24"

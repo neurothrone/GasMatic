@@ -2,37 +2,38 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
              x:Class="GasMatic.Mobile.Views.About.AboutPage"
              x:DataType="viewModels:AboutViewModel">
 
+    <!-- ReSharper disable Xaml.InvalidType -->
     <TableView Intent="Data">
         <TableRoot>
             <TableSection Title="{Binding AppTitle, Mode=OneTime}">
                 <EntryCell Label="Version"
                            Text="{Binding Version, Mode=OneTime}"
                            IsEnabled="False" />
-                <EntryCell Label="Developer"
+                <EntryCell Label="{mauiLoc:Translate DeveloperLabel}"
                            Text="{Binding Author, Mode=OneTime}"
                            IsEnabled="False" />
             </TableSection>
 
-            <TableSection Title="Contact">
+            <TableSection Title="{mauiLoc:Translate ContactLabel}">
                 <ImageCell ImageSource="icon_link.png"
                            Text="Support"
-                           Detail="This will open the default email app"
+                           Detail="{mauiLoc:Translate EmailHint}"
                            Command="{Binding OpenSupportEmailLinkCommand}" />
                 <ImageCell ImageSource="icon_link.png"
                            Text="LinkedIn"
-                           Detail="This will open a browser"
+                           Detail="{mauiLoc:Translate BrowserHint}"
                            Command="{Binding OpenLinkedinWebLinkCommand}" />
             </TableSection>
 
-            <TableSection Title="Credits">
+            <TableSection Title="{mauiLoc:Translate CreditsLabel}">
                 <ImageCell ImageSource="dotnet_bot.png"
-                           Text="{Binding DotNetTextCredits, Mode=OneTime}"
-                           Detail="{Binding DotNetDetailCredits, Mode=OneTime}" />
-                <!-- <TextCell Text="{Binding AppIconCredit, Mode=OneTime}" /> -->
+                           Text="{mauiLoc:Translate DotNetTextCreditsLabel}"
+                           Detail="{mauiLoc:Translate DotNetDetailCreditsLabel}" />
             </TableSection>
         </TableRoot>
     </TableView>

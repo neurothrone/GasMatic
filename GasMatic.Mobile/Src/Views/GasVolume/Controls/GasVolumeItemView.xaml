@@ -2,6 +2,7 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
              x:Class="GasMatic.Mobile.Views.GasVolume.Controls.GasVolumeItemView"
              x:DataType="viewModels:GasVolumeItemViewModel">
@@ -15,15 +16,16 @@
             <Border Stroke="Transparent">
                 <SwipeView>
                     <SwipeView.RightItems>
-                        <SwipeItem Text="Delete"
-                                   IconImageSource="icon_delete.png"
-                                   BackgroundColor="DarkRed"
-                                   IsDestructive="True"
-                                   Command="{Binding 
+                           <!-- ReSharper disable once Xaml.InvalidType -->
+                           <SwipeItem Text="{mauiLoc:Translate DeleteButton}"
+                                      IconImageSource="icon_delete.png"
+                                      BackgroundColor="DarkRed"
+                                      IsDestructive="True"
+                                      Command="{Binding 
                                                    Source={RelativeSource 
                                                    AncestorType={x:Type viewModels:GasVolumeHistoryViewModel}}, 
                                                    Path=DeleteCommand}"
-                                   CommandParameter="{Binding .}" />
+                                      CommandParameter="{Binding .}" />
                     </SwipeView.RightItems>
 
                     <Grid RowDefinitions="*,*,*,*,*"
@@ -39,32 +41,36 @@
                                FontAttributes="Bold"
                                HorizontalOptions="End" />
 
+                        <!-- ReSharper disable once Xaml.InvalidType -->
                         <Label Grid.Row="1" Grid.Column="0"
-                               Text="Length"
+                               Text="{mauiLoc:Translate LengthLabel}"
                                TextColor="Gold" />
                         <Label Grid.Row="1" Grid.Column="1"
                                Text="{Binding Length}"
                                FontAttributes="Bold"
                                HorizontalOptions="End" />
 
+                        <!-- ReSharper disable once Xaml.InvalidType -->
                         <Label Grid.Row="2" Grid.Column="0"
-                               Text="Pressure"
+                               Text="{mauiLoc:Translate PressureLabel}"
                                TextColor="Gold" />
                         <Label Grid.Row="2" Grid.Column="1"
                                Text="{Binding Pressure}"
                                FontAttributes="Bold"
                                HorizontalOptions="End" />
 
+                        <!-- ReSharper disable once Xaml.InvalidType -->
                         <Label Grid.Row="3" Grid.Column="0"
-                               Text="Gas Volume"
+                               Text="{mauiLoc:Translate GasVolumeLabel}"
                                TextColor="Gold" />
                         <Label Grid.Row="3" Grid.Column="1"
                                Text="{Binding GasVolume}"
                                FontAttributes="Bold"
                                HorizontalOptions="End" />
 
+                        <!-- ReSharper disable once Xaml.InvalidType -->
                         <Label Grid.Row="4" Grid.Column="0"
-                               Text="Calculated at"
+                               Text="{mauiLoc:Translate CalculatedDateLabel}"
                                TextColor="Goldenrod" />
                         <Label Grid.Row="4" Grid.Column="1"
                                Text="{Binding CalculatedAtFormatted}"

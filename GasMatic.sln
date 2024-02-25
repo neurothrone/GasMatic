@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMatic.Mobile", "GasMatic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMatic.Client.Core", "GasMatic.Client.Core\GasMatic.Client.Core.csproj", "{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "Localization\Localization.csproj", "{606541C6-C6E1-456E-96C4-84F096078287}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization.Maui", "Localization.Maui\Localization.Maui.csproj", "{210BDE9F-E262-4C97-9D55-312ABDE99D1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A62351B4-33A7-4DF9-BDCC-9D73AD5EE400}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606541C6-C6E1-456E-96C4-84F096078287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606541C6-C6E1-456E-96C4-84F096078287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606541C6-C6E1-456E-96C4-84F096078287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606541C6-C6E1-456E-96C4-84F096078287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210BDE9F-E262-4C97-9D55-312ABDE99D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210BDE9F-E262-4C97-9D55-312ABDE99D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210BDE9F-E262-4C97-9D55-312ABDE99D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210BDE9F-E262-4C97-9D55-312ABDE99D1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
