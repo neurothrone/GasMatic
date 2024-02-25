@@ -63,7 +63,7 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
 
 
     public string[] NominalPipeSizeChoices => NominalPipeSizeExtensions.ToStringArray();
-    public string[] PressureChoices => PressureExtensions.ToStringList();
+    public string[] PressureChoices => PressureExtensions.ToStringArray();
 
     public AsyncRelayCommand SubmitCommand { get; }
 

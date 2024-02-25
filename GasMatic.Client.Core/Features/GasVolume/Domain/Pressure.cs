@@ -14,7 +14,7 @@ public static class PressureExtensions
         ..(Pressure[])Enum.GetValues(typeof(Pressure))
     ];
 
-    public static string[] ToStringList() => AllEnumValues
+    public static string[] ToStringArray() => AllEnumValues
         .Select(p => ((int)p).ToString())
         .ToArray();
 }
