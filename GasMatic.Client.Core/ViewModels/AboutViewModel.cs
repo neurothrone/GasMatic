@@ -1,14 +1,15 @@
 using CommunityToolkit.Mvvm.Input;
 using GasMatic.Client.Core.Services;
+using GasMatic.Client.Core.Services.Environment;
+using GasMatic.Client.Core.Services.Interactions;
 
 namespace GasMatic.Client.Core.ViewModels;
 
-public partial class AboutViewModel
+public partial class AboutViewModel(
+    IAppInteractionsService appInteractionsService,
+    IConfigurationService configurationService)
 {
-    private readonly IAppInteractionsService _appInteractionsService;
-
     private const string LinkedinUrl = "https://www.linkedin.com/in/neurothrone/";
-    private const string SupportEmail = "support@neurothrone.tech";
 
     public string AppTitle => AppInfo.Name;
     public string Version => AppInfo.VersionString;
@@ -17,20 +18,15 @@ public partial class AboutViewModel
     public string DotNetDetailCredits => "Written in XAML & C#";
     public string AppIconCredit => "App icon by svgrepo.com";
 
-    public AboutViewModel(IAppInteractionsService appInteractionsService)
-    {
-        _appInteractionsService = appInteractionsService;
-    }
-
     [RelayCommand]
     private async Task OpenSupportEmailLink()
     {
-        await _appInteractionsService.ComposeSupportEmailAsync(
-            SupportEmail,
+        await appInteractionsService.ComposeSupportEmailAsync(
+            configurationService.GetSupportEmail(),
             "GasMatic Support"
         );
     }
 
     [RelayCommand]
-    private async Task OpenLinkedinWebLink() => await _appInteractionsService.OpenBrowserAsync(LinkedinUrl);
+    private async Task OpenLinkedinWebLink() => await appInteractionsService.OpenBrowserAsync(LinkedinUrl);
 }
