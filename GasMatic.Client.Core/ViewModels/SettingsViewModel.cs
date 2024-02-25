@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,31 +12,58 @@ using Localization;
 
 namespace GasMatic.Client.Core.ViewModels;
 
-public partial class SettingsViewModel(
-    IAppInteractionsService appInteractionsService,
-    IDatabaseService databaseService,
-    IAlertService alertService,
-    ILocalizationManager localizationManager,
-    ILocalizedResourcesProvider resources)
-    : ObservableObject
+public partial class SettingsViewModel : ObservableObject
 {
     private const string NominalPipeSizeUrl = "https://en.wikipedia.org/wiki/Nominal_Pipe_Size";
+
+    private readonly IAppInteractionsService _appInteractionsService;
+    private readonly IDatabaseService _databaseService;
+    private readonly IAlertService _alertService;
+    private readonly ILocalizationManager _localizationManager;
+    private readonly ILocalizedResourcesProvider _resources;
 
     [ObservableProperty] private BottomSheetState _deleteDataSheetState = BottomSheetState.Hidden;
     [ObservableProperty] private BottomSheetState _changeLanguageSheetState = BottomSheetState.Hidden;
     [ObservableProperty] private double _deleteSliderValue;
     [ObservableProperty] private bool _isLoading;
 
-    public string[] SupportedLanguages =>
+    private static IEnumerable<string> SupportedLanguages =>
     [
         "en-SE",
         "sv-SE"
     ];
 
-    [ObservableProperty] private string _currentLanguage = CultureInfo.CurrentCulture.Name;
+    [ObservableProperty] private string _currentLanguage;
+    private ObservableCollection<LanguageItemViewModel> _languages = [];
+
+    public ObservableCollection<LanguageItemViewModel> Languages
+    {
+        get => _languages;
+        set
+        {
+            _languages = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public SettingsViewModel(IAppInteractionsService appInteractionsService,
+        IDatabaseService databaseService,
+        IAlertService alertService,
+        ILocalizationManager localizationManager,
+        ILocalizedResourcesProvider resources)
+    {
+        _appInteractionsService = appInteractionsService;
+        _databaseService = databaseService;
+        _alertService = alertService;
+        _localizationManager = localizationManager;
+        _resources = resources;
+
+        _currentLanguage = CultureInfo.CurrentCulture.Name;
+        UpdateLanguages(_currentLanguage);
+    }
 
     [RelayCommand]
-    private async Task OpenNpsWebLink() => await appInteractionsService.OpenBrowserAsync(NominalPipeSizeUrl);
+    private async Task OpenNpsWebLink() => await _appInteractionsService.OpenBrowserAsync(NominalPipeSizeUrl);
 
     [RelayCommand]
     private void ShowChangeLanguageSheet()
@@ -46,19 +74,20 @@ public partial class SettingsViewModel(
     [RelayCommand]
     private async Task ChangeLanguage(string newLanguage)
     {
-        var hasConfirmed = await alertService.ShowConfirmationPromptAsync(
-            resources["ChangeLanguage"],
-            resources["ChangeLanguageDialogMessage"],
-            resources["AcceptButton"],
-            resources["CancelButton"]);
+        var hasConfirmed = await _alertService.ShowConfirmationPromptAsync(
+            _resources["ChangeLanguage"],
+            _resources["ChangeLanguageDialogMessage"],
+            _resources["AcceptButton"],
+            _resources["CancelButton"]);
 
         if (hasConfirmed)
         {
             SwitchLanguage(newLanguage);
-            await alertService.ShowSnackbarAsync(resources["ChangeLanguageSuccessMessage"]);
+            await _alertService.ShowSnackbarAsync(_resources["ChangeLanguageSuccessMessage"]);
         }
 
         ChangeLanguageSheetState = BottomSheetState.Hidden;
+        UpdateLanguages(newLanguage);
     }
 
     private void SwitchLanguage(string newLanguage)
@@ -66,7 +95,16 @@ public partial class SettingsViewModel(
         CurrentLanguage = newLanguage;
 
         var newCulture = new CultureInfo(newLanguage);
-        localizationManager.UpdateUserCulture(newCulture);
+        _localizationManager.UpdateUserCulture(newCulture);
+    }
+
+    private void UpdateLanguages(string newLanguage)
+    {
+        Languages = [];
+        foreach (var language in SupportedLanguages)
+        {
+            Languages.Add(new LanguageItemViewModel(language, language == newLanguage));
+        }
     }
 
     [RelayCommand]
@@ -79,13 +117,13 @@ public partial class SettingsViewModel(
     private async Task DeleteAllData()
     {
         IsLoading = true;
-        await databaseService.DeleteAllAsync();
+        await _databaseService.DeleteAllAsync();
 
         DeleteDataSheetState = BottomSheetState.Hidden;
         DeleteSliderValue = 0;
         IsLoading = false;
 
         WeakReferenceMessenger.Default.Send(new GasVolumeDataDeletedMessage());
-        await alertService.ShowSnackbarAsync(resources["DeleteAllDataSuccessMessage"]);
+        await _alertService.ShowSnackbarAsync(_resources["DeleteAllDataSuccessMessage"]);
     }
 }

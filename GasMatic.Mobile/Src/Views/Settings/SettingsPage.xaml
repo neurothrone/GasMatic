@@ -3,14 +3,28 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:devExpressControls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+             xmlns:controls="clr-namespace:GasMatic.Mobile.Views.Settings.Controls"
+             xmlns:converters="clr-namespace:GasMatic.Mobile.Converters"
              xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
+             xmlns:templateSelectors="clr-namespace:GasMatic.Mobile.TemplateSelectors"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
-             xmlns:converters1="clr-namespace:GasMatic.Mobile.Converters"
              x:Class="GasMatic.Mobile.Views.Settings.SettingsPage"
              x:DataType="viewModels:SettingsViewModel">
 
     <ContentPage.Resources>
-        <converters1:IntToBoolConverter x:Key="IntToBoolConverter" />
+        <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
+
+        <DataTemplate x:Key="SelectedLanguageTemplate">
+            <controls:SelectedLanguageItemView />
+        </DataTemplate>
+        <DataTemplate x:Key="UnselectedLanguageTemplate">
+            <controls:UnselectedLanguageItemView />
+        </DataTemplate>
+
+        <templateSelectors:LanguageDataTemplateSelector
+            x:Key="LanguageDataTemplateSelector"
+            SelectedLanguageTemplate="{StaticResource SelectedLanguageTemplate}"
+            UnselectedLanguageTemplate="{StaticResource UnselectedLanguageTemplate}" />
     </ContentPage.Resources>
 
     <!-- ReSharper disable Xaml.InvalidType -->
@@ -43,8 +57,9 @@
 
         <!-- Change Language Sheet -->
         <devExpressControls:BottomSheet State="{Binding ChangeLanguageSheetState }">
-            <CollectionView ItemsSource="{Binding SupportedLanguages}"
-                            SelectionMode="None">
+            <CollectionView ItemsSource="{Binding Languages}"
+                            SelectionMode="None"
+                            ItemTemplate="{StaticResource LanguageDataTemplateSelector}">
 
                 <CollectionView.Header>
                     <VerticalStackLayout Padding="0,10">
@@ -59,34 +74,6 @@
                     <LinearItemsLayout Orientation="Vertical"
                                        ItemSpacing="1" />
                 </CollectionView.ItemsLayout>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Stroke="MediumSlateBlue"
-                                BackgroundColor="SlateBlue"
-                                Padding="10,15">
-
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="0" />
-                            </Border.StrokeShape>
-
-                            <Label Text="{Binding .}"
-                                   TextColor="White"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   HorizontalTextAlignment="Center" />
-
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding
-                                        Source={RelativeSource
-                                        AncestorType={x:Type viewModels:SettingsViewModel}},
-                                        Path=ChangeLanguageCommand}"
-                                    CommandParameter="{Binding .}" />
-                            </Border.GestureRecognizers>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
             </CollectionView>
         </devExpressControls:BottomSheet>
 
