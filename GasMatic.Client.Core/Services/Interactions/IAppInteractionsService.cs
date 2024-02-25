@@ -1,4 +1,4 @@
-namespace GasMatic.Client.Core.Services;
+namespace GasMatic.Client.Core.Services.Interactions;
 
 public interface IAppInteractionsService
 {
