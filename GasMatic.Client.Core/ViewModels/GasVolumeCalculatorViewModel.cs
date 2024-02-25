@@ -5,8 +5,8 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using DevExpress.Maui.Controls;
 using GasMatic.Client.Core.Features.GasVolume;
-using GasMatic.Client.Core.Features.GasVolume.Database;
 using GasMatic.Client.Core.Messages;
+using GasMatic.Client.Core.Services.Database;
 using GasMatic.Client.Core.Validation;
 using GasMatic.Shared.Domain;
 using GasMatic.Shared.Dto;
@@ -15,7 +15,7 @@ namespace GasMatic.Client.Core.ViewModels;
 
 public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDisposable
 {
-    private readonly IGasVolumeDatabase _gasVolumeDatabase;
+    private readonly IDatabaseService _databaseService;
     private readonly IGasVolumeService _gasVolumeService;
 
     private const int RoundToDecimals = 3;
@@ -69,10 +69,10 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     public AsyncRelayCommand SubmitCommand { get; }
 
     public GasVolumeCalculatorViewModel(
-        IGasVolumeDatabase gasVolumeDatabase,
+        IDatabaseService databaseService,
         IGasVolumeService gasVolumeService)
     {
-        _gasVolumeDatabase = gasVolumeDatabase;
+        _databaseService = databaseService;
         _gasVolumeService = gasVolumeService;
 
         SelectedNominalPipeSize = NominalPipeSizeChoices.First();
@@ -153,7 +153,7 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
         double gasVolume
     )
     {
-        var savedRecord = await _gasVolumeDatabase.SaveGasVolumeRecord(
+        var savedRecord = await _databaseService.SaveGasVolumeRecord(
             new GasVolumeRecord(
                 (int)nominalPipeSize,
                 length,

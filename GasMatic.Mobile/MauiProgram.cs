@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using DevExpress.Maui;
 using GasMatic.Client.Core.Features.GasVolume;
-using GasMatic.Client.Core.Features.GasVolume.Database;
 using GasMatic.Client.Core.Services.Alerts;
+using GasMatic.Client.Core.Services.Database;
 using GasMatic.Client.Core.Services.Environment;
 using GasMatic.Client.Core.Services.Interactions;
 using GasMatic.Client.Core.ViewModels;
@@ -69,7 +69,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IAppInteractionsService, AppInteractionsService>();
 
         builder.Services.AddSingleton<IGasVolumeService, GasVolumeService>();
-        builder.Services.AddSingleton<IGasVolumeDatabase, GasVolumeDatabase>();
+        builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
     }
 
     private static void RegisterViewModels(this MauiAppBuilder builder)

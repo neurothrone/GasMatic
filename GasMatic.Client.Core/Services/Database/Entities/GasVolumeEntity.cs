@@ -1,6 +1,6 @@
 using SQLite;
 
-namespace GasMatic.Client.Core.Features.GasVolume.Database;
+namespace GasMatic.Client.Core.Services.Database.Entities;
 
 [Table(nameof(GasVolumeEntity))]
 public class GasVolumeEntity

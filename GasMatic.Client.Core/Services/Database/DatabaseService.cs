@@ -1,9 +1,10 @@
+using GasMatic.Client.Core.Services.Database.Entities;
 using GasMatic.Shared.Dto;
 using SQLite;
 
-namespace GasMatic.Client.Core.Features.GasVolume.Database;
+namespace GasMatic.Client.Core.Services.Database;
 
-public class GasVolumeDatabase : IGasVolumeDatabase
+public class DatabaseService : IDatabaseService
 {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     private SQLiteAsyncConnection _database;
