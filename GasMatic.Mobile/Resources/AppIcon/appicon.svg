@@ -8,7 +8,6 @@
         <stop offset="100%" style="stop-color:slateblue;stop-opacity:1"/>
     </linearGradient>
 
-    <!-- Background rectangle with desired color -->
     <rect x="0" y="-960" width="960" height="960" fill="url(#gradient)"/>
 
     <g transform="translate(512, -512) scale(0.8) translate(-512, 512)">
