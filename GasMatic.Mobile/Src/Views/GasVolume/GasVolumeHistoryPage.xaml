@@ -7,13 +7,10 @@
              x:Class="GasMatic.Mobile.Views.GasVolume.GasVolumeHistoryPage"
              x:DataType="viewModels:GasVolumeHistoryViewModel">
 
-    <Grid HorizontalOptions="Fill"
-          VerticalOptions="Fill"
-          Margin="10">
+    <Grid Margin="10">
+        <controls:GasVolumeCollectionView />
 
         <ActivityIndicator IsRunning="{Binding IsLoading}"
                            IsVisible="{Binding IsLoading}" />
-
-        <controls:GasVolumeCollectionView />
     </Grid>
 </ContentPage>
