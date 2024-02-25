@@ -222,7 +222,7 @@
                 </FlexLayout>
             </Border>
 
-            <!-- NPS Bottom Sheet -->
+            <!-- Pressure Bottom Sheet -->
             <devExpressControls:BottomSheet State="{Binding PressureSheetState }">
                 <CollectionView ItemsSource="{Binding  PressureChoices}"
                                 SelectionMode="None">
