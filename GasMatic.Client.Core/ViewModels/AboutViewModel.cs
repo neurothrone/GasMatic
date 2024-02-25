@@ -13,7 +13,6 @@ public partial class AboutViewModel(
     public string AppTitle => AppInfo.Name;
     public string Version => AppInfo.VersionString;
     public string Author => "Zane Neurothrone";
-    public string AppIconCredit => "App icon by svgrepo.com";
 
     [RelayCommand]
     private async Task OpenSupportEmailLink()
