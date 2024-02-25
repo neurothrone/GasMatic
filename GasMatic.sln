@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization", "Localizatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Localization.Maui", "Localization.Maui\Localization.Maui.csproj", "{210BDE9F-E262-4C97-9D55-312ABDE99D1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasMatic.Shared", "GasMatic.Shared\GasMatic.Shared.csproj", "{A5FE65E7-B728-4CB8-97CD-A68B1C341AF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{210BDE9F-E262-4C97-9D55-312ABDE99D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{210BDE9F-E262-4C97-9D55-312ABDE99D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{210BDE9F-E262-4C97-9D55-312ABDE99D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5FE65E7-B728-4CB8-97CD-A68B1C341AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5FE65E7-B728-4CB8-97CD-A68B1C341AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5FE65E7-B728-4CB8-97CD-A68B1C341AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5FE65E7-B728-4CB8-97CD-A68B1C341AF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
