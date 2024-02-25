@@ -1,4 +1,4 @@
-namespace GasMatic.Client.Core.Features.GasVolume.Domain;
+namespace GasMatic.Shared.Dto;
 
 public record GasVolumeRecord(
     int NominalPipeSize,

@@ -1,4 +1,4 @@
-namespace GasMatic.Client.Core.Features.GasVolume.Domain;
+namespace GasMatic.Shared.Domain;
 
 public enum NominalPipeSize
 {

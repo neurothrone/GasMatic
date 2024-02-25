@@ -11,6 +11,7 @@
         <controls:GasVolumeCollectionView />
 
         <ActivityIndicator IsRunning="{Binding IsLoading}"
-                           IsVisible="{Binding IsLoading}" />
+                           IsVisible="{Binding IsLoading}"
+                           HeightRequest="50" />
     </Grid>
 </ContentPage>

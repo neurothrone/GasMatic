@@ -1,10 +1,10 @@
 using System.Globalization;
 
-namespace GasMatic.Client.Converters;
+namespace GasMatic.Mobile.Converters;
 
 public class InverseBooleanConverter : IValueConverter
 {
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is bool booleanValue)
             return !booleanValue;
@@ -12,7 +12,7 @@ public class InverseBooleanConverter : IValueConverter
         throw new ArgumentException("Value must be a boolean");
     }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         throw new NotSupportedException("InverseBooleanConverter can only be used with one way bindings");
     }

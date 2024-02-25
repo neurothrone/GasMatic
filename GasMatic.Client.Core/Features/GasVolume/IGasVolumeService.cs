@@ -1,4 +1,4 @@
-using GasMatic.Client.Core.Features.GasVolume.Domain;
+using GasMatic.Shared.Domain;
 
 namespace GasMatic.Client.Core.Features.GasVolume;
 

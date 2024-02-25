@@ -1,14 +1,17 @@
-using GasMatic.Client.Core.Features.GasVolume.Domain;
+using GasMatic.Shared.Dto;
 using SQLite;
 
 namespace GasMatic.Client.Core.Features.GasVolume.Database;
 
 public class GasVolumeDatabase : IGasVolumeDatabase
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     private SQLiteAsyncConnection _database;
+#pragma warning restore CS8618
 
     private async Task Connect()
     {
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (_database is not null)
             return;
 

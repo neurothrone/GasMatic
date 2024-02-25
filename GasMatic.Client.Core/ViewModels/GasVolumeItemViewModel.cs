@@ -1,4 +1,5 @@
-using GasMatic.Client.Core.Features.GasVolume.Domain;
+using GasMatic.Shared.Domain;
+using GasMatic.Shared.Dto;
 
 namespace GasMatic.Client.Core.ViewModels;
 

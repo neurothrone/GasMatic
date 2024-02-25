@@ -6,9 +6,10 @@ using CommunityToolkit.Mvvm.Messaging;
 using DevExpress.Maui.Controls;
 using GasMatic.Client.Core.Features.GasVolume;
 using GasMatic.Client.Core.Features.GasVolume.Database;
-using GasMatic.Client.Core.Features.GasVolume.Domain;
 using GasMatic.Client.Core.Messages;
 using GasMatic.Client.Core.Validation;
+using GasMatic.Shared.Domain;
+using GasMatic.Shared.Dto;
 
 namespace GasMatic.Client.Core.ViewModels;
 
@@ -31,7 +32,7 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
         set => SetProperty(ref _length, value, true);
     }
 
-    private bool _isCustomPressure = false;
+    private bool _isCustomPressure;
 
     public bool IsCustomPressure
     {

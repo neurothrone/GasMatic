@@ -3,8 +3,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using GasMatic.Client.Core.Features.GasVolume.Database;
-using GasMatic.Client.Core.Features.GasVolume.Domain;
 using GasMatic.Client.Core.Messages;
+using GasMatic.Shared.Dto;
 
 namespace GasMatic.Client.Core.ViewModels;
 

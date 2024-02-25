@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace GasMatic.Client.Converters;
+namespace GasMatic.Mobile.Converters;
 
 public class IntToBoolConverter : IValueConverter
 {

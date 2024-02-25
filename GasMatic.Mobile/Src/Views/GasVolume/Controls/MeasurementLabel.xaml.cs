@@ -1,6 +1,6 @@
 namespace GasMatic.Mobile.Views.GasVolume.Controls;
 
-public partial class MeasurementLabel : ContentView
+public partial class MeasurementLabel
 {
     private static readonly BindableProperty FirstTextProperty = BindableProperty.Create(
         nameof(MeasurementType),
