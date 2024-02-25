@@ -1,5 +1,4 @@
 using CommunityToolkit.Mvvm.Input;
-using GasMatic.Client.Core.Services;
 using GasMatic.Client.Core.Services.Environment;
 using GasMatic.Client.Core.Services.Interactions;
 
@@ -14,8 +13,6 @@ public partial class AboutViewModel(
     public string AppTitle => AppInfo.Name;
     public string Version => AppInfo.VersionString;
     public string Author => "Zane Neurothrone";
-    public string DotNetTextCredits => "This app is powered by .NET MAUI";
-    public string DotNetDetailCredits => "Written in XAML & C#";
     public string AppIconCredit => "App icon by svgrepo.com";
 
     [RelayCommand]
