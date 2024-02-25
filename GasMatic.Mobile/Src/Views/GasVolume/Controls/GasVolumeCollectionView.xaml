@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:GasMatic.Mobile.Views.GasVolume.Controls"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
              x:Class="GasMatic.Mobile.Views.GasVolume.Controls.GasVolumeCollectionView"
              x:DataType="viewModels:GasVolumeHistoryViewModel">
 
@@ -14,6 +15,18 @@
         SelectionMode="None"
         VerticalScrollBarVisibility="{OnIdiom Desktop=Always, Default=Never}"
         BackgroundColor="Transparent">
+
+        <CollectionView.EmptyView>
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <VerticalStackLayout Spacing="10">
+                <Image Source="icon_sad.png"
+                       HeightRequest="100" />
+                <Label Text="{mauiLoc:Translate GasVolumeCalculationsEmptyLabel}"
+                       TextColor="Silver"
+                       FontSize="20"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </CollectionView.EmptyView>
 
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical"
