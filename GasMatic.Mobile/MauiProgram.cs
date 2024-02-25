@@ -1,8 +1,13 @@
-﻿using DevExpress.Maui;
+﻿using CommunityToolkit.Maui;
+using DevExpress.Maui;
 using GasMatic.Client.Core.Features.GasVolume;
 using GasMatic.Client.Core.Features.GasVolume.Database;
 using GasMatic.Client.Core.Services;
+using GasMatic.Client.Core.Services.Alerts;
+using GasMatic.Client.Core.Services.Environment;
+using GasMatic.Client.Core.Services.Interactions;
 using GasMatic.Client.Core.ViewModels;
+using GasMatic.Mobile.Services;
 using GasMatic.Mobile.Views.About;
 using GasMatic.Mobile.Views.GasVolume;
 using GasMatic.Mobile.Views.Settings;
@@ -40,15 +45,23 @@ public static class MauiProgram
 
     private static void RegisterThirdPartyServices(this MauiAppBuilder builder)
     {
-        // Register Handlers for DevExpress Components
-        builder.UseDevExpress();
+        builder.UseMauiCommunityToolkit();
+        builder.UseDevExpress(); // Register Handlers for DevExpress Components
     }
 
     private static void RegisterAppServices(this MauiAppBuilder builder)
     {
+        // Load environment variables
+        IDotEnvService dotEnvService = new DotEnvService();
+        dotEnvService.LoadEnvironmentVariables(
+            FileSystem.OpenAppPackageFileAsync("env.txt"));
+
+        builder.Services.AddTransient<IConfigurationService, ConfigurationService>();
+        builder.Services.AddSingleton<IAlertService, AlertService>();
+        builder.Services.AddSingleton<IAppInteractionsService, AppInteractionsService>();
+
         builder.Services.AddSingleton<IGasVolumeService, GasVolumeService>();
         builder.Services.AddSingleton<IGasVolumeDatabase, GasVolumeDatabase>();
-        builder.Services.AddSingleton<IAppInteractionsService, AppInteractionsService>();
     }
 
     private static void RegisterViewModels(this MauiAppBuilder builder)
