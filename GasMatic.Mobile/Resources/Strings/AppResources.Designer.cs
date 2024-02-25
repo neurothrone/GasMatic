@@ -255,9 +255,9 @@ namespace GasMatic.Mobile.Resources.Strings {
             }
         }
         
-        internal static string ChangeLanguageDialogTitle {
+        internal static string ChangeLanguage {
             get {
-                return ResourceManager.GetString("ChangeLanguageDialogTitle", resourceCulture);
+                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
             }
         }
         

@@ -126,7 +126,7 @@
     <data name="ChangeLanguageDialogMessage" xml:space="preserve">
         <value>Är du säker på att du vill ändra språket?</value>
     </data>
-    <data name="ChangeLanguageDialogTitle" xml:space="preserve">
+    <data name="ChangeLanguage" xml:space="preserve">
         <value>Ändra språk</value>
     </data>
     <data name="ChangeLanguageSuccessMessage" xml:space="preserve">

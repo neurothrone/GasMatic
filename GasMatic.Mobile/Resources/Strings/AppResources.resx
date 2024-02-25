@@ -123,7 +123,7 @@
     <data name="DeleteAllDataSuccessMessage" xml:space="preserve">
         <value>Your data has been deleted.</value>
     </data>
-    <data name="ChangeLanguageDialogTitle" xml:space="preserve">
+    <data name="ChangeLanguage" xml:space="preserve">
         <value>Change Language</value>
     </data>
     <data name="ChangeLanguageDialogMessage" xml:space="preserve">
