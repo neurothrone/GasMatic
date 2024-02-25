@@ -123,4 +123,19 @@
     <data name="DeleteAllDataSuccessMessage" xml:space="preserve">
         <value>Din data har raderats.</value>
     </data>
+    <data name="ChangeLanguageDialogMessage" xml:space="preserve">
+        <value>Är du säker på att du vill ändra språket?</value>
+    </data>
+    <data name="ChangeLanguageDialogTitle" xml:space="preserve">
+        <value>Ändra språk</value>
+    </data>
+    <data name="ChangeLanguageSuccessMessage" xml:space="preserve">
+        <value>Språket har ändrats.</value>
+    </data>
+    <data name="AcceptButton" xml:space="preserve">
+        <value>Ja</value>
+    </data>
+    <data name="CancelButton" xml:space="preserve">
+        <value>Avbryt</value>
+    </data>
 </root>

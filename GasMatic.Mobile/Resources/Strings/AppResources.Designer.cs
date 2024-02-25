@@ -254,5 +254,35 @@ namespace GasMatic.Mobile.Resources.Strings {
                 return ResourceManager.GetString("DeleteAllDataSuccessMessage", resourceCulture);
             }
         }
+        
+        internal static string ChangeLanguageDialogTitle {
+            get {
+                return ResourceManager.GetString("ChangeLanguageDialogTitle", resourceCulture);
+            }
+        }
+        
+        internal static string ChangeLanguageDialogMessage {
+            get {
+                return ResourceManager.GetString("ChangeLanguageDialogMessage", resourceCulture);
+            }
+        }
+        
+        internal static string ChangeLanguageSuccessMessage {
+            get {
+                return ResourceManager.GetString("ChangeLanguageSuccessMessage", resourceCulture);
+            }
+        }
+        
+        internal static string AcceptButton {
+            get {
+                return ResourceManager.GetString("AcceptButton", resourceCulture);
+            }
+        }
+        
+        internal static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -14,16 +15,59 @@ public partial class SettingsViewModel(
     IAppInteractionsService appInteractionsService,
     IGasVolumeDatabase gasVolumeDatabase,
     IAlertService alertService,
-    ILocalizedResourcesProvider resources) : ObservableObject
+    ILocalizationManager localizationManager,
+    ILocalizedResourcesProvider resources)
+    : ObservableObject
 {
     private const string NominalPipeSizeUrl = "https://en.wikipedia.org/wiki/Nominal_Pipe_Size";
 
     [ObservableProperty] private BottomSheetState _deleteDataSheetState = BottomSheetState.Hidden;
+    [ObservableProperty] private BottomSheetState _changeLanguageSheetState = BottomSheetState.Hidden;
     [ObservableProperty] private double _deleteSliderValue;
     [ObservableProperty] private bool _isLoading;
 
+    public string[] SupportedLanguages =>
+    [
+        "en-SE",
+        "sv-SE"
+    ];
+
+    [ObservableProperty] private string _currentLanguage = CultureInfo.CurrentCulture.Name;
+
     [RelayCommand]
     private async Task OpenNpsWebLink() => await appInteractionsService.OpenBrowserAsync(NominalPipeSizeUrl);
+
+    [RelayCommand]
+    private void ShowChangeLanguageSheet()
+    {
+        ChangeLanguageSheetState = BottomSheetState.HalfExpanded;
+    }
+
+    [RelayCommand]
+    private async Task ChangeLanguage(string newLanguage)
+    {
+        var hasConfirmed = await alertService.ShowConfirmationPromptAsync(
+            resources["ChangeLanguageDialogTitle"],
+            resources["ChangeLanguageDialogMessage"],
+            resources["AcceptButton"],
+            resources["CancelButton"]);
+
+        if (hasConfirmed)
+        {
+            SwitchLanguage(newLanguage);
+            await alertService.ShowSnackbarAsync(resources["ChangeLanguageSuccessMessage"]);
+        }
+
+        ChangeLanguageSheetState = BottomSheetState.Hidden;
+    }
+
+    private void SwitchLanguage(string newLanguage)
+    {
+        CurrentLanguage = newLanguage;
+
+        var newCulture = new CultureInfo(newLanguage);
+        localizationManager.UpdateUserCulture(newCulture);
+    }
 
     [RelayCommand]
     private void ShowDeleteDataSheet()

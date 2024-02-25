@@ -12,13 +12,17 @@ public class AlertService : IAlertService
         await MainThread.InvokeOnMainThreadAsync(() => Shell.Current.DisplayAlert(title, message, cancel));
     }
 
-    async Task<bool> IAlertService.ShowConfirmationPromptAsync(string title, string message)
+    async Task<bool> IAlertService.ShowConfirmationPromptAsync(
+        string title,
+        string message,
+        string accept,
+        string cancel)
     {
         return await MainThread.InvokeOnMainThreadAsync(() => Shell.Current.DisplayAlert(
             title,
             message: message,
-            accept: "Yes",
-            cancel: "Cancel"
+            accept: accept,
+            cancel: cancel
         ));
     }
 
