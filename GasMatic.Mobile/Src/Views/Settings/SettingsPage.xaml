@@ -36,47 +36,57 @@
         </TableView>
 
         <controls:BottomSheet State="{Binding DeleteDataSheetState}">
-            <VerticalStackLayout Margin="10" Spacing="10">
-                <Label Text="Delete All Data"
-                       FontSize="22"
-                       FontAttributes="Bold" />
-                <Label Text="Are you sure? This will delete all of your data on the device."
-                       FontSize="16" />
+            <Grid>
+                <VerticalStackLayout
+                    IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}"
+                    Margin="10"
+                    Spacing="10">
+                    <Label Text="Delete All Data"
+                           FontSize="22"
+                           FontAttributes="Bold" />
+                    <Label Text="Are you sure? This will delete all of your data on the device."
+                           FontSize="16" />
 
-                <Border Stroke="Transparent"
-                        BackgroundColor="DarkRed"
-                        Padding="10">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="15" />
-                    </Border.StrokeShape>
+                    <Border Stroke="Transparent"
+                            BackgroundColor="DarkRed"
+                            Padding="10">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
 
-                    <FlexLayout Direction="Row">
-                        <Image Source="icon_info.png" />
-                        <Label Text="You must drag the slider to the end to confirm."
-                               FontSize="14"
-                               VerticalTextAlignment="Center"
-                               Padding="5,0,0,0" />
-                    </FlexLayout>
-                </Border>
+                        <FlexLayout Direction="Row">
+                            <Image Source="icon_info.png" />
+                            <Label Text="You must drag the slider to the end to confirm."
+                                   FontSize="14"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,0,0,0" />
+                        </FlexLayout>
+                    </Border>
 
-                <Slider x:Name="Slider"
-                        Margin="0,10"
-                        Minimum="0"
-                        Maximum="100"
-                        MinimumTrackColor="Red"
-                        MaximumTrackColor="DarkRed"
-                        Value="{Binding DeleteSliderValue, Mode=TwoWay}" />
+                    <Slider x:Name="Slider"
+                            Margin="0,10"
+                            Minimum="0"
+                            Maximum="100"
+                            MinimumTrackColor="Red"
+                            MaximumTrackColor="DarkRed"
+                            Value="{Binding DeleteSliderValue, Mode=TwoWay}" />
 
-                <Button
-                    IsVisible="{Binding Source={x:Reference Slider}, Path=Value,
+                    <Button
+                        IsVisible="{Binding Source={x:Reference Slider}, Path=Value,
                             Converter={StaticResource IntToBoolConverter}}"
-                    Text="Delete All Data"
-                    FontSize="16"
-                    FontAttributes="Bold"
-                    BackgroundColor="DarkRed"
-                    TextColor="White"
-                    Command="{Binding DeleteAllDataCommand}" />
-            </VerticalStackLayout>
+                        Text="Delete All Data"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        BackgroundColor="DarkRed"
+                        TextColor="White"
+                        Command="{Binding DeleteAllDataCommand}" />
+                </VerticalStackLayout>
+
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                   IsVisible="{Binding IsLoading}"
+                                   HeightRequest="50" />
+            </Grid>
+
         </controls:BottomSheet>
     </Grid>
 </ContentPage>
