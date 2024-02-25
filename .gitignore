@@ -8,4 +8,8 @@ riderModule.iml
 .vs
 .vscode
 
+# Temp/Development
 requirements.md
+
+# Environment
+env.txt
