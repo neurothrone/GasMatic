@@ -6,37 +6,27 @@ namespace Localization;
 
 public class LocalizedResourcesProvider : INotifyPropertyChanged, ILocalizedResourcesProvider
 {
-    ResourceManager resourceManager;
-    CultureInfo currentCulture;
+    private readonly ResourceManager _resourceManager;
+    private CultureInfo _currentCulture;
 
-    public static LocalizedResourcesProvider Instance
-    {
-        get;
-        private set;
-    }
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    public static LocalizedResourcesProvider Instance { get; private set; }
+#pragma warning restore CS8618
 
-    public string this[string key]
-        => resourceManager.GetString(key, currentCulture)
-        ?? key;
+    public string this[string key] => _resourceManager.GetString(key, _currentCulture) ?? key;
 
     public LocalizedResourcesProvider(ResourceManager resourceManager)
     {
-        this.resourceManager = resourceManager;
-        currentCulture = CultureInfo.CurrentUICulture;
+        _resourceManager = resourceManager;
+        _currentCulture = CultureInfo.CurrentUICulture;
         Instance = this;
     }
 
     public void UpdateCulture(CultureInfo cultureInfo)
     {
-        currentCulture = cultureInfo;
-        // OnPropertyChanged("Item");
+        _currentCulture = cultureInfo;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    // protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    // {
-    //     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    // }
 }
