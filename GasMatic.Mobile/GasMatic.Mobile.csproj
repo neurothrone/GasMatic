@@ -40,11 +40,11 @@
         <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4"/>
-
+        <MauiIcon Include="Resources\AppIcon\appicon.svg"/>
+        
         <!-- Splash Screen -->
         <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
 
@@ -60,84 +60,84 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1"/>
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GasMatic.Client.Core\GasMatic.Client.Core.csproj" />
-      <ProjectReference Include="..\Localization.Maui\Localization.Maui.csproj" />
-      <ProjectReference Include="..\Localization\Localization.csproj" />
+        <ProjectReference Include="..\GasMatic.Client.Core\GasMatic.Client.Core.csproj"/>
+        <ProjectReference Include="..\Localization.Maui\Localization.Maui.csproj"/>
+        <ProjectReference Include="..\Localization\Localization.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="Src\Views\Settings\SettingsPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Src\Views\About\AboutPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Src\Views\Effect\EffectCalculatorPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Src\Views\Effect\EffectHistoryPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Src\Views\GasVolume\GasVolumeCalculatorPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Src\Views\GasVolume\GasVolumeHistoryPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
+        <MauiXaml Update="Src\Views\Settings\SettingsPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Src\Views\About\AboutPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Src\Views\Effect\EffectCalculatorPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Src\Views\Effect\EffectHistoryPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Src\Views\GasVolume\GasVolumeCalculatorPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Src\Views\GasVolume\GasVolumeHistoryPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Src\Views\Settings\SettingsPage.xaml.cs">
-        <DependentUpon>SettingsPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Src\Views\About\AboutPage.xaml.cs">
-        <DependentUpon>AboutPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Src\Views\Effect\EffectCalculatorPage.xaml.cs">
-        <DependentUpon>EffectCalculatorPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Src\Views\Effect\EffectHistoryPage.xaml.cs">
-        <DependentUpon>EffectHistoryPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Src\Views\GasVolume\GasVolumeCalculatorPage.xaml.cs">
-        <DependentUpon>GasVolumeCalculatorPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Src\Views\GasVolume\GasVolumeHistoryPage.xaml.cs">
-        <DependentUpon>GasVolumeHistoryPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Resources\Strings\AppResources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>AppResources.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Strings\AppResources.sv-SE.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>AppResources.sv-SE.resx</DependentUpon>
-      </Compile>
+        <Compile Update="Src\Views\Settings\SettingsPage.xaml.cs">
+            <DependentUpon>SettingsPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Src\Views\About\AboutPage.xaml.cs">
+            <DependentUpon>AboutPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Src\Views\Effect\EffectCalculatorPage.xaml.cs">
+            <DependentUpon>EffectCalculatorPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Src\Views\Effect\EffectHistoryPage.xaml.cs">
+            <DependentUpon>EffectHistoryPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Src\Views\GasVolume\GasVolumeCalculatorPage.xaml.cs">
+            <DependentUpon>GasVolumeCalculatorPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Src\Views\GasVolume\GasVolumeHistoryPage.xaml.cs">
+            <DependentUpon>GasVolumeHistoryPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Resources\Strings\AppResources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>AppResources.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Strings\AppResources.sv-SE.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>AppResources.sv-SE.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Strings\AppResources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Strings\AppResources.sv-SE.resx">
-        <LastGenOutput>AppResources.sv-SE.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Strings\AppResources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Strings\AppResources.sv-SE.resx">
+            <LastGenOutput>AppResources.sv-SE.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
 </Project>
