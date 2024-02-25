@@ -21,7 +21,7 @@
                     <!-- <SwitchCell Text="Dark Mode" -->
                     <!--             On="True" -->
                     <!--             OnColor="MediumPurple" /> -->
-                    <ImageCell Text="{mauiLoc:Translate ChangeLanguageDialogTitle}"
+                    <ImageCell Text="{mauiLoc:Translate ChangeLanguage}"
                                Detail="{Binding CurrentLanguage}"
                                ImageSource="icon_language.png"
                                Command="{Binding ShowChangeLanguageSheetCommand}" />
@@ -48,7 +48,7 @@
 
                 <CollectionView.Header>
                     <VerticalStackLayout Padding="0,10">
-                        <Label Text="{mauiLoc:Translate PressurePicker}"
+                        <Label Text="{mauiLoc:Translate ChangeLanguage}"
                                TextColor="Silver"
                                HorizontalTextAlignment="Center"
                                FontSize="20" />
