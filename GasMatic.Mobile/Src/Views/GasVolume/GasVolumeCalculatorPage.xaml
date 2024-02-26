@@ -54,6 +54,7 @@
                                  BackgroundColor="MediumSlateBlue"
                                  BorderWidth="0"
                                  Margin="0,20"
+                                 Padding="5"
                                  Command="{Binding ShowNominalPipeSizeSelectionSheetCommand}" />
                 </FlexLayout>
             </Border>
@@ -174,6 +175,7 @@
                                  BackgroundColor="MediumSlateBlue"
                                  BorderWidth="0"
                                  Margin="0,20"
+                                 Padding="5"
                                  Command="{Binding ShowPressureSelectionSheetCommand}" />
                 </FlexLayout>
             </Border>
