@@ -18,7 +18,7 @@
                     <!--             On="True" -->
                     <!--             OnColor="MediumPurple" /> -->
                     <ImageCell Text="{mauiLoc:Translate ChangeLanguage}"
-                               Detail="{Binding SelectedLanguage}"
+                               Detail="{Binding CurrentLanguage}"
                                ImageSource="icon_language.png"
                                Command="{Binding ShowChangeLanguageSheetCommand}" />
                 </TableSection>

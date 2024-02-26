@@ -33,7 +33,7 @@ public partial class SettingsViewModel : ObservableObject
         "sv-SE"
     ];
 
-    [ObservableProperty] private string _selectedLanguage;
+    [ObservableProperty] private string _currentLanguage;
     private ObservableCollection<SelectionItemViewModel> _languageList = [];
 
     public ObservableCollection<SelectionItemViewModel> LanguageList
@@ -58,25 +58,25 @@ public partial class SettingsViewModel : ObservableObject
         _localizationManager = localizationManager;
         _resources = resources;
 
-        _selectedLanguage = CultureInfo.CurrentCulture.Name;
+        _currentLanguage = CultureInfo.CurrentCulture.Name;
         LoadSupportedLanguages();
     }
 
     private void LoadSupportedLanguages()
     {
         LanguageList = new ObservableCollection<SelectionItemViewModel>(SupportedLanguages
-            .Select(language => new SelectionItemViewModel(language, string.Equals(language, SelectedLanguage)))
+            .Select(language => new SelectionItemViewModel(language, string.Equals(language, CurrentLanguage)))
             .ToList());
     }
 
     private void SwitchLanguage(string newLanguage)
     {
-        var currentChoice = LanguageList.First(p => p.Item == SelectedLanguage);
+        var currentChoice = LanguageList.First(p => p.Item == CurrentLanguage);
         currentChoice.IsSelected = false;
 
-        SelectedLanguage = newLanguage;
+        CurrentLanguage = newLanguage;
 
-        var newChoice = LanguageList.First(p => p.Item == SelectedLanguage);
+        var newChoice = LanguageList.First(p => p.Item == CurrentLanguage);
         newChoice.IsSelected = true;
 
         var newCulture = new CultureInfo(newLanguage);
@@ -95,7 +95,7 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private async Task ChangeLanguage(string newLanguage)
     {
-        if (string.Equals(SelectedLanguage, newLanguage))
+        if (string.Equals(CurrentLanguage, newLanguage))
             return;
 
         var hasConfirmed = await _alertService.ShowConfirmationPromptAsync(
