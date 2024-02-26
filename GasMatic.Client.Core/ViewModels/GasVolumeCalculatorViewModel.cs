@@ -57,8 +57,8 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     [ObservableProperty] private double _gasVolume;
     [ObservableProperty] private bool _isFormValid;
 
-    [ObservableProperty] private string _selectedNominalPipeSize = string.Empty;
-    [ObservableProperty] private string _selectedPressure = string.Empty;
+    [ObservableProperty] private string _currentNominalPipeSize = string.Empty;
+    [ObservableProperty] private string _currentPressure = string.Empty;
 
     [ObservableProperty] private BottomSheetState _npsSheetState = BottomSheetState.Hidden;
     [ObservableProperty] private BottomSheetState _pressureSheetState = BottomSheetState.Hidden;
@@ -128,7 +128,7 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
 
     private async Task CalculateGasVolume()
     {
-        var nominalPipeSize = NominalPipeSizeExtensions.FromString(SelectedNominalPipeSize);
+        var nominalPipeSize = NominalPipeSizeExtensions.FromString(CurrentNominalPipeSize);
 
         if (!double.TryParse(Length, out double length))
         {
@@ -136,7 +136,7 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
             return;
         }
 
-        var pressureString = IsCustomPressure ? CustomPressure : SelectedPressure;
+        var pressureString = IsCustomPressure ? CustomPressure : CurrentPressure;
         if (!double.TryParse(pressureString, out double pressure))
         {
             // Console.WriteLine("❌ -> Invalid Pressure.");
@@ -178,15 +178,15 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     {
         var npsChoices = NominalPipeSizeExtensions.ToStringArray();
         var pressureChoices = PressureExtensions.ToStringArray();
-        SelectedNominalPipeSize = npsChoices.First();
-        SelectedPressure = pressureChoices.First();
+        CurrentNominalPipeSize = npsChoices.First();
+        CurrentPressure = pressureChoices.First();
 
         NominalPipeSizeList = new ObservableCollection<SelectionItemViewModel>(npsChoices
-            .Select(c => new SelectionItemViewModel(c, string.Equals(c, SelectedNominalPipeSize)))
+            .Select(c => new SelectionItemViewModel(c, string.Equals(c, CurrentNominalPipeSize)))
             .ToList());
 
         PressureList = new ObservableCollection<SelectionItemViewModel>(pressureChoices
-            .Select(c => new SelectionItemViewModel(c, string.Equals(c, SelectedPressure)))
+            .Select(c => new SelectionItemViewModel(c, string.Equals(c, CurrentPressure)))
             .ToList());
     }
 
@@ -197,17 +197,17 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     }
 
     [RelayCommand]
-    private void SelectNominalPipeSize(string selection)
+    private void ChangeNominalPipeSize(string selection)
     {
-        if (string.Equals(SelectedNominalPipeSize, selection))
+        if (string.Equals(CurrentNominalPipeSize, selection))
             return;
 
-        var currentChoice = NominalPipeSizeList.First(p => p.Item == SelectedNominalPipeSize);
+        var currentChoice = NominalPipeSizeList.First(p => p.Item == CurrentNominalPipeSize);
         currentChoice.IsSelected = false;
 
-        SelectedNominalPipeSize = selection;
+        CurrentNominalPipeSize = selection;
 
-        var newChoice = NominalPipeSizeList.First(p => p.Item == SelectedNominalPipeSize);
+        var newChoice = NominalPipeSizeList.First(p => p.Item == CurrentNominalPipeSize);
         newChoice.IsSelected = true;
 
         NpsSheetState = BottomSheetState.Hidden;
@@ -220,19 +220,19 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     }
 
     [RelayCommand]
-    private void SelectPressure(string selection)
+    private void ChangePressure(string selection)
     {
-        if (string.Equals(SelectedPressure, selection))
+        if (string.Equals(CurrentPressure, selection))
             return;
 
         // Set IsSelected of old choice to false
-        var currentChoice = PressureList.First(p => p.Item == SelectedPressure);
+        var currentChoice = PressureList.First(p => p.Item == CurrentPressure);
         currentChoice.IsSelected = false;
 
-        SelectedPressure = selection;
+        CurrentPressure = selection;
 
         // Set IsSelected of new choice to true
-        var newChoice = PressureList.First(p => p.Item == SelectedPressure);
+        var newChoice = PressureList.First(p => p.Item == CurrentPressure);
         newChoice.IsSelected = true;
 
         PressureSheetState = BottomSheetState.Hidden;

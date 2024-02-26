@@ -46,7 +46,7 @@
                             JustifyContent="SpaceBetween"
                             AlignItems="Center">
 
-                    <Label Text="{Binding SelectedNominalPipeSize}"
+                    <Label Text="{Binding CurrentNominalPipeSize}"
                            FontSize="18"
                            Padding="5,0,0,0" />
                     <ImageButton Source="icon_menu_open.png"
@@ -165,7 +165,7 @@
                             JustifyContent="SpaceBetween"
                             AlignItems="Center">
 
-                    <Label Text="{Binding  SelectedPressure}"
+                    <Label Text="{Binding  CurrentPressure}"
                            FontSize="18"
                            FontAttributes="Bold"
                            Margin="3,0,0,0" />
