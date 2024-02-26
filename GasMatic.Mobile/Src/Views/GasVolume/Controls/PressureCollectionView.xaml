@@ -55,8 +55,8 @@
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding
-                                        Source={RelativeSource AncestorType={x:Type viewModels:GasVolumeCalculatorViewModel}},
-                                        Path=SelectPressureCommand}"
+                            Source={RelativeSource AncestorType={x:Type viewModels:GasVolumeCalculatorViewModel}},
+                            Path=ChangePressureCommand}"
                             CommandParameter="{Binding Item}" />
                     </Border.GestureRecognizers>
                 </Border>
