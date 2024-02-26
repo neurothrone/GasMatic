@@ -33,15 +33,15 @@ public partial class SettingsViewModel : ObservableObject
         "sv-SE"
     ];
 
-    [ObservableProperty] private string _currentLanguage;
-    private ObservableCollection<LanguageItemViewModel> _languages = [];
+    [ObservableProperty] private string _selectedLanguage;
+    private ObservableCollection<SelectionItemViewModel> _languageList = [];
 
-    public ObservableCollection<LanguageItemViewModel> Languages
+    public ObservableCollection<SelectionItemViewModel> LanguageList
     {
-        get => _languages;
+        get => _languageList;
         set
         {
-            _languages = value;
+            _languageList = value;
             OnPropertyChanged();
         }
     }
@@ -58,8 +58,29 @@ public partial class SettingsViewModel : ObservableObject
         _localizationManager = localizationManager;
         _resources = resources;
 
-        _currentLanguage = CultureInfo.CurrentCulture.Name;
-        UpdateLanguages(_currentLanguage);
+        _selectedLanguage = CultureInfo.CurrentCulture.Name;
+        LoadSupportedLanguages();
+    }
+
+    private void LoadSupportedLanguages()
+    {
+        LanguageList = new ObservableCollection<SelectionItemViewModel>(SupportedLanguages
+            .Select(language => new SelectionItemViewModel(language, string.Equals(language, SelectedLanguage)))
+            .ToList());
+    }
+
+    private void SwitchLanguage(string newLanguage)
+    {
+        var currentChoice = LanguageList.First(p => p.Item == SelectedLanguage);
+        currentChoice.IsSelected = false;
+
+        SelectedLanguage = newLanguage;
+
+        var newChoice = LanguageList.First(p => p.Item == SelectedLanguage);
+        newChoice.IsSelected = true;
+
+        var newCulture = new CultureInfo(newLanguage);
+        _localizationManager.UpdateUserCulture(newCulture);
     }
 
     [RelayCommand]
@@ -87,24 +108,6 @@ public partial class SettingsViewModel : ObservableObject
         }
 
         ChangeLanguageSheetState = BottomSheetState.Hidden;
-        UpdateLanguages(newLanguage);
-    }
-
-    private void SwitchLanguage(string newLanguage)
-    {
-        CurrentLanguage = newLanguage;
-
-        var newCulture = new CultureInfo(newLanguage);
-        _localizationManager.UpdateUserCulture(newCulture);
-    }
-
-    private void UpdateLanguages(string newLanguage)
-    {
-        Languages = [];
-        foreach (var language in SupportedLanguages)
-        {
-            Languages.Add(new LanguageItemViewModel(language, language == newLanguage));
-        }
     }
 
     [RelayCommand]
@@ -118,12 +121,12 @@ public partial class SettingsViewModel : ObservableObject
     {
         IsLoading = true;
         await _databaseService.DeleteAllAsync();
+        WeakReferenceMessenger.Default.Send(new GasVolumeDataDeletedMessage());
+        IsLoading = false;
 
         DeleteDataSheetState = BottomSheetState.Hidden;
         DeleteSliderValue = 0;
-        IsLoading = false;
 
-        WeakReferenceMessenger.Default.Send(new GasVolumeDataDeletedMessage());
         await _alertService.ShowSnackbarAsync(_resources["DeleteAllDataSuccessMessage"]);
     }
 }
