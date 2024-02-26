@@ -15,8 +15,7 @@
                 <EntryCell Label="Version"
                            LabelColor="Silver"
                            Text="{Binding Version, Mode=OneTime}"
-                           IsEnabled="False">
-                </EntryCell>
+                           IsEnabled="False" />
                 <EntryCell Label="{mauiLoc:Translate DeveloperLabel}"
                            LabelColor="Silver"
                            Text="{Binding Author, Mode=OneTime}"
