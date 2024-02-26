@@ -13,25 +13,31 @@
     <Grid>
         <TableView Intent="Settings">
             <TableRoot>
-                <TableSection Title="{mauiLoc:Translate PreferencesLabel}">
+                <TableSection Title="{mauiLoc:Translate PreferencesLabel}"
+                              TextColor="Goldenrod">
                     <!-- <SwitchCell Text="Dark Mode" -->
                     <!--             On="True" -->
                     <!--             OnColor="MediumPurple" /> -->
-                    <ImageCell Text="{mauiLoc:Translate ChangeLanguage}"
+                    <ImageCell ImageSource="icon_language.png"
+                               Text="{mauiLoc:Translate ChangeLanguage}"
+                               TextColor="White"
                                Detail="{Binding CurrentLanguage}"
-                               ImageSource="icon_language.png"
                                Command="{Binding ShowChangeLanguageSheetCommand}" />
                 </TableSection>
-                <TableSection Title="{mauiLoc:Translate GasVolumeLabel}">
-                    <ImageCell Text="{mauiLoc:Translate NominalPipeSizeLinkLabel}"
+                <TableSection Title="{mauiLoc:Translate GasVolumeLabel}"
+                              TextColor="Goldenrod">
+                    <ImageCell ImageSource="icon_link.png"
+                               Text="{mauiLoc:Translate NominalPipeSizeLinkLabel}"
+                               TextColor="White"
                                Detail="{mauiLoc:Translate BrowserHint}"
-                               ImageSource="icon_link.png"
                                Command="{Binding OpenNpsWebLinkCommand}" />
                 </TableSection>
-                <TableSection Title="Data">
-                    <ImageCell Text="{mauiLoc:Translate DeleteAllDataLabel}"
+                <TableSection Title="Data"
+                              TextColor="Goldenrod">
+                    <ImageCell ImageSource="icon_folder_delete.png"
+                               Text="{mauiLoc:Translate DeleteAllDataLabel}"
+                               TextColor="White"
                                Detail="{mauiLoc:Translate DeleteAllDataHint}"
-                               ImageSource="icon_folder_delete.png"
                                Command="{Binding ShowDeleteDataSheetCommand}" />
                 </TableSection>
             </TableRoot>
