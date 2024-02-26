@@ -16,16 +16,16 @@
             <Border Stroke="Transparent">
                 <SwipeView>
                     <SwipeView.RightItems>
-                           <!-- ReSharper disable once Xaml.InvalidType -->
-                           <SwipeItem Text="{mauiLoc:Translate DeleteButton}"
-                                      IconImageSource="icon_delete.png"
-                                      BackgroundColor="DarkRed"
-                                      IsDestructive="True"
-                                      Command="{Binding 
-                                                   Source={RelativeSource 
-                                                   AncestorType={x:Type viewModels:GasVolumeHistoryViewModel}}, 
-                                                   Path=DeleteCommand}"
-                                      CommandParameter="{Binding .}" />
+                        <!-- ReSharper disable once Xaml.InvalidType -->
+                        <SwipeItem Text="{OnPlatform iOS={mauiLoc:Translate DeleteButton}}"
+                                   IconImageSource="icon_delete.png"
+                                   BackgroundColor="DarkRed"
+                                   IsDestructive="True"
+                                   Command="{Binding 
+                                      Source={RelativeSource 
+                                      AncestorType={x:Type viewModels:GasVolumeHistoryViewModel}}, 
+                                      Path=DeleteCommand}"
+                                   CommandParameter="{Binding .}" />
                     </SwipeView.RightItems>
 
                     <Grid RowDefinitions="*,*,*,*,*"
