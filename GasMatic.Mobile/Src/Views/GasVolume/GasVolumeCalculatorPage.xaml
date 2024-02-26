@@ -5,6 +5,7 @@
              xmlns:devExpressControls="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
              xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
              xmlns:viewModels="clr-namespace:GasMatic.Client.Core.ViewModels;assembly=GasMatic.Client.Core"
+             xmlns:controls="clr-namespace:GasMatic.Mobile.Views.GasVolume.Controls"
              x:Class="GasMatic.Mobile.Views.GasVolume.GasVolumeCalculatorPage"
              x:DataType="viewModels:GasVolumeCalculatorViewModel"
              HideSoftInputOnTapped="True">
@@ -59,51 +60,7 @@
 
             <!-- NPS Bottom Sheet -->
             <devExpressControls:BottomSheet State="{Binding NpsSheetState }">
-                <CollectionView ItemsSource="{Binding  NominalPipeSizeChoices}"
-                                SelectionMode="None">
-
-                    <CollectionView.Header>
-                        <VerticalStackLayout Padding="0,10">
-                            <!-- ReSharper disable once Xaml.InvalidType -->
-                            <Label Text="{mauiLoc:Translate NominalPipeSizePicker}"
-                                   TextColor="Silver"
-                                   HorizontalTextAlignment="Center"
-                                   FontSize="20" />
-                        </VerticalStackLayout>
-                    </CollectionView.Header>
-
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical"
-                                           ItemSpacing="1" />
-                    </CollectionView.ItemsLayout>
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="{x:Type x:String}">
-                            <Border Stroke="MediumSlateBlue"
-                                    BackgroundColor="SlateBlue"
-                                    Padding="10,15">
-
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="0" />
-                                </Border.StrokeShape>
-
-                                <Label Text="{Binding .}"
-                                       TextColor="White"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       HorizontalTextAlignment="Center" />
-
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding
-                                        Source={RelativeSource AncestorType={x:Type viewModels:GasVolumeCalculatorViewModel}},
-                                        Path=SelectNominalPipeSizeCommand}"
-                                        CommandParameter="{Binding .}" />
-                                </Border.GestureRecognizers>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <controls:NpsCollectionView />
             </devExpressControls:BottomSheet>
 
             <!-- Length -->
@@ -133,7 +90,7 @@
                     <RoundRectangle CornerRadius="0,45,0,0" />
                 </Border.StrokeShape>
 
-                <Entry Placeholder="{mauiLoc:Translate LengthPlaceholder}" 
+                <Entry Placeholder="{mauiLoc:Translate LengthPlaceholder}"
                        FontSize="18"
                        Keyboard="Numeric"
                        Style="{StaticResource CustomEntry}"
@@ -167,7 +124,7 @@
                         JustifyContent="SpaceBetween"
                         AlignItems="Center"
                         Margin="0,0,0,10">
-                
+
                 <Label Text="{mauiLoc:Translate UseCustomPressureLabel}"
                        TextColor="Silver"
                        FontSize="16" />
@@ -180,7 +137,7 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="0,45,0,0" />
                 </Border.StrokeShape>
-                
+
                 <Entry Placeholder="{mauiLoc:Translate PressurePlaceholder}"
                        FontSize="18"
                        Keyboard="Numeric"
@@ -223,51 +180,7 @@
 
             <!-- Pressure Bottom Sheet -->
             <devExpressControls:BottomSheet State="{Binding PressureSheetState }">
-                <CollectionView ItemsSource="{Binding  PressureChoices}"
-                                SelectionMode="None">
-
-                    <CollectionView.Header>
-                        <VerticalStackLayout Padding="0,10">
-                            <Label Text="{mauiLoc:Translate PressurePicker}"
-                                   TextColor="Silver"
-                                   HorizontalTextAlignment="Center"
-                                   FontSize="20" />
-                        </VerticalStackLayout>
-                    </CollectionView.Header>
-
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical"
-                                           ItemSpacing="1" />
-                    </CollectionView.ItemsLayout>
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Stroke="MediumSlateBlue"
-                                    BackgroundColor="SlateBlue"
-                                    Padding="10,15">
-
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="0" />
-                                </Border.StrokeShape>
-
-                                <Label Text="{Binding .}"
-                                       TextColor="White"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       HorizontalTextAlignment="Center" />
-
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding 
-                                        Source={RelativeSource 
-                                        AncestorType={x:Type viewModels:GasVolumeCalculatorViewModel}}, 
-                                        Path=SelectPressureCommand}"
-                                        CommandParameter="{Binding .}" />
-                                </Border.GestureRecognizers>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <controls:PressureCollectionView />
             </devExpressControls:BottomSheet>
 
             <!-- Gas Volume -->

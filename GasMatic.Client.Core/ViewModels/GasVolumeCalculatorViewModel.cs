@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -56,15 +57,36 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     [ObservableProperty] private double _gasVolume;
     [ObservableProperty] private bool _isFormValid;
 
-    [ObservableProperty] private string _selectedNominalPipeSize;
-    [ObservableProperty] private string _selectedPressure;
+    [ObservableProperty] private string _selectedNominalPipeSize = string.Empty;
+    [ObservableProperty] private string _selectedPressure = string.Empty;
 
     [ObservableProperty] private BottomSheetState _npsSheetState = BottomSheetState.Hidden;
     [ObservableProperty] private BottomSheetState _pressureSheetState = BottomSheetState.Hidden;
 
 
-    public string[] NominalPipeSizeChoices => NominalPipeSizeExtensions.ToStringArray();
-    public string[] PressureChoices => PressureExtensions.ToStringArray();
+    private ObservableCollection<SelectionItemViewModel> _nominalPipeSizeList = [];
+
+    public ObservableCollection<SelectionItemViewModel> NominalPipeSizeList
+    {
+        get => _nominalPipeSizeList;
+        set
+        {
+            _nominalPipeSizeList = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private ObservableCollection<SelectionItemViewModel> _pressureList = [];
+
+    public ObservableCollection<SelectionItemViewModel> PressureList
+    {
+        get => _pressureList;
+        set
+        {
+            _pressureList = value;
+            OnPropertyChanged();
+        }
+    }
 
     public AsyncRelayCommand SubmitCommand { get; }
 
@@ -75,12 +97,11 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
         _databaseService = databaseService;
         _gasVolumeService = gasVolumeService;
 
-        SelectedNominalPipeSize = NominalPipeSizeChoices.First();
-        SelectedPressure = PressureChoices.First();
-
         SubmitCommand = new AsyncRelayCommand(OnSubmit, () => !HasErrors);
         ResetInputFields();
         ErrorsChanged += GasVolumeCalculatorViewModel_ErrorsChanged;
+
+        LoadSheetLists();
     }
 
     void IDisposable.Dispose()
@@ -103,19 +124,6 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     private async Task OnSubmit()
     {
         await CalculateGasVolume();
-
-        // ValidateAllProperties();
-        // if (HasErrors)
-        // {
-        //     var errors = GetErrors();
-        //     Debug.WriteLine(string.Join("\n", errors.Select(e => e.ErrorMessage)));
-        // }
-        // else
-        // {
-        //     Debug.WriteLine("All OK");
-        // }
-        //
-        // return Task.CompletedTask;
     }
 
     private async Task CalculateGasVolume()
@@ -166,6 +174,22 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
         WeakReferenceMessenger.Default.Send(new CalculationCompletedMessage(savedRecord));
     }
 
+    private void LoadSheetLists()
+    {
+        var npsChoices = NominalPipeSizeExtensions.ToStringArray();
+        var pressureChoices = PressureExtensions.ToStringArray();
+        SelectedNominalPipeSize = npsChoices.First();
+        SelectedPressure = pressureChoices.First();
+
+        NominalPipeSizeList = new ObservableCollection<SelectionItemViewModel>(npsChoices
+            .Select(c => new SelectionItemViewModel(c, string.Equals(c, SelectedNominalPipeSize)))
+            .ToList());
+
+        PressureList = new ObservableCollection<SelectionItemViewModel>(pressureChoices
+            .Select(c => new SelectionItemViewModel(c, string.Equals(c, SelectedPressure)))
+            .ToList());
+    }
+
     [RelayCommand]
     private void ShowNominalPipeSizeSelectionSheet()
     {
@@ -175,8 +199,15 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     [RelayCommand]
     private void SelectNominalPipeSize(string selection)
     {
-        NpsSheetState = BottomSheetState.Hidden;
+        var currentChoice = NominalPipeSizeList.First(p => p.Item == SelectedNominalPipeSize);
+        currentChoice.IsSelected = false;
+
         SelectedNominalPipeSize = selection;
+
+        var newChoice = NominalPipeSizeList.First(p => p.Item == SelectedNominalPipeSize);
+        newChoice.IsSelected = true;
+
+        NpsSheetState = BottomSheetState.Hidden;
     }
 
     [RelayCommand]
@@ -188,7 +219,16 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     [RelayCommand]
     private void SelectPressure(string selection)
     {
-        PressureSheetState = BottomSheetState.Hidden;
+        // Set IsSelected of old choice to false
+        var currentChoice = PressureList.First(p => p.Item == SelectedPressure);
+        currentChoice.IsSelected = false;
+
         SelectedPressure = selection;
+
+        // Set IsSelected of new choice to true
+        var newChoice = PressureList.First(p => p.Item == SelectedPressure);
+        newChoice.IsSelected = true;
+
+        PressureSheetState = BottomSheetState.Hidden;
     }
 }
