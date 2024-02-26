@@ -1,10 +1,12 @@
 using GasMatic.Client.Core.Services.Alerts;
 using GasMatic.Client.Core.Services.Interactions;
+using Localization;
 
 namespace GasMatic.Mobile.Services;
 
 public class AppInteractionsService(
-    IAlertService alertService) : IAppInteractionsService
+    IAlertService alertService,
+    ILocalizedResourcesProvider resources) : IAppInteractionsService
 {
     public async Task OpenBrowserAsync(string url)
     {
@@ -23,8 +25,8 @@ public class AppInteractionsService(
         catch (Exception)
         {
             await alertService.ShowAlertAsync(
-                "An unexpected error occurred.",
-                "No browser may be installed on the device.",
+                resources["BrowserFailedTitle"],
+                resources["BrowserFailedMessage"],
                 "OK");
         }
     }

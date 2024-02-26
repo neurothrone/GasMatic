@@ -284,5 +284,17 @@ namespace GasMatic.Mobile.Resources.Strings {
                 return ResourceManager.GetString("CancelButton", resourceCulture);
             }
         }
+        
+        internal static string BrowserFailedTitle {
+            get {
+                return ResourceManager.GetString("BrowserFailedTitle", resourceCulture);
+            }
+        }
+        
+        internal static string BrowserFailedMessage {
+            get {
+                return ResourceManager.GetString("BrowserFailedMessage", resourceCulture);
+            }
+        }
     }
 }

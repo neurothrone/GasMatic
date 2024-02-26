@@ -138,4 +138,10 @@
     <data name="CancelButton" xml:space="preserve">
         <value>Cancel</value>
     </data>
+    <data name="BrowserFailedTitle" xml:space="preserve">
+        <value>An unexpected error occurred</value>
+    </data>
+    <data name="BrowserFailedMessage" xml:space="preserve">
+        <value>No browser may be installed on the device.</value>
+    </data>
 </root>

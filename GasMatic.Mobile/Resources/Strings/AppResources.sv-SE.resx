@@ -138,4 +138,10 @@
     <data name="CancelButton" xml:space="preserve">
         <value>Avbryt</value>
     </data>
+    <data name="BrowserFailedTitle" xml:space="preserve">
+        <value>Ett oväntat fel uppstod</value>
+    </data>
+    <data name="BrowserFailedMessage" xml:space="preserve">
+        <value>Ingen webbläsare kan vara installerad på enheten.</value>
+    </data>
 </root>
