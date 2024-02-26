@@ -438,22 +438,22 @@
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
         <!-- !: App Bar Styling -->
-        <Setter Property="Shell.BackgroundColor"
+        <Setter Property="BackgroundColor"
                 Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}" />
-        <Setter Property="Shell.ForegroundColor"
+        <Setter Property="ForegroundColor"
                 Value="{OnPlatform WinUI={StaticResource Primary}, Default={StaticResource White}}" />
-        <Setter Property="Shell.TitleColor"
+        <Setter Property="TitleColor"
                 Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}" />
-        <Setter Property="Shell.DisabledColor"
+        <Setter Property="DisabledColor"
                 Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
-        <Setter Property="Shell.UnselectedColor"
+        <Setter Property="UnselectedColor"
                 Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray200}}" />
-        <Setter Property="Shell.NavBarHasShadow" Value="False" />
+        <Setter Property="NavBarHasShadow" Value="False" />
         <!-- !: Tab Bar Styling -->
-        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource OffBlack}" />
-        <Setter Property="Shell.TabBarTitleColor" Value="MediumPurple" />
-        <Setter Property="Shell.TabBarForegroundColor" Value="MediumPurple" />
-        <Setter Property="Shell.TabBarUnselectedColor" Value="White" />
+        <Setter Property="TabBarBackgroundColor" Value="{StaticResource OffBlack}" />
+        <Setter Property="TabBarTitleColor" Value="{StaticResource MediumSlateBlueLighter}" />
+        <Setter Property="TabBarForegroundColor" Value="{StaticResource MediumSlateBlueLighter}" />
+        <Setter Property="TabBarUnselectedColor" Value="Silver" />
     </Style>
 
     <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">

@@ -22,6 +22,7 @@
     <!-- Custom -->
     <Color x:Key="PrimaryBackgroundColor">#171717</Color>
     <Color x:Key="InputBackgroundColor">#171717</Color>
+    <Color x:Key="MediumSlateBlueLighter">#FF8C7AF0</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
