@@ -95,6 +95,9 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private async Task ChangeLanguage(string newLanguage)
     {
+        if (string.Equals(SelectedLanguage, newLanguage))
+            return;
+
         var hasConfirmed = await _alertService.ShowConfirmationPromptAsync(
             _resources["ChangeLanguage"],
             _resources["ChangeLanguageDialogMessage"],

@@ -199,6 +199,9 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     [RelayCommand]
     private void SelectNominalPipeSize(string selection)
     {
+        if (string.Equals(SelectedNominalPipeSize, selection))
+            return;
+
         var currentChoice = NominalPipeSizeList.First(p => p.Item == SelectedNominalPipeSize);
         currentChoice.IsSelected = false;
 
@@ -219,6 +222,9 @@ public partial class GasVolumeCalculatorViewModel : ObservableValidator, IDispos
     [RelayCommand]
     private void SelectPressure(string selection)
     {
+        if (string.Equals(SelectedPressure, selection))
+            return;
+
         // Set IsSelected of old choice to false
         var currentChoice = PressureList.First(p => p.Item == SelectedPressure);
         currentChoice.IsSelected = false;
