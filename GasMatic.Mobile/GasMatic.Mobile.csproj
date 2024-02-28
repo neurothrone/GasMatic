@@ -40,35 +40,43 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+      <CreatePackage>false</CreatePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
+      <CreatePackage>false</CreatePackage>
+      <CodesignProvision>Automatic:AppStore</CodesignProvision>
+      <CodesignKey>iPhone Distribution</CodesignKey>
+    </PropertyGroup>
     <ItemGroup>
         <!-- App Icon -->
-        <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFFFFF" ForegroundFile="Resources\AppIcon\appiconfg.svg"/>
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFFFFF" ForegroundFile="Resources\AppIcon\appiconfg.svg" />
 
         <!-- Splash Screen -->
-        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
         <!-- Images -->
-        <MauiImage Include="Resources\Images\*"/>
-        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="24,24"/>
+        <MauiImage Include="Resources\Images\*" />
+        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="24,24" />
 
         <!-- Custom Fonts -->
-        <MauiFont Include="Resources\Fonts\*"/>
+        <MauiFont Include="Resources\Fonts\*" />
 
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
-        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1"/>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7"/>
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7"/>
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
+        <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\GasMatic.Client.Core\GasMatic.Client.Core.csproj"/>
-        <ProjectReference Include="..\Localization.Maui\Localization.Maui.csproj"/>
-        <ProjectReference Include="..\Localization\Localization.csproj"/>
+        <ProjectReference Include="..\GasMatic.Client.Core\GasMatic.Client.Core.csproj" />
+        <ProjectReference Include="..\Localization.Maui\Localization.Maui.csproj" />
+        <ProjectReference Include="..\Localization\Localization.csproj" />
     </ItemGroup>
 
     <ItemGroup>
