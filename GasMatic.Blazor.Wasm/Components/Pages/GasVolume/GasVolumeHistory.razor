@@ -1,0 +1,32 @@
+@page "/gas-volume-history"
+@using GasMatic.Shared.Domain
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+<PageTitle>Gas Volume History</PageTitle>
+
+<h3>Gas Volume History</h3>
+
+<div class="grid" tabindex="-1">
+    <QuickGrid Items="@_calculations" Pagination="_pagination">
+        <PropertyColumn Title="Nominal Pipe Size - DN (mm)"
+                        Property="@(c => NominalPipeSizeExtensions.Label((NominalPipeSize)c.NominalPipeSize))"
+                        Sortable="true"/>
+        <PropertyColumn Title="Length (m)"
+                        Property="@(c => c.Length)"
+                        Sortable="true"/>
+        <PropertyColumn Title="Pressure (mbar)"
+                        Property="@(c => c.Pressure)"
+                        Sortable="true"/>
+        <PropertyColumn Title="Gas Volume (m&sup3;)"
+                        Property="@(c => c.GasVolume)"
+                        Sortable="true"/>
+        <PropertyColumn Title="Calculated at"
+                        Property="@(c => c.CalculatedAt)" Format="MMM dd, yyyy"
+                        Sortable="true"/>
+        <TemplateColumn Align="Align.Center" Title="Actions">
+            <button class="btn btn-outline-danger my-1" @onclick="() => DeleteCalculationAsync(context.Id)">Delete</button>
+        </TemplateColumn>
+    </QuickGrid>
+</div>
+
+<Paginator State="_pagination"/>

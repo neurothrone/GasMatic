@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
+             xmlns:viewModels="clr-namespace:GasMatic.Maui.Core.ViewModels;assembly=GasMatic.Maui.Core"
+             xmlns:controls="clr-namespace:GasMatic.Maui.Client.Views.GasVolume.Controls"
+             x:Class="GasMatic.Maui.Client.Views.GasVolume.Controls.GasVolumeCollectionView"
+             x:DataType="viewModels:GasVolumeHistoryViewModel">
+
+    <CollectionView
+        IsVisible="{Binding IsLoading,
+                        Converter={StaticResource InverseBooleanConverter}}"
+        ItemsSource="{Binding Items}"
+        SelectionMode="None"
+        VerticalScrollBarVisibility="{OnIdiom Desktop=Always, Default=Never}"
+        BackgroundColor="Transparent">
+
+        <CollectionView.EmptyView>
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <VerticalStackLayout Spacing="10">
+                <Image Source="icon_sad.png"
+                       HeightRequest="100" />
+                <Label Text="{mauiLoc:Translate GasVolumeCalculationsEmptyLabel}"
+                       TextColor="Silver"
+                       FontSize="20"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </CollectionView.EmptyView>
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="10" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="viewModels:GasVolumeItemViewModel">
+                <controls:GasVolumeItemView />
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

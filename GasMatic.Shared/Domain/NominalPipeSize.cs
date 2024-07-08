@@ -45,24 +45,6 @@ public static class NominalPipeSizeExtensions
     };
 
 
-    private static readonly NominalPipeSize[] AllEnumValues =
-    [
-        ..(NominalPipeSize[])Enum.GetValues(typeof(NominalPipeSize))
-    ];
-
-    private static readonly string[] AllLabels = PipeSizeLabels.Values.ToArray();
-
-    public static string[] ToStringArray() => AllLabels;
-
-    public static NominalPipeSize FromString(string label)
-    {
-        var index = Array.IndexOf(AllLabels, label);
-        if (index != -1)
-            return AllEnumValues[index];
-
-        throw new Exception("Label not found");
-    }
-
     public static string Label(NominalPipeSize nominalPipeSize) => PipeSizeLabels.GetValueOrDefault(
         nominalPipeSize, "Unknown"
     );

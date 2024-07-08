@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
+             xmlns:viewModels="clr-namespace:GasMatic.Maui.Core.ViewModels;assembly=GasMatic.Maui.Core"
+             xmlns:converters="clr-namespace:GasMatic.Maui.Client.Converters"
+             x:Class="GasMatic.Maui.Client.Views.Settings.Controls.DeleteAllDataView"
+             x:DataType="viewModels:SettingsViewModel">
+
+    <ContentView.Resources>
+        <converters:IntToBoolConverter x:Key="IntToBoolConverter" />
+    </ContentView.Resources>
+
+    <!-- ReSharper disable Xaml.InvalidType -->
+    <VerticalStackLayout
+        IsVisible="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}}"
+        Margin="10"
+        Spacing="10">
+        <Label Text="{mauiLoc:Translate DeleteAllDataLabel}"
+               FontSize="22"
+               FontAttributes="Bold" />
+        <Label Text="{mauiLoc:Translate DeleteAllDataInfoLabel}"
+               FontSize="16" />
+
+        <Border Stroke="Transparent"
+                BackgroundColor="DarkRed"
+                Padding="10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="15" />
+            </Border.StrokeShape>
+
+            <FlexLayout Direction="Row">
+                <Image Source="icon_info.png" />
+                <Label Text="{mauiLoc:Translate DeleteAllDataSliderLabel}"
+                       FontSize="14"
+                       VerticalTextAlignment="Center"
+                       Padding="5,0,0,0" />
+            </FlexLayout>
+        </Border>
+
+        <Slider x:Name="Slider"
+                Margin="0,10"
+                Minimum="0"
+                Maximum="100"
+                MinimumTrackColor="Red"
+                MaximumTrackColor="DarkRed"
+                Value="{Binding DeleteSliderValue, Mode=TwoWay}" />
+
+        <Button
+            IsVisible="{Binding Source={x:Reference Slider}, Path=Value,
+                            Converter={StaticResource IntToBoolConverter}}"
+            Text="{mauiLoc:Translate DeleteAllDataLabel}"
+            FontSize="16"
+            FontAttributes="Bold"
+            BackgroundColor="DarkRed"
+            TextColor="White"
+            Command="{Binding DeleteAllDataCommand}" />
+    </VerticalStackLayout>
+</ContentView>

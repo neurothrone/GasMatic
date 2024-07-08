@@ -1,0 +1,17 @@
+.grid ::deep table {
+    min-width: 100%;
+}
+
+::deep tr:nth-child(even) {
+    /*background: rgba(255, 255, 255, 0.4);*/
+    /*background: lightcyan;*/
+}
+
+::deep tr:nth-child(odd) {
+    /*background: lightsteelblue;*/
+}
+
+::deep thead {
+    background-color: #d8d8d8;
+    outline: 0.1rem solid gray;
+}

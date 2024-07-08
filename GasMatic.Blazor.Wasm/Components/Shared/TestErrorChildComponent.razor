@@ -1,0 +1,32 @@
+<h4>TestErrorChildComponent</h4>
+
+<p>All good so far</p>
+
+<button class="btn btn-outline-danger" @onclick="CauseError">Cause Error</button>
+
+@if (_message is not null)
+{
+    <p class="text-danger mt-3">@_message</p>
+}
+
+@code {
+
+    [CascadingParameter]
+    public Error? Error { get; set; }
+
+    private string? _message;
+
+    private void CauseError()
+    {
+        try
+        {
+            throw new Exception("This is a test exception");
+        }
+        catch (Exception ex)
+        {
+            Error?.ProcessError(ex);
+            _message = ex.Message;
+        }
+    }
+
+}

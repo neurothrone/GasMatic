@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="GasVolumeCalculatorTitle" xml:space="preserve">
+        <value>Gasvolym beräknare</value>
+    </data>
+    <data name="CalculateButton" xml:space="preserve">
+        <value>Beräkna</value>
+    </data>
+    <data name="GasVolumeHistoryTitle" xml:space="preserve">
+        <value>Gasvolym historik</value>
+    </data>
+    <data name="GasVolumeLabel" xml:space="preserve">
+        <value>Gasvolym</value>
+    </data>
+    <data name="LengthLabel" xml:space="preserve">
+        <value>Längd</value>
+    </data>
+    <data name="PressureLabel" xml:space="preserve">
+        <value>Tryck</value>
+    </data>
+    <data name="PressurePicker" xml:space="preserve">
+        <value>Välj tryck</value>
+    </data>
+    <data name="NominalPipeSizePicker" xml:space="preserve">
+        <value>Välj nominell rörstorlek</value>
+    </data>
+    <data name="NominalPipeSizeLabel" xml:space="preserve">
+        <value>Nominell rörstorlek - DN</value>
+    </data>
+    <data name="LengthPlaceholder" xml:space="preserve">
+        <value>Ange längd i meter</value>
+    </data>
+    <data name="PressurePlaceholder" xml:space="preserve">
+        <value>Ange tryck i mbar</value>
+    </data>
+    <data name="UseCustomPressureLabel" xml:space="preserve">
+        <value>Använd anpassat tryck?</value>
+    </data>
+    <data name="CalculatedDateLabel" xml:space="preserve">
+        <value>Beräknat datum</value>
+    </data>
+    <data name="GasVolumeCalculationsEmptyLabel" xml:space="preserve">
+        <value>Inga beräkningar än</value>
+    </data>
+    <data name="AboutTitle" xml:space="preserve">
+        <value>Om</value>
+    </data>
+    <data name="SettingsTitle" xml:space="preserve">
+        <value>Inställningar</value>
+    </data>
+    <data name="EffectCalculatorTitle" xml:space="preserve">
+        <value>Effekt beräknare</value>
+    </data>
+    <data name="HistoryTab" xml:space="preserve">
+        <value>Historik</value>
+    </data>
+    <data name="CalculateTab" xml:space="preserve">
+        <value>Beräknare</value>
+    </data>
+    <data name="EffectHistoryTitle" xml:space="preserve">
+        <value>Effekt historik</value>
+    </data>
+    <data name="DeleteButton" xml:space="preserve">
+        <value>Radera</value>
+    </data>
+    <data name="PreferencesLabel" xml:space="preserve">
+        <value>Preferenser</value>
+    </data>
+    <data name="DeleteAllDataLabel" xml:space="preserve">
+        <value>Radera all data</value>
+    </data>
+    <data name="DeleteAllDataHint" xml:space="preserve">
+        <value>Detta kommer att radera all din data på enheten</value>
+    </data>
+    <data name="NominalPipeSizeLinkLabel" xml:space="preserve">
+        <value>Läs mer om NPS-standarder</value>
+    </data>
+    <data name="DeleteAllDataInfoLabel" xml:space="preserve">
+        <value>Är du säker? Detta kommer att radera all din data på enheten.</value>
+    </data>
+    <data name="DeleteAllDataSliderLabel" xml:space="preserve">
+        <value>Dra skjutreglaget till slutet för att bekräfta.</value>
+    </data>
+    <data name="DeveloperLabel" xml:space="preserve">
+        <value>Utvecklare</value>
+    </data>
+    <data name="ContactLabel" xml:space="preserve">
+        <value>Kontakt</value>
+    </data>
+    <data name="CreditsLabel" xml:space="preserve">
+        <value>Krediter</value>
+    </data>
+    <data name="BrowserHint" xml:space="preserve">
+        <value>Detta öppnar en webbläsare</value>
+    </data>
+    <data name="EmailHint" xml:space="preserve">
+        <value>Detta öppnar standardappen för e-post</value>
+    </data>
+    <data name="DotNetTextCreditsLabel" xml:space="preserve">
+        <value>Denna app drivs av .NET MAUI</value>
+    </data>
+    <data name="DotNetDetailCreditsLabel" xml:space="preserve">
+        <value>Skrivet i XAML &amp; C#</value>
+    </data>
+    <data name="DeleteAllDataSuccessMessage" xml:space="preserve">
+        <value>Din data har raderats.</value>
+    </data>
+    <data name="ChangeLanguageDialogMessage" xml:space="preserve">
+        <value>Är du säker på att du vill ändra språket?</value>
+    </data>
+    <data name="ChangeLanguage" xml:space="preserve">
+        <value>Ändra språk</value>
+    </data>
+    <data name="ChangeLanguageSuccessMessage" xml:space="preserve">
+        <value>Språket har ändrats.</value>
+    </data>
+    <data name="AcceptButton" xml:space="preserve">
+        <value>Ja</value>
+    </data>
+    <data name="CancelButton" xml:space="preserve">
+        <value>Avbryt</value>
+    </data>
+    <data name="BrowserFailedTitle" xml:space="preserve">
+        <value>Ett oväntat fel uppstod</value>
+    </data>
+    <data name="BrowserFailedMessage" xml:space="preserve">
+        <value>Ingen webbläsare kan vara installerad på enheten.</value>
+    </data>
+</root>

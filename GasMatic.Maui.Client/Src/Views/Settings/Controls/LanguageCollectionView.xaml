@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
+             xmlns:viewModels="clr-namespace:GasMatic.Maui.Core.ViewModels;assembly=GasMatic.Maui.Core"
+             x:Class="GasMatic.Maui.Client.Views.Settings.Controls.LanguageCollectionView"
+             x:DataType="viewModels:SettingsViewModel">
+    
+    <CollectionView ItemsSource="{Binding LanguageList}"
+                    SelectionMode="None">
+
+        <CollectionView.Header>
+            <VerticalStackLayout Padding="0,10">
+                <!-- ReSharper disable once Xaml.InvalidType -->
+                <Label Text="{mauiLoc:Translate ChangeLanguage}"
+                       TextColor="Silver"
+                       HorizontalTextAlignment="Center"
+                       FontSize="20" />
+            </VerticalStackLayout>
+        </CollectionView.Header>
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="1" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="viewModels:SelectionItemViewModel">
+                <Border Padding="10,15">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Stroke" Value="MediumSlateBlue" />
+                            <Setter Property="BackgroundColor" Value="MediumSlateBlue" />
+                            <Style.Triggers>
+                                <DataTrigger TargetType="Border"
+                                             Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="Stroke" Value="DarkSlateBlue" />
+                                    <Setter Property="BackgroundColor" Value="DarkSlateBlue" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0" />
+                    </Border.StrokeShape>
+
+                    <Label Text="{Binding Item}"
+                           TextColor="White"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center" />
+
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding
+                            Source={RelativeSource AncestorType={x:Type viewModels:SettingsViewModel}},
+                            Path=ChangeLanguageCommand}"
+                            CommandParameter="{Binding Item}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

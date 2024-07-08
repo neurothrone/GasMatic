@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+        <RootNamespace>GasMatic.Blazor.Wasm</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.5"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.5" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" />
+        <PackageReference Include="SqliteWasmHelper" Version="1.2.0-beta-gf8e1db1f31"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\GasMatic.Shared\GasMatic.Shared.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="Components\Layout\MainLayout.razor"/>
+        <AdditionalFiles Include="Components\Layout\NavMenu.razor"/>
+        <AdditionalFiles Include="Components\Pages\GasVolume\GasVolumeCalculator.razor"/>
+        <AdditionalFiles Include="Components\Pages\GasVolume\GasVolumeHistory.razor"/>
+        <AdditionalFiles Include="Components\Pages\Home.razor"/>
+        <AdditionalFiles Include="Components\Shared\CustomInputText.razor"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Pages\GasVolume\GasVolumeCalculator.razor"/>
+        <_ContentIncludedByDefault Remove="Pages\GasVolume\GasVolumeHistory.razor"/>
+        <_ContentIncludedByDefault Remove="Pages\Home.razor"/>
+        <_ContentIncludedByDefault Remove="Shared\CustomInputText.razor"/>
+    </ItemGroup>
+
+</Project>

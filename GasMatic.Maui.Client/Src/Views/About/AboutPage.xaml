@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
+             xmlns:viewModels="clr-namespace:GasMatic.Maui.Core.ViewModels;assembly=GasMatic.Maui.Core"
+             x:Class="GasMatic.Maui.Client.Views.About.AboutPage"
+             x:DataType="viewModels:AboutViewModel">
+
+    <!-- ReSharper disable Xaml.InvalidType -->
+    <TableView Intent="Data">
+        <TableRoot>
+            <TableSection Title="{Binding AppTitle, Mode=OneTime}"
+                          TextColor="Goldenrod">
+                <EntryCell Label="Version"
+                           LabelColor="Silver"
+                           Text="{Binding Version, Mode=OneTime}"
+                           IsEnabled="False" />
+                <EntryCell Label="{mauiLoc:Translate DeveloperLabel}"
+                           LabelColor="Silver"
+                           Text="{Binding Author, Mode=OneTime}"
+                           IsEnabled="False" />
+            </TableSection>
+
+            <TableSection Title="{mauiLoc:Translate ContactLabel}"
+                          TextColor="Goldenrod">
+                <ImageCell ImageSource="icon_link.png"
+                           Text="Support"
+                           TextColor="White"
+                           Detail="{mauiLoc:Translate EmailHint}"
+                           Command="{Binding OpenSupportEmailLinkCommand}" />
+                <ImageCell ImageSource="icon_link.png"
+                           Text="LinkedIn"
+                           TextColor="White"
+                           Detail="{mauiLoc:Translate BrowserHint}"
+                           Command="{Binding OpenLinkedinWebLinkCommand}" />
+            </TableSection>
+
+            <TableSection Title="{mauiLoc:Translate CreditsLabel}"
+                          TextColor="Goldenrod">
+                <ImageCell ImageSource="dotnet_bot.png"
+                           Text="{mauiLoc:Translate DotNetTextCreditsLabel}"
+                           TextColor="White"
+                           Detail="{mauiLoc:Translate DotNetDetailCreditsLabel}" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:GasMatic.Maui.Core.ViewModels;assembly=GasMatic.Maui.Core"
+             xmlns:controls="clr-namespace:GasMatic.Maui.Client.Views.GasVolume.Controls"
+             x:Class="GasMatic.Maui.Client.Views.GasVolume.GasVolumeHistoryPage"
+             x:DataType="viewModels:GasVolumeHistoryViewModel">
+
+    <Grid Margin="10">
+        <controls:GasVolumeCollectionView />
+
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           HeightRequest="50" />
+    </Grid>
+</ContentPage>

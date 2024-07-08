@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Shell
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mauiLoc="clr-namespace:Localization.Maui;assembly=Localization.Maui"
+    xmlns:about="clr-namespace:GasMatic.Maui.Client.Views.About"
+    xmlns:effect="clr-namespace:GasMatic.Maui.Client.Views.Effect"
+    xmlns:gasVolume="clr-namespace:GasMatic.Maui.Client.Views.GasVolume"
+    xmlns:settings="clr-namespace:GasMatic.Maui.Client.Views.Settings"
+    x:Class="GasMatic.Maui.Client.AppShell"
+    FlyoutBehavior="{OnIdiom Phone=Flyout, Default=Locked}"
+    Title="GasMatic"
+    TitleColor="White">
+
+    <Shell.FlyoutBackground>
+        <LinearGradientBrush StartPoint="0,0"
+                             EndPoint="1,2">
+            <GradientStop Color="{StaticResource OffBlack}"
+                          Offset="0.2" />
+            <GradientStop Color="DarkSlateBlue"
+                          Offset="0.6" />
+            <GradientStop Color="SlateBlue"
+                          Offset="0.9" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackground>
+
+    <!-- Gas Volume Calculator -->
+    <!-- ReSharper disable once Xaml.InvalidType -->
+    <FlyoutItem Title="{mauiLoc:Translate GasVolumeCalculatorTitle}"
+                FlyoutIcon="icon_valve.png"
+                StyleClass="FlyoutItemLayoutStyle">
+
+        <!-- ReSharper disable once Xaml.InvalidType -->
+        <Tab Title="{mauiLoc:Translate CalculateTab}"
+             Icon="icon_calculate.png">
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <ShellContent
+                Title="{mauiLoc:Translate GasVolumeCalculatorTitle}"
+                ContentTemplate="{DataTemplate gasVolume:GasVolumeCalculatorPage}"
+                Route="GasVolumeCalculatorPage" />
+        </Tab>
+        <!-- ReSharper disable once Xaml.InvalidType -->
+        <Tab Title="{mauiLoc:Translate HistoryTab}"
+             Icon="icon_work_history.png">
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <ShellContent
+                Title="{mauiLoc:Translate GasVolumeHistoryTitle}"
+                ContentTemplate="{DataTemplate gasVolume:GasVolumeHistoryPage}"
+                Route="GasVolumeHistoryPage" />
+        </Tab>
+    </FlyoutItem>
+
+    <!-- Effect Calculator -->
+    <!-- ReSharper disable once Xaml.InvalidType -->
+    <FlyoutItem Title="{mauiLoc:Translate EffectCalculatorTitle}"
+                FlyoutIcon="icon_construction.png"
+                IsEnabled="False">
+
+        <!-- ReSharper disable once Xaml.InvalidType -->
+        <Tab Title="{mauiLoc:Translate CalculateTab}"
+             Icon="icon_calculate.png">
+
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <ShellContent
+                Title="{mauiLoc:Translate EffectCalculatorTitle}"
+                ContentTemplate="{DataTemplate effect:EffectCalculatorPage}"
+                Route="EffectCalculatorPage" />
+        </Tab>
+        <!-- ReSharper disable once Xaml.InvalidType -->
+        <Tab Title="{mauiLoc:Translate HistoryTab}"
+             Icon="icon_work_history.png">
+            <!-- ReSharper disable once Xaml.InvalidType -->
+            <ShellContent
+                Title="{mauiLoc:Translate EffectHistoryTitle}"
+                ContentTemplate="{DataTemplate effect:EffectHistoryPage}"
+                Route="EffectHistoryPage" />
+        </Tab>
+    </FlyoutItem>
+
+    <!-- About -->
+    <!-- ReSharper disable once Xaml.InvalidType -->
+    <FlyoutItem Title="{mauiLoc:Translate AboutTitle}"
+                FlyoutIcon="icon_info.png">
+
+        <!-- ReSharper disable once Xaml.InvalidType -->
+        <ShellContent
+            Title="{mauiLoc:Translate AboutTitle}"
+            ContentTemplate="{DataTemplate about:AboutPage}"
+            Route="AboutPage" />
+    </FlyoutItem>
+
+    <!-- Settings -->
+    <!-- ReSharper disable once Xaml.InvalidType -->
+    <FlyoutItem Title="{mauiLoc:Translate SettingsTitle}"
+                FlyoutIcon="icon_settings.png">
+
+        <!-- ReSharper disable once Xaml.InvalidType -->
+        <ShellContent
+            Title="{mauiLoc:Translate SettingsTitle}"
+            ContentTemplate="{DataTemplate settings:SettingsPage}"
+            Route="SettingsPage" />
+    </FlyoutItem>
+
+</Shell>
