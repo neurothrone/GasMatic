@@ -40,6 +40,7 @@
         <_ContentIncludedByDefault Remove="Pages\GasVolume\GasVolumeHistory.razor"/>
         <_ContentIncludedByDefault Remove="Pages\Home.razor"/>
         <_ContentIncludedByDefault Remove="Shared\CustomInputText.razor"/>
+        <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
     </ItemGroup>
 
 </Project>
