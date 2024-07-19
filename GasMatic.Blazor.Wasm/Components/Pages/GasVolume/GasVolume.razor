@@ -1,0 +1,31 @@
+@page "/gas-volume"
+
+<PageTitle>@Localizer["GasVolumeLabel"]</PageTitle>
+<HeadContent>
+    <meta name="description" content="">
+</HeadContent>
+
+<ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+        <a class="nav-link @(_tab == GasVolumeTab.Calculator ? "active" : "")"
+           style="cursor: pointer"
+           @onclick="() => ChangeTabTo(GasVolumeTab.Calculator)">
+            @Localizer["CalculateTab"]
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(_tab == GasVolumeTab.History ? "active" : "")"
+           style="cursor: pointer"
+           @onclick="() => ChangeTabTo(GasVolumeTab.History)">
+            @Localizer["HistoryTab"]
+        </a>
+    </li>
+</ul>
+@if (_tab == GasVolumeTab.Calculator)
+{
+    <GasVolumeCalculator GasVolumeInputViewModel="_inputViewModel"/>
+}
+else
+{
+    <GasVolumeHistory/>
+}
