@@ -1,4 +1,3 @@
-using GasMatic.Blazor.Wasm.Models;
 using GasMatic.Blazor.Wasm.Services;
 using GasMatic.Blazor.Wasm.ViewModels;
 using GasMatic.Shared.Services;
@@ -15,48 +14,52 @@ public partial class GasVolumeCalculator
     [Inject]
     private IGasVolumeService GasVolumeService { get; set; } = null!;
 
+    [Parameter]
+    public GasVolumeInputViewModel GasVolumeInputViewModel { get; set; } = null!;
+
     private ErrorBoundary? _errorBoundary;
 
     private const int RoundToDecimals = 3;
-    private GasVolumeInput _input = new();
+
     private bool _useCustomPressure;
-    private bool _isFormValid;
     private double _gasVolume;
 
     private void ValidateInput()
     {
-        if (!double.TryParse(_input.Length, out _))
+        if (!double.TryParse(GasVolumeInputViewModel.Length, out _))
         {
-            _isFormValid = false;
+            GasVolumeInputViewModel.IsValid = false;
             return;
         }
 
-        if (_useCustomPressure && !double.TryParse(_input.CustomPressure, out _))
+        if (_useCustomPressure && !double.TryParse(GasVolumeInputViewModel.CustomPressure, out _))
         {
-            _isFormValid = false;
+            GasVolumeInputViewModel.IsValid = false;
             return;
         }
 
-        _isFormValid = true;
+        GasVolumeInputViewModel.IsValid = true;
     }
 
     private async Task CalculateGasVolume()
     {
         // throw new SystemException();
 
-        if (!double.TryParse(_input.Length, out double length))
+        if (!double.TryParse(GasVolumeInputViewModel.Length, out double length))
         {
             return;
         }
 
-        var pressureString = _useCustomPressure ? _input.CustomPressure : ((int)_input.SelectedPressure).ToString();
+        var pressureString = _useCustomPressure
+            ? GasVolumeInputViewModel.CustomPressure
+            : ((int)GasVolumeInputViewModel.SelectedPressure).ToString();
         if (!double.TryParse(pressureString, out double pressure))
         {
             return;
         }
 
         var gasVolume = GasVolumeService.CalculateGasVolume(
-            (int)_input.NominalPipeSize,
+            (int)GasVolumeInputViewModel.NominalPipeSize,
             length,
             pressure);
         var roundedGasVolume = Math.Round(gasVolume, RoundToDecimals);
@@ -64,11 +67,11 @@ public partial class GasVolumeCalculator
 
         var viewModel = new GasVolumeViewModel
         {
-            NominalPipeSize = (int)_input.NominalPipeSize,
+            NominalPipeSize = (int)GasVolumeInputViewModel.NominalPipeSize,
             Length = length,
             Pressure = pressure,
             GasVolume = _gasVolume,
-            CalculatedAt = DateTime.Now
+            CalculatedDate = DateTime.Now
         };
         await GasVolumeDataSource.CreateAsync(viewModel);
     }

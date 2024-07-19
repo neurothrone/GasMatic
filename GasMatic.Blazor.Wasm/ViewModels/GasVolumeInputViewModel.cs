@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using GasMatic.Shared.Domain;
 
-namespace GasMatic.Blazor.Wasm.Models;
+namespace GasMatic.Blazor.Wasm.ViewModels;
 
-public class GasVolumeInput
+public class GasVolumeInputViewModel
 {
     private const string DoubleValueRegex = @"^\d+(\.\d+)?$";
 
@@ -17,4 +17,6 @@ public class GasVolumeInput
     [Required(ErrorMessage = "The Custom Pressure field is required.")]
     [RegularExpression(DoubleValueRegex, ErrorMessage = "That is not a valid number.")]
     public string CustomPressure { get; set; } = string.Empty;
+
+    public bool IsValid { get; set; }
 }

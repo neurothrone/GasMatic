@@ -7,5 +7,5 @@ public class GasVolumeViewModel
     public double Length { get; set; }
     public double Pressure { get; set; }
     public double GasVolume { get; set; }
-    public DateTime CalculatedAt { get; set; }
+    public DateTime CalculatedDate { get; set; }
 }

@@ -4,7 +4,7 @@ using Microsoft.JSInterop;
 
 namespace GasMatic.Blazor.Wasm.Components.Shared;
 
-public partial class LanguageSwitcher
+public partial class CultureSelect
 {
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
@@ -12,10 +12,7 @@ public partial class LanguageSwitcher
     [Inject]
     public IJSRuntime JsRuntime { get; set; } = null!;
 
-    [Inject]
-    public ILogger<LanguageSwitcher> Logger { get; set; } = null!;
-
-    private readonly CultureInfo[] _cultures =
+    private readonly CultureInfo[] _supportedCultures =
     [
         new CultureInfo("en"),
         new CultureInfo("sv-se")
@@ -31,9 +28,8 @@ public partial class LanguageSwitcher
 
             var js = (IJSInProcessRuntime)JsRuntime;
             js.InvokeVoid("clientCulture.set", value.Name);
+            js.InvokeVoid("changeHtmlLang", value.Name);
             NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
-
-            Logger.LogInformation($"Language switched to {value.Name}");
         }
     }
 }

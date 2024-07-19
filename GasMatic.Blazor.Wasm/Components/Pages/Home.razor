@@ -1,9 +1,11 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
-@inject IStringLocalizer<AppResources> Localizer
+@code {
 
-<PageTitle>Home</PageTitle>
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("/gas-volume");
+    }
 
-<h1>@Localizer["GasVolumeCalculatorTitle"]</h1>
-
-<LanguageSwitcher/>
+}

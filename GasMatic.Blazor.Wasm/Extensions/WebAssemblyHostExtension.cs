@@ -9,15 +9,10 @@ public static class WebAssemblyHostExtension
     public static async Task SetDefaultCulture(this WebAssemblyHost host)
     {
         var jsInterop = host.Services.GetRequiredService<IJSRuntime>();
-        var result = await jsInterop.InvokeAsync<string>("clientCulture.get");
+        var result = await jsInterop.InvokeAsync<string?>("clientCulture.get") ?? "en";
+        await jsInterop.InvokeVoidAsync("changeHtmlLang", result.Equals("en") ? "en" : "sv");
 
-        CultureInfo culture;
-
-        if (result != null)
-            culture = new CultureInfo(result);
-        else
-            culture = new CultureInfo("en");
-
+        var culture = new CultureInfo(result);
         CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
     }

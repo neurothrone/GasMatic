@@ -1,8 +1,8 @@
 @inject IStringLocalizer<AppResources> Localizer
 
 <strong>@Localizer["ChangeLanguage"]</strong>
-<select class="form-control" @bind="SelectedCulture" style="width:300px; margin-left:10px;">
-    @foreach (var culture in _cultures)
+<select class="form-control" @bind="SelectedCulture" style="width:150px;">
+    @foreach (var culture in _supportedCultures)
     {
         <option value="@culture">@culture.DisplayName</option>
     }
