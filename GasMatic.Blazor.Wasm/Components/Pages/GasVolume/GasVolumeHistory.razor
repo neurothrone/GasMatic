@@ -16,7 +16,8 @@
                         Property="@(c => c.GasVolume)"
                         Sortable="true"/>
         <PropertyColumn Title="@($"{Localizer["CalculatedDateLabel"]}")"
-                        Property="@(c => c.CalculatedDate.ToString("MMM dd, yyyy"))"
+                        Property="@(c => c.CalculatedDate)"
+                        Format="MMM dd, yyyy"
                         Sortable="true"/>
         <TemplateColumn Align="Align.Center" Title="@($"{Localizer["Actions"]}")">
             <button class="btn btn-outline-danger my-1" @onclick="() => DeleteCalculationAsync(context.Id)">@Localizer["DeleteButton"]</button>
