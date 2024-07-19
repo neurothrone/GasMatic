@@ -1,6 +1,7 @@
 using GasMatic.Blazor.Wasm.Data;
 using GasMatic.Blazor.Wasm.Mappers;
 using GasMatic.Blazor.Wasm.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using SqliteWasmHelper;
 
 namespace GasMatic.Blazor.Wasm.Services;
@@ -17,25 +18,25 @@ public class GasVolumeLocalDataSource : IGasVolumeDataSource
     public async Task<List<GasVolumeViewModel>> FetchAllAsync()
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
-        return dbContext.GasVolumeEntities
+        return await dbContext.GasVolumeEntities
             .Select(e => e.ToViewModel())
-            .ToList();
+            .ToListAsync();
     }
 
     public async Task<GasVolumeViewModel?> FetchByIdAsync(int id)
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
-        return dbContext.GasVolumeEntities
+        return await dbContext.GasVolumeEntities
             .Where(e => e.Id == id)
             .Select(e => e.ToViewModel())
-            .FirstOrDefault();
+            .FirstOrDefaultAsync();
     }
 
     public async Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
         var entity = viewModel.ToEntity();
-        dbContext.GasVolumeEntities.Add(entity);
+        await dbContext.GasVolumeEntities.AddAsync(entity);
         await dbContext.SaveChangesAsync();
 
         viewModel.Id = entity.Id;
@@ -45,7 +46,7 @@ public class GasVolumeLocalDataSource : IGasVolumeDataSource
     public async Task<bool> UpdateByIdAsync(int id, GasVolumeViewModel viewModel)
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
-        var entity = dbContext.GasVolumeEntities.FirstOrDefault(e => e.Id == id);
+        var entity = await dbContext.GasVolumeEntities.FirstOrDefaultAsync(e => e.Id == id);
         if (entity is null)
             return false;
 
@@ -58,7 +59,7 @@ public class GasVolumeLocalDataSource : IGasVolumeDataSource
     public async Task<bool> DeleteByIdAsync(int id)
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
-        var entity = dbContext.GasVolumeEntities.FirstOrDefault(e => e.Id == id);
+        var entity = await dbContext.GasVolumeEntities.FirstOrDefaultAsync(e => e.Id == id);
         if (entity is null) return false;
 
         dbContext.GasVolumeEntities.Remove(entity);
