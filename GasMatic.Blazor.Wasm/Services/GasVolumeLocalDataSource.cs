@@ -1,4 +1,5 @@
 using GasMatic.Blazor.Wasm.Data;
+using GasMatic.Blazor.Wasm.Mappers;
 using GasMatic.Blazor.Wasm.ViewModels;
 using SqliteWasmHelper;
 
@@ -17,15 +18,7 @@ public class GasVolumeLocalDataSource : IGasVolumeDataSource
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
         return dbContext.GasVolumeEntities
-            .Select(e => new GasVolumeViewModel
-            {
-                Id = e.Id,
-                NominalPipeSize = e.NominalPipeSize,
-                Length = e.Length,
-                Pressure = e.Pressure,
-                GasVolume = e.GasVolume,
-                CalculatedAt = e.CalculatedAt,
-            })
+            .Select(e => e.ToViewModel())
             .ToList();
     }
 
@@ -34,29 +27,14 @@ public class GasVolumeLocalDataSource : IGasVolumeDataSource
         await using var dbContext = await _factory.CreateDbContextAsync();
         return dbContext.GasVolumeEntities
             .Where(e => e.Id == id)
-            .Select(e => new GasVolumeViewModel
-            {
-                Id = e.Id,
-                NominalPipeSize = e.NominalPipeSize,
-                Length = e.Length,
-                Pressure = e.Pressure,
-                GasVolume = e.GasVolume,
-                CalculatedAt = e.CalculatedAt,
-            })
+            .Select(e => e.ToViewModel())
             .FirstOrDefault();
     }
 
     public async Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
-        var entity = new GasVolumeEntity
-        {
-            NominalPipeSize = viewModel.NominalPipeSize,
-            Length = viewModel.Length,
-            Pressure = viewModel.Pressure,
-            GasVolume = viewModel.GasVolume,
-            CalculatedAt = viewModel.CalculatedAt
-        };
+        var entity = viewModel.ToEntity();
         dbContext.GasVolumeEntities.Add(entity);
         await dbContext.SaveChangesAsync();
 
@@ -71,11 +49,7 @@ public class GasVolumeLocalDataSource : IGasVolumeDataSource
         if (entity is null)
             return false;
 
-        entity.NominalPipeSize = viewModel.NominalPipeSize;
-        entity.Length = viewModel.Length;
-        entity.Pressure = viewModel.Pressure;
-        entity.GasVolume = viewModel.GasVolume;
-        entity.CalculatedAt = viewModel.CalculatedAt;
+        entity.UpdateFromViewModel(viewModel);
         await dbContext.SaveChangesAsync();
 
         return true;
