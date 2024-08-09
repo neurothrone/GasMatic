@@ -2,44 +2,34 @@ using AngleSharp.Html.Dom;
 using FluentAssertions;
 using Moq;
 using SqliteWasmHelper;
-using GasMatic.Shared.Services;
 using GasMatic.Blazor.Wasm.Components.Pages.GasVolume;
 using GasMatic.Blazor.Wasm.Data;
 using GasMatic.Blazor.Wasm.Services;
-using GasMatic.Blazor.Wasm.ViewModels;
+using GasMatic.Core.Interfaces;
+using GasMatic.Core.Services;
+using GasMatic.Core.ViewModels;
 
 namespace GasMatic.Tests.Blazor.Wasm;
 
-public class GasVolumeCalculatorTests
+public class GasVolumeCalculatorTests : TestContext
 {
-    [Fact]
-    public void HeaderComponentRendersCorrectly()
+    public GasVolumeCalculatorTests()
     {
         // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
-        // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
-        var h3Element = cut.Find("h3");
-
-        // Assert
-        h3Element.TextContent.Should().Be("Gas Volume Calculator");
+        Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
+        Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
+        Services.AddScoped<IGasVolumeService, GasVolumeService>();
+        Services.AddLocalization();
     }
 
     [Fact]
     public void SubmitButtonShouldInitiallyBeDisabled()
     {
-        // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         var submitButton = cut.Find("button[type=submit]");
 
         // Assert
@@ -49,14 +39,11 @@ public class GasVolumeCalculatorTests
     [Fact]
     public void SubmitButtonShouldBeEnabledAfterProvidingValidInput()
     {
-        // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         cut.Find("#length").Input(2400);
         var submitButton = cut.Find("button[type=submit]");
 
@@ -67,14 +54,11 @@ public class GasVolumeCalculatorTests
     [Fact]
     public void PressureRadioGroupShouldBeVisibleWhenCustomPressureInputIsFalse()
     {
-        // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         var pressureThirtyInputRadio = cut.Find("#Thirty");
 
         // Assert
@@ -84,14 +68,11 @@ public class GasVolumeCalculatorTests
     [Fact]
     public void PressureInputShouldBeVisibleWhenCustomPressureCheckboxIsTrue()
     {
-        // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         cut.Find("#useCustomPressure").Change(true);
         var pressureInput = cut.Find("#pressure");
 
@@ -104,13 +85,12 @@ public class GasVolumeCalculatorTests
     {
         // Arrange
         const string expectedOption = "ThreeHundred";
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
 
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         var selectElement = (IHtmlSelectElement)cut.Find("#nominalPipeSize");
         selectElement.Change(expectedOption);
 
@@ -121,14 +101,11 @@ public class GasVolumeCalculatorTests
     [Fact]
     public void CanChangeRadioGroupOption()
     {
-        // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         var thirtyOption = (IHtmlInputElement)cut.Find("input[name=pressureOptions][value=Thirty]");
         var fourThousandOption = (IHtmlInputElement)cut.Find("input[name=pressureOptions][value=FourThousand]");
         thirtyOption.IsChecked = false;
@@ -143,19 +120,18 @@ public class GasVolumeCalculatorTests
     public void GasVolumeResultShouldBeRenderedCorrectlyAfterSubmittingValidInput()
     {
         // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         var mockedDataSource = new Mock<IGasVolumeDataSource>();
         var viewModel = new GasVolumeViewModel();
         mockedDataSource
             .Setup(s => s.CreateAsync(viewModel))
             .ReturnsAsync(viewModel);
-        ctx.Services.AddScoped<IGasVolumeDataSource>(_ => mockedDataSource.Object);
+        Services.AddScoped<IGasVolumeDataSource>(_ => mockedDataSource.Object);
 
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         cut.Find("#nominalPipeSize").Change("ThreeHundred");
         cut.Find("#length").Input(2400);
         cut.Find("#useCustomPressure").Change(true);
@@ -170,14 +146,11 @@ public class GasVolumeCalculatorTests
     [Fact]
     public void TypingInvalidInputInLengthControlShouldRenderValidationMessage()
     {
-        // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         cut.Find("#length").Input("a");
         var divValidationMessage = cut.Find(".text-danger");
 
@@ -188,14 +161,11 @@ public class GasVolumeCalculatorTests
     [Fact]
     public void LeavingLengthControlEmptyAfterFirstTypingShouldRenderValidationMessage()
     {
-        // Arrange
-        using var ctx = new TestContext();
-        ctx.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        ctx.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        ctx.Services.AddScoped<IGasVolumeService, GasVolumeService>();
-
         // Act
-        var cut = ctx.RenderComponent<GasVolumeCalculator>();
+        var cut = RenderComponent<GasVolumeCalculator>(
+            parameters => parameters
+                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+        );
         cut.Find("#length").Input("a");
         cut.Find("#length").Input(string.Empty);
         var divValidationMessage = cut.Find(".text-danger");

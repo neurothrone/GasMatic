@@ -1,7 +1,8 @@
 using FluentAssertions;
-using GasMatic.Shared.Services;
+using GasMatic.Core.Interfaces;
+using GasMatic.Core.Services;
 
-namespace GasMatic.Tests.Shared;
+namespace GasMatic.Tests.Core;
 
 public class GasVolumeServiceTests
 {

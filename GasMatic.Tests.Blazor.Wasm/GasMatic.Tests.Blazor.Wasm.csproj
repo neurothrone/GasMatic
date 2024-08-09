@@ -35,6 +35,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\GasMatic.Blazor.Wasm\GasMatic.Blazor.Wasm.csproj"/>
+        <ProjectReference Include="..\GasMatic.Core\GasMatic.Core.csproj" />
     </ItemGroup>
 
 
