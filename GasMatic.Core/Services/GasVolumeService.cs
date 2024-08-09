@@ -1,4 +1,6 @@
-namespace GasMatic.Shared.Services;
+using GasMatic.Core.Interfaces;
+
+namespace GasMatic.Core.Services;
 
 public class GasVolumeService : IGasVolumeService
 {

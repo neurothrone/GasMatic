@@ -74,6 +74,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\GasMatic.Core\GasMatic.Core.csproj" />
         <ProjectReference Include="..\GasMatic.Maui.Core\GasMatic.Maui.Core.csproj" />
         <ProjectReference Include="..\Localization.Maui\Localization.Maui.csproj"/>
         <ProjectReference Include="..\Localization\Localization.csproj"/>

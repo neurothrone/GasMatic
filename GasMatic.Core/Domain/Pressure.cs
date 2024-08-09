@@ -1,4 +1,4 @@
-namespace GasMatic.Shared.Domain;
+namespace GasMatic.Core.Domain;
 
 public enum Pressure
 {

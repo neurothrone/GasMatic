@@ -1,6 +1,6 @@
-using GasMatic.Blazor.Wasm.ViewModels;
+using GasMatic.Core.ViewModels;
 
-namespace GasMatic.Blazor.Wasm.Services;
+namespace GasMatic.Core.Interfaces;
 
 public interface IGasVolumeDataSource
 {

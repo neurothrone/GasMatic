@@ -1,4 +1,4 @@
-using GasMatic.Blazor.Wasm.ViewModels;
+using GasMatic.Core.ViewModels;
 
 namespace GasMatic.Blazor.Wasm.Components.Pages.GasVolume;
 

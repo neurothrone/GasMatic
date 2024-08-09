@@ -1,8 +1,7 @@
-using GasMatic.Blazor.Wasm.Services;
-using GasMatic.Blazor.Wasm.ViewModels;
-using GasMatic.Shared.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using GasMatic.Core.Interfaces;
+using GasMatic.Core.ViewModels;
 
 namespace GasMatic.Blazor.Wasm.Components.Pages.GasVolume;
 

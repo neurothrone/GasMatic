@@ -5,13 +5,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using DevExpress.Maui.Controls;
+using GasMatic.Core.Interfaces;
 using GasMatic.Maui.Core.Extensions;
 using GasMatic.Maui.Core.Messages;
 using GasMatic.Maui.Core.Services.Database;
 using GasMatic.Maui.Core.Validation;
 using GasMatic.Maui.Shared.Domain;
 using GasMatic.Maui.Shared.Dto;
-using GasMatic.Shared.Services;
 
 namespace GasMatic.Maui.Core.ViewModels;
 

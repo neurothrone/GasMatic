@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GasMatic.Shared.Resources.Strings {
+namespace GasMatic.Core.Resources.Strings {
     using System;
     
     

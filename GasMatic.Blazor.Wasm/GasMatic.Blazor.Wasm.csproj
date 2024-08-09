@@ -23,7 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\GasMatic.Shared\GasMatic.Shared.csproj"/>
+        <ProjectReference Include="..\GasMatic.Components\GasMatic.Components.csproj" />
+        <ProjectReference Include="..\GasMatic.Core\GasMatic.Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>

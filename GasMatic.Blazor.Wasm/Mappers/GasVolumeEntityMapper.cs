@@ -1,5 +1,5 @@
 using GasMatic.Blazor.Wasm.Data;
-using GasMatic.Blazor.Wasm.ViewModels;
+using GasMatic.Core.ViewModels;
 
 namespace GasMatic.Blazor.Wasm.Mappers;
 

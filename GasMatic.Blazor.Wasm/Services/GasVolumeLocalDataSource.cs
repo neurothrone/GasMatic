@@ -1,6 +1,7 @@
 using GasMatic.Blazor.Wasm.Data;
 using GasMatic.Blazor.Wasm.Mappers;
-using GasMatic.Blazor.Wasm.ViewModels;
+using GasMatic.Core.Interfaces;
+using GasMatic.Core.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using SqliteWasmHelper;
 

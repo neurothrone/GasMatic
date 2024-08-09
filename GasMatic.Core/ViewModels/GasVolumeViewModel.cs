@@ -1,4 +1,4 @@
-namespace GasMatic.Blazor.Wasm.ViewModels;
+namespace GasMatic.Core.ViewModels;
 
 public class GasVolumeViewModel
 {

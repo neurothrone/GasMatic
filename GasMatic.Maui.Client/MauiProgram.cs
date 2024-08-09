@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using DevExpress.Maui;
+using GasMatic.Core.Interfaces;
+using GasMatic.Core.Services;
 using GasMatic.Maui.Client.Services;
 using GasMatic.Maui.Client.Views.About;
 using GasMatic.Maui.Client.Views.GasVolume;
@@ -11,7 +13,6 @@ using GasMatic.Maui.Core.Services.Environment;
 using GasMatic.Maui.Core.Services.Interactions;
 using GasMatic.Maui.Core.ViewModels;
 using GasMatic.Mobile.Resources.Strings;
-using GasMatic.Shared.Services;
 using Localization;
 using Localization.Maui;
 

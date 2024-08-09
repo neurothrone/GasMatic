@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using GasMatic.Shared.Domain;
+using GasMatic.Core.Domain;
 
-namespace GasMatic.Blazor.Wasm.ViewModels;
+namespace GasMatic.Core.ViewModels;
 
 public class GasVolumeInputViewModel
 {

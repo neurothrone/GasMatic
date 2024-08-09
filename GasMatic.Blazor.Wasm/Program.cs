@@ -5,7 +5,8 @@ using GasMatic.Blazor.Wasm.Components;
 using GasMatic.Blazor.Wasm.Data;
 using GasMatic.Blazor.Wasm.Extensions;
 using GasMatic.Blazor.Wasm.Services;
-using GasMatic.Shared.Services;
+using GasMatic.Core.Interfaces;
+using GasMatic.Core.Services;
 using SqliteWasmHelper;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

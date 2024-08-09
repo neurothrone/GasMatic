@@ -1,7 +1,7 @@
-using GasMatic.Blazor.Wasm.Services;
-using GasMatic.Blazor.Wasm.ViewModels;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.QuickGrid;
+using GasMatic.Core.Interfaces;
+using GasMatic.Core.ViewModels;
 
 namespace GasMatic.Blazor.Wasm.Components.Pages.GasVolume;
 
