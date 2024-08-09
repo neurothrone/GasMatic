@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.QuickGrid;
 using GasMatic.Core.Interfaces;
 using GasMatic.Core.ViewModels;
 
-namespace GasMatic.Blazor.Wasm.Components.Pages.GasVolume;
+namespace GasMatic.Components.Pages.GasVolume;
 
 public partial class GasVolumeHistory
 {

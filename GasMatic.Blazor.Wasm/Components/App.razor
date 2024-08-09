@@ -1,4 +1,11 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
+﻿@using Microsoft.Extensions.Localization
+@using GasMatic.Components.Layout
+@using GasMatic.Core.Resources.Strings
+
+@inject IStringLocalizer<AppResources> Localizer
+
+<Router AppAssembly="@typeof(App).Assembly"
+        AdditionalAssemblies="new[] { typeof(GasMatic.Components._Imports).Assembly }">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
         <FocusOnNavigate RouteData="@routeData" Selector="h1"/>

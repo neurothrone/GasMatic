@@ -12,11 +12,26 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="8.0.7"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.7" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Pages\GasVolume\GasVolume.razor" />
+      <AdditionalFiles Include="Pages\Settings.razor" />
+      <AdditionalFiles Include="Pages\TestError.razor" />
+      <AdditionalFiles Include="Widgets\CultureSelect.razor" />
+      <AdditionalFiles Include="Widgets\Error.razor" />
+      <AdditionalFiles Include="Widgets\TestErrorChildComponent.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GasMatic.Core\GasMatic.Core.csproj" />
     </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
-namespace GasMatic.Blazor.Wasm.Components.Shared;
+namespace GasMatic.Components.Widgets;
 
 public partial class CultureSelect
 {

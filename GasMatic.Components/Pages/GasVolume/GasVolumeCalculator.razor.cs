@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using GasMatic.Core.Interfaces;
 using GasMatic.Core.ViewModels;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 
-namespace GasMatic.Blazor.Wasm.Components.Pages.GasVolume;
+namespace GasMatic.Components.Pages.GasVolume;
 
 public partial class GasVolumeCalculator
 {
