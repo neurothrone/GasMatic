@@ -9,11 +9,17 @@ public class GasVolumeEntity
     [Column(nameof(Id))]
     public int Id { get; init; }
 
-    [Column(nameof(NominalPipeSize))] public int NominalPipeSize { get; init; }
+    [Column(nameof(NominalPipeSize))]
+    public int NominalPipeSize { get; init; }
 
-    [Column(nameof(Length))] public double Length { get; init; }
-    [Column(nameof(Pressure))] public double Pressure { get; init; }
-    [Column(nameof(GasVolume))] public double GasVolume { get; init; }
+    [Column(nameof(Length))]
+    public double Length { get; init; }
+
+    [Column(nameof(Pressure))]
+    public double Pressure { get; init; }
+
+    [Column(nameof(GasVolume))]
+    public double GasVolume { get; init; }
 
     [Indexed]
     [Column(nameof(CalculatedDate))]

@@ -16,6 +16,17 @@ public class GasVolumeSqliteDataSource : IGasVolumeDataSource
         _factory = factory;
     }
 
+    public async Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
+    {
+        await using var dbContext = await _factory.CreateDbContextAsync();
+        var entity = viewModel.ToEntity();
+        await dbContext.GasVolumeEntities.AddAsync(entity);
+        await dbContext.SaveChangesAsync();
+
+        viewModel.Id = entity.Id;
+        return viewModel;
+    }
+
     public async Task<List<GasVolumeViewModel>> FetchAllAsync()
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
@@ -31,17 +42,6 @@ public class GasVolumeSqliteDataSource : IGasVolumeDataSource
             .Where(e => e.Id.Equals(id))
             .Select(e => e.ToViewModel())
             .FirstOrDefaultAsync();
-    }
-
-    public async Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
-    {
-        await using var dbContext = await _factory.CreateDbContextAsync();
-        var entity = viewModel.ToEntity();
-        await dbContext.GasVolumeEntities.AddAsync(entity);
-        await dbContext.SaveChangesAsync();
-
-        viewModel.Id = entity.Id;
-        return viewModel;
     }
 
     public async Task<bool> UpdateByIdAsync(int id, GasVolumeViewModel viewModel)

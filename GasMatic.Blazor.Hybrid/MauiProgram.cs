@@ -2,6 +2,9 @@
 using GasMatic.Blazor.Hybrid.Services;
 using GasMatic.Core.Interfaces;
 using GasMatic.Core.Services;
+using GasMatic.Maui.Sqlite.Interfaces;
+using GasMatic.Maui.Sqlite.Repositories;
+using GasMatic.Maui.Sqlite.Services;
 
 namespace GasMatic.Blazor.Hybrid;
 
@@ -21,8 +24,8 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        // builder.Services.AddSingleton<IGasVolumeDataSource, GasVolumeLocalDataSource>();
-        builder.Services.AddSingleton<IGasVolumeDataSource, GasVolumeInMemoryDataSource>();
+        builder.Services.AddSingleton<IDatabaseRepository, DatabaseRepository>();
+        builder.Services.AddSingleton<IGasVolumeDataSource, GasVolumeDataSource>();
         builder.Services.AddSingleton<IGasVolumeService, GasVolumeService>();
         builder.Services.AddSingleton<ICultureService, CultureService>();
 

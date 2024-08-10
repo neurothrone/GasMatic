@@ -14,7 +14,7 @@ public partial class GasVolumeCalculator
     private IGasVolumeService GasVolumeService { get; set; } = null!;
 
     [Parameter]
-    public GasVolumeInputViewModel GasVolumeInputViewModel { get; set; } = null!;
+    public GasVolumeInputViewModel InputViewModel { get; set; } = null!;
 
     private ErrorBoundary? _errorBoundary;
 
@@ -25,34 +25,34 @@ public partial class GasVolumeCalculator
 
     private void ValidateInput()
     {
-        if (!double.TryParse(GasVolumeInputViewModel.Length, out _))
+        if (!double.TryParse(InputViewModel.Length, out _))
         {
-            GasVolumeInputViewModel.IsValid = false;
+            InputViewModel.IsValid = false;
             return;
         }
 
-        if (_useCustomPressure && !double.TryParse(GasVolumeInputViewModel.CustomPressure, out _))
+        if (_useCustomPressure && !double.TryParse(InputViewModel.CustomPressure, out _))
         {
-            GasVolumeInputViewModel.IsValid = false;
+            InputViewModel.IsValid = false;
             return;
         }
 
-        GasVolumeInputViewModel.IsValid = true;
+        InputViewModel.IsValid = true;
     }
 
     private async Task CalculateGasVolume()
     {
-        if (!double.TryParse(GasVolumeInputViewModel.Length, out double length))
+        if (!double.TryParse(InputViewModel.Length, out double length))
             return;
 
         var pressureString = _useCustomPressure
-            ? GasVolumeInputViewModel.CustomPressure
-            : ((int)GasVolumeInputViewModel.SelectedPressure).ToString();
+            ? InputViewModel.CustomPressure
+            : ((int)InputViewModel.SelectedPressure).ToString();
         if (!double.TryParse(pressureString, out double pressure))
             return;
 
         var gasVolume = GasVolumeService.CalculateGasVolume(
-            (int)GasVolumeInputViewModel.NominalPipeSize,
+            (int)InputViewModel.NominalPipeSize,
             length,
             pressure);
         var roundedGasVolume = Math.Round(gasVolume, RoundToDecimals);
@@ -60,7 +60,7 @@ public partial class GasVolumeCalculator
 
         var viewModel = new GasVolumeViewModel
         {
-            NominalPipeSize = (int)GasVolumeInputViewModel.NominalPipeSize,
+            NominalPipeSize = (int)InputViewModel.NominalPipeSize,
             Length = length,
             Pressure = pressure,
             GasVolume = _gasVolume,

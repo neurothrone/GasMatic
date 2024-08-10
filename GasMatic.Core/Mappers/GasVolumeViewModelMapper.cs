@@ -14,7 +14,7 @@ public static class GasVolumeViewModelMapper
             Length = entity.Length,
             Pressure = entity.Pressure,
             GasVolume = entity.GasVolume,
-            CalculatedDate = entity.CalculatedAt,
+            CalculatedDate = entity.CalculatedDate,
         };
     }
 }

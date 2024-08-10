@@ -1,4 +1,4 @@
-namespace GasMatic.Maui.Core.Services.Database;
+namespace GasMatic.Maui.Sqlite.Data;
 
 public static class DatabaseConstants
 {

@@ -2,12 +2,12 @@
 
 <ErrorBoundary @ref="_errorBoundary">
     <ChildContent>
-        <EditForm Model="GasVolumeInputViewModel" OnSubmit="@CalculateGasVolume">
+        <EditForm Model="InputViewModel" OnSubmit="@CalculateGasVolume">
             <DataAnnotationsValidator/>
 
             <div class="mb-3">
                 <label class="mb-1" for="nominalPipeSize">@Localizer["NominalPipeSizeLabel"] (mm)</label>
-                <InputSelect @bind-Value="GasVolumeInputViewModel.NominalPipeSize"
+                <InputSelect @bind-Value="InputViewModel.NominalPipeSize"
                              class="form-select" id="nominalPipeSize">
                     <option value="" disabled="disabled">@Localizer["NominalPipeSizePicker"]</option>
 
@@ -20,10 +20,10 @@
 
             <div class="mb-3">
                 <label class="mb-1" for="length">@Localizer["LengthLabel"] (m)</label>
-                <CustomInputText @bind-Value="GasVolumeInputViewModel.Length" @bind-Value:after="ValidateInput"
+                <CustomInputText @bind-Value="InputViewModel.Length" @bind-Value:after="ValidateInput"
                                  class="form-control" id="length"
                                  placeholder="@($"{Localizer["LengthPlaceholder"]}")"/>
-                <ValidationMessage class="text-danger mt-1" For="() => GasVolumeInputViewModel.Length"/>
+                <ValidationMessage class="text-danger mt-1" For="() => InputViewModel.Length"/>
             </div>
 
             <div class="mb-3">
@@ -39,11 +39,11 @@
                 @if (_useCustomPressure)
                 {
                     <div class="mb-3">
-                        <CustomInputText @bind-Value="GasVolumeInputViewModel.CustomPressure" @bind-Value:after="ValidateInput"
+                        <CustomInputText @bind-Value="InputViewModel.CustomPressure" @bind-Value:after="ValidateInput"
                                          DisplayName="Custom Pressure"
                                          class="form-control" id="pressure"
                                          placeholder="@($"{Localizer["PressurePlaceholder"]}")"/>
-                        <ValidationMessage class="text-danger mt-1" For="() => GasVolumeInputViewModel.CustomPressure"/>
+                        <ValidationMessage class="text-danger mt-1" For="() => InputViewModel.CustomPressure"/>
                     </div>
                 }
                 else
@@ -59,7 +59,7 @@
                     @*     <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label> *@
                     @* </div> *@
 
-                    <InputRadioGroup @bind-Value="GasVolumeInputViewModel.SelectedPressure" Name="pressureOptions"
+                    <InputRadioGroup @bind-Value="InputViewModel.SelectedPressure" Name="pressureOptions"
                                      class="btn-group" id="pressure"
                                      role="group">
                         @foreach (var pressure in Enum.GetValues<Pressure>())
@@ -72,7 +72,7 @@
                 }
             </div>
 
-            <button type="submit" disabled="@(!GasVolumeInputViewModel.IsValid)"
+            <button type="submit" disabled="@(!InputViewModel.IsValid)"
                     class="btn btn-primary">
                 @Localizer["CalculateButton"]
             </button>

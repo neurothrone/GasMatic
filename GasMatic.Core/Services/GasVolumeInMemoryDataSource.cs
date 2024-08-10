@@ -1,11 +1,18 @@
 using GasMatic.Core.Interfaces;
 using GasMatic.Core.ViewModels;
 
-namespace GasMatic.Blazor.Hybrid.Services;
+namespace GasMatic.Core.Services;
 
 public class GasVolumeInMemoryDataSource : IGasVolumeDataSource
 {
     private readonly List<GasVolumeViewModel> _models = [];
+
+    public Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
+    {
+        viewModel.Id = _models.Count.Equals(0) ? 1 : _models.Max(m => m.Id + 1);
+        _models.Add(viewModel);
+        return Task.FromResult(viewModel);
+    }
 
     public Task<List<GasVolumeViewModel>> FetchAllAsync()
     {
@@ -15,13 +22,6 @@ public class GasVolumeInMemoryDataSource : IGasVolumeDataSource
     public Task<GasVolumeViewModel?> FetchByIdAsync(int id)
     {
         return Task.FromResult(_models.Find(m => m.Id.Equals(id)));
-    }
-
-    public Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
-    {
-        viewModel.Id = _models.Count.Equals(0) ? 1 : _models.Max(m => m.Id + 1);
-        _models.Add(viewModel);
-        return Task.FromResult(viewModel);
     }
 
     public async Task<bool> UpdateByIdAsync(int id, GasVolumeViewModel viewModel)

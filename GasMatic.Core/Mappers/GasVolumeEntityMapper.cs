@@ -13,7 +13,7 @@ public static class GasVolumeEntityMapper
             Length = viewModel.Length,
             Pressure = viewModel.Pressure,
             GasVolume = viewModel.GasVolume,
-            CalculatedAt = viewModel.CalculatedDate
+            CalculatedDate = viewModel.CalculatedDate
         };
     }
 
@@ -23,6 +23,6 @@ public static class GasVolumeEntityMapper
         entity.Length = viewModel.Length;
         entity.Pressure = viewModel.Pressure;
         entity.GasVolume = viewModel.GasVolume;
-        entity.CalculatedAt = viewModel.CalculatedDate;
+        entity.CalculatedDate = viewModel.CalculatedDate;
     }
 }

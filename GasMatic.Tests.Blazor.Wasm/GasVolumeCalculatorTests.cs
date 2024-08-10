@@ -28,7 +28,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         var submitButton = cut.Find("button[type=submit]");
 
@@ -42,7 +42,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         cut.Find("#length").Input(2400);
         var submitButton = cut.Find("button[type=submit]");
@@ -57,7 +57,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         var pressureThirtyInputRadio = cut.Find("#Thirty");
 
@@ -71,7 +71,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         cut.Find("#useCustomPressure").Change(true);
         var pressureInput = cut.Find("#pressure");
@@ -89,7 +89,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         var selectElement = (IHtmlSelectElement)cut.Find("#nominalPipeSize");
         selectElement.Change(expectedOption);
@@ -104,7 +104,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         var thirtyOption = (IHtmlInputElement)cut.Find("input[name=pressureOptions][value=Thirty]");
         var fourThousandOption = (IHtmlInputElement)cut.Find("input[name=pressureOptions][value=FourThousand]");
@@ -130,7 +130,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         cut.Find("#nominalPipeSize").Change("ThreeHundred");
         cut.Find("#length").Input(2400);
@@ -149,7 +149,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         cut.Find("#length").Input("a");
         var divValidationMessage = cut.Find(".text-danger");
@@ -164,7 +164,7 @@ public class GasVolumeCalculatorTests : TestContext
         // Act
         var cut = RenderComponent<GasVolumeCalculator>(
             parameters => parameters
-                .Add(p => p.GasVolumeInputViewModel, new GasVolumeInputViewModel())
+                .Add(p => p.InputViewModel, new GasVolumeInputViewModel())
         );
         cut.Find("#length").Input("a");
         cut.Find("#length").Input(string.Empty);

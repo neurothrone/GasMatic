@@ -16,6 +16,17 @@ public class GasVolumeIndexedDbDataSource : IGasVolumeDataSource
         _dbFactory.Create<GasVolumeDb>();
     }
 
+    public async Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
+    {
+        using var db = await _dbFactory.Create<GasVolumeDb>();
+        var entity = viewModel.ToEntity();
+        db.GasVolumeEntities.Add(entity);
+        await db.SaveChanges();
+
+        viewModel.Id = entity.Id;
+        return viewModel;
+    }
+
     public async Task<List<GasVolumeViewModel>> FetchAllAsync()
     {
         using var db = await _dbFactory.Create<GasVolumeDb>();
@@ -31,17 +42,6 @@ public class GasVolumeIndexedDbDataSource : IGasVolumeDataSource
             .Where(e => e.Id.Equals(id))
             .Select(e => e.ToViewModel())
             .FirstOrDefault();
-    }
-
-    public async Task<GasVolumeViewModel> CreateAsync(GasVolumeViewModel viewModel)
-    {
-        using var db = await _dbFactory.Create<GasVolumeDb>();
-        var entity = viewModel.ToEntity();
-        db.GasVolumeEntities.Add(entity);
-        await db.SaveChanges();
-
-        viewModel.Id = entity.Id;
-        return viewModel;
     }
 
     public async Task<bool> UpdateByIdAsync(int id, GasVolumeViewModel viewModel)
