@@ -12,20 +12,14 @@ public partial class Settings
     [Inject]
     public ICultureService CultureService { get; set; } = null!;
 
-    private CultureInfo _currentCulture = CultureInfo.CurrentCulture;
+    private CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
 
     private void ChangeCulture(CultureInfo culture)
     {
         if (Equals(CultureInfo.CurrentCulture, culture))
             return;
 
-        Thread.CurrentThread.CurrentCulture = culture;
-        Thread.CurrentThread.CurrentUICulture = culture;
-        CultureInfo.DefaultThreadCurrentCulture = culture;
-        CultureInfo.DefaultThreadCurrentUICulture = culture;
-
-        _currentCulture = culture;
-
         CultureService.SaveCulture(culture);
+        NavigationManager.Refresh(forceReload: true);
     }
 }

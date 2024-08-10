@@ -25,5 +25,10 @@ public class CultureService : ICultureService
         var js = (IJSInProcessRuntime)_jsRuntime;
         js.InvokeVoid("clientCulture.set", culture.Name);
         js.InvokeVoid("changeHtmlLang", culture.Name);
+        
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
     }
 }

@@ -14,5 +14,13 @@ public class CultureService : ICultureService
     public void SaveCulture(CultureInfo culture)
     {
         Preferences.Default.Set(nameof(CultureInfo), culture.Name);
+        
+        Application.Current?.Dispatcher.Dispatch(() =>
+        {
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+        });
     }
 }
