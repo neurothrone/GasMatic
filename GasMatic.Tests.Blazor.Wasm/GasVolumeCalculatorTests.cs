@@ -17,7 +17,7 @@ public class GasVolumeCalculatorTests : TestContext
     {
         // Arrange
         Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
+        Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalSqliteDataSource>();
         Services.AddScoped<IGasVolumeService, GasVolumeService>();
         Services.AddLocalization();
     }

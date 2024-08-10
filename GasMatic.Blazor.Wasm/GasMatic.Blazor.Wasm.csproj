@@ -23,6 +23,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\GasMatic.Blazor.Localization\GasMatic.Blazor.Localization.csproj" />
+        <ProjectReference Include="..\GasMatic.Blazor.Wasm.Sqlite\GasMatic.Blazor.Wasm.Sqlite.csproj" />
         <ProjectReference Include="..\GasMatic.Components\GasMatic.Components.csproj" />
         <ProjectReference Include="..\GasMatic.Core\GasMatic.Core.csproj" />
     </ItemGroup>

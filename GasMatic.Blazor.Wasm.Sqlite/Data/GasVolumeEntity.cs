@@ -1,4 +1,4 @@
-namespace GasMatic.Blazor.Wasm.Data;
+namespace GasMatic.Blazor.Wasm.Sqlite.Data;
 
 public class GasVolumeEntity
 {

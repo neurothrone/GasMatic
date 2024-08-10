@@ -5,8 +5,9 @@ using Microsoft.JSInterop;
 using SqliteWasmHelper;
 using GasMatic.Blazor.Localization;
 using GasMatic.Blazor.Wasm.Components;
-using GasMatic.Blazor.Wasm.Data;
 using GasMatic.Blazor.Wasm.Services;
+using GasMatic.Blazor.Wasm.Sqlite.Data;
+using GasMatic.Blazor.Wasm.Sqlite.Services;
 using GasMatic.Core.Interfaces;
 using GasMatic.Core.Services;
 
@@ -20,7 +21,7 @@ builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 
 builder.Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>(options =>
     options.UseSqlite("Data Source=GasMaticDB.sqlite3"));
-builder.Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalDataSource>();
+builder.Services.AddScoped<IGasVolumeDataSource, GasVolumeSqliteDataSource>();
 builder.Services.AddScoped<IGasVolumeService, GasVolumeService>();
 builder.Services.AddScoped<ICultureService, CultureService>();
 

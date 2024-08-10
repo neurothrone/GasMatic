@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace GasMatic.Blazor.Wasm.Data;
+namespace GasMatic.Blazor.Wasm.Sqlite.Data;
 
 public class GasMaticDbContext : DbContext
 {

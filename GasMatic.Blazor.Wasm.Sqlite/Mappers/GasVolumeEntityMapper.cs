@@ -1,7 +1,7 @@
-using GasMatic.Blazor.Wasm.Data;
+using GasMatic.Blazor.Wasm.Sqlite.Data;
 using GasMatic.Core.ViewModels;
 
-namespace GasMatic.Blazor.Wasm.Mappers;
+namespace GasMatic.Blazor.Wasm.Sqlite.Mappers;
 
 public static class GasVolumeEntityMapper
 {

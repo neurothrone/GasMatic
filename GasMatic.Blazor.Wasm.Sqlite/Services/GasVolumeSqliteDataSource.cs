@@ -1,17 +1,17 @@
-using GasMatic.Blazor.Wasm.Data;
-using GasMatic.Blazor.Wasm.Mappers;
+using GasMatic.Blazor.Wasm.Sqlite.Data;
+using GasMatic.Blazor.Wasm.Sqlite.Mappers;
 using GasMatic.Core.Interfaces;
 using GasMatic.Core.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using SqliteWasmHelper;
 
-namespace GasMatic.Blazor.Wasm.Services;
+namespace GasMatic.Blazor.Wasm.Sqlite.Services;
 
-public class GasVolumeLocalDataSource : IGasVolumeDataSource
+public class GasVolumeSqliteDataSource : IGasVolumeDataSource
 {
     private readonly ISqliteWasmDbContextFactory<GasMaticDbContext> _factory;
 
-    public GasVolumeLocalDataSource(ISqliteWasmDbContextFactory<GasMaticDbContext> factory)
+    public GasVolumeSqliteDataSource(ISqliteWasmDbContextFactory<GasMaticDbContext> factory)
     {
         _factory = factory;
     }
