@@ -1,13 +1,12 @@
 using AngleSharp.Html.Dom;
 using FluentAssertions;
 using Moq;
-using SqliteWasmHelper;
-using GasMatic.Blazor.Wasm.Data;
-using GasMatic.Blazor.Wasm.Services;
+using GasMatic.Blazor.Wasm.IndexedDb.Services;
 using GasMatic.Components.Pages.GasVolume;
 using GasMatic.Core.Interfaces;
 using GasMatic.Core.Services;
 using GasMatic.Core.ViewModels;
+using IndexedDB.Blazor;
 
 namespace GasMatic.Tests.Blazor.Wasm;
 
@@ -16,8 +15,8 @@ public class GasVolumeCalculatorTests : TestContext
     public GasVolumeCalculatorTests()
     {
         // Arrange
-        Services.AddSqliteWasmDbContextFactory<GasMaticDbContext>();
-        Services.AddScoped<IGasVolumeDataSource, GasVolumeLocalSqliteDataSource>();
+        Services.AddScoped<IIndexedDbFactory, IndexedDbFactory>();
+        Services.AddScoped<IGasVolumeDataSource, GasVolumeIndexedDbDataSource>();
         Services.AddScoped<IGasVolumeService, GasVolumeService>();
         Services.AddLocalization();
     }
