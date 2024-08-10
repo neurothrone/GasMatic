@@ -1,11 +1,6 @@
 @page "/settings"
-@inject IStringLocalizer<AppResources> Localizer
 
-<PageTitle>@Localizer["SettingsTitle"]</PageTitle>
+<PageTitle>@Localizer["SettingsTitle"] - GasMatic</PageTitle>
 <h1>@Localizer["SettingsTitle"]</h1>
 
-<CultureSelect/>
-
-@code {
-
-}
+<CultureSelect SelectedCulture="_currentCulture" OnCultureSelected="ChangeCulture"/>

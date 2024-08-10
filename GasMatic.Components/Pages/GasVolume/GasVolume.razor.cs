@@ -10,7 +10,7 @@ public partial class GasVolume
         History
     }
 
-    private GasVolumeInputViewModel _inputViewModel = new();
+    private readonly GasVolumeInputViewModel _inputViewModel = new();
     private GasVolumeTab _tab = GasVolumeTab.Calculator;
 
     private void ChangeTabTo(GasVolumeTab tab)

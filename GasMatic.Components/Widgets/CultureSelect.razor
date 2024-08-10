@@ -1,5 +1,11 @@
-<strong>@Localizer["ChangeLanguage"]</strong>
-<select class="form-control" @bind="SelectedCulture" style="width:150px;">
+<h4 class="mb-2">@Localizer["ChangeLanguageLabel"]</h4>
+
+<select class="form-select mb-3"
+        @bind="@SelectedCulture"
+        @bind:after="() => CultureSelected(SelectedCulture)"
+        style="width:150px;">
+    <option value="" disabled="disabled">@Localizer["SelectLanguage"]</option>
+
     @foreach (var culture in _supportedCultures)
     {
         <option value="@culture">@culture.DisplayName</option>

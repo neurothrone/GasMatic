@@ -1,35 +1,24 @@
-using System.Globalization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using System.Globalization;
 
 namespace GasMatic.Components.Widgets;
 
 public partial class CultureSelect
 {
-    [Inject]
-    public NavigationManager NavigationManager { get; set; } = null!;
+    [Parameter, EditorRequired]
+    public CultureInfo SelectedCulture { get; set; } = null!;
 
-    [Inject]
-    public IJSRuntime JsRuntime { get; set; } = null!;
+    [Parameter]
+    public EventCallback<CultureInfo> OnCultureSelected { get; set; }
 
     private readonly CultureInfo[] _supportedCultures =
     [
-        new CultureInfo("en"),
-        new CultureInfo("sv-se")
+        new CultureInfo("en-US"),
+        new CultureInfo("sv-SE")
     ];
 
-    private CultureInfo SelectedCulture
+    private void CultureSelected(CultureInfo culture)
     {
-        get => CultureInfo.CurrentCulture;
-        set
-        {
-            if (Equals(CultureInfo.CurrentCulture, value))
-                return;
-
-            var js = (IJSInProcessRuntime)JsRuntime;
-            js.InvokeVoid("clientCulture.set", value.Name);
-            js.InvokeVoid("changeHtmlLang", value.Name);
-            NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
-        }
+        OnCultureSelected.InvokeAsync(culture);
     }
 }

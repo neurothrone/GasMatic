@@ -42,20 +42,14 @@ public partial class GasVolumeCalculator
 
     private async Task CalculateGasVolume()
     {
-        // throw new SystemException();
-
         if (!double.TryParse(GasVolumeInputViewModel.Length, out double length))
-        {
             return;
-        }
 
         var pressureString = _useCustomPressure
             ? GasVolumeInputViewModel.CustomPressure
             : ((int)GasVolumeInputViewModel.SelectedPressure).ToString();
         if (!double.TryParse(pressureString, out double pressure))
-        {
             return;
-        }
 
         var gasVolume = GasVolumeService.CalculateGasVolume(
             (int)GasVolumeInputViewModel.NominalPipeSize,

@@ -126,7 +126,7 @@
     <data name="ChangeLanguageDialogMessage" xml:space="preserve">
         <value>Är du säker på att du vill ändra språket?</value>
     </data>
-    <data name="ChangeLanguage" xml:space="preserve">
+    <data name="ChangeLanguageLabel" xml:space="preserve">
         <value>Ändra språk</value>
     </data>
     <data name="ChangeLanguageSuccessMessage" xml:space="preserve">
@@ -158,5 +158,17 @@
     </data>
     <data name="RequiredInputValidation" xml:space="preserve">
         <value>Detta krävs.</value>
+    </data>
+    <data name="SaveButton" xml:space="preserve">
+        <value>Spara</value>
+    </data>
+    <data name="English" xml:space="preserve">
+        <value>Engelska</value>
+    </data>
+    <data name="Swedish" xml:space="preserve">
+        <value>Svenska</value>
+    </data>
+    <data name="SelectLanguage" xml:space="preserve">
+        <value>Välj språk</value>
     </data>
 </root>

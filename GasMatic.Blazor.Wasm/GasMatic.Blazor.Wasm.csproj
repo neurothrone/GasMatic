@@ -10,9 +10,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.5"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.5" PrivateAssets="all"/>
-        <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.6"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.7" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.7" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.7" />
         <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" />
         <PackageReference Include="SqliteWasmHelper" Version="1.2.0-beta-gf8e1db1f31"/>
     </ItemGroup>
@@ -22,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\GasMatic.Blazor.Localization\GasMatic.Blazor.Localization.csproj" />
         <ProjectReference Include="..\GasMatic.Components\GasMatic.Components.csproj" />
         <ProjectReference Include="..\GasMatic.Core\GasMatic.Core.csproj" />
     </ItemGroup>
@@ -44,6 +45,7 @@
         <_ContentIncludedByDefault Remove="Components\Pages\Home.razor" />
         <_ContentIncludedByDefault Remove="Components\Pages\Settings.razor" />
         <_ContentIncludedByDefault Remove="Components\Pages\TestError.razor" />
+        <_ContentIncludedByDefault Remove="wwwroot\scripts\culture.js" />
     </ItemGroup>
 
 </Project>
