@@ -1,6 +1,6 @@
 using GasMatic.Blazor.Wasm.Sqlite.Data;
-using GasMatic.Blazor.Wasm.Sqlite.Mappers;
 using GasMatic.Core.Interfaces;
+using GasMatic.Core.Mappers;
 using GasMatic.Core.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using SqliteWasmHelper;
@@ -28,7 +28,7 @@ public class GasVolumeSqliteDataSource : IGasVolumeDataSource
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
         return await dbContext.GasVolumeEntities
-            .Where(e => e.Id == id)
+            .Where(e => e.Id.Equals(id))
             .Select(e => e.ToViewModel())
             .FirstOrDefaultAsync();
     }
@@ -47,25 +47,26 @@ public class GasVolumeSqliteDataSource : IGasVolumeDataSource
     public async Task<bool> UpdateByIdAsync(int id, GasVolumeViewModel viewModel)
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
-        var entity = await dbContext.GasVolumeEntities.FirstOrDefaultAsync(e => e.Id == id);
+        var entity = await dbContext.GasVolumeEntities
+            .FirstOrDefaultAsync(e => e.Id.Equals(id));
         if (entity is null)
             return false;
 
         entity.UpdateFromViewModel(viewModel);
         await dbContext.SaveChangesAsync();
-
         return true;
     }
 
     public async Task<bool> DeleteByIdAsync(int id)
     {
         await using var dbContext = await _factory.CreateDbContextAsync();
-        var entity = await dbContext.GasVolumeEntities.FirstOrDefaultAsync(e => e.Id == id);
-        if (entity is null) return false;
+        var entity = await dbContext.GasVolumeEntities
+            .FirstOrDefaultAsync(e => e.Id.Equals(id));
+        if (entity is null)
+            return false;
 
         dbContext.GasVolumeEntities.Remove(entity);
         await dbContext.SaveChangesAsync();
-
         return true;
     }
 

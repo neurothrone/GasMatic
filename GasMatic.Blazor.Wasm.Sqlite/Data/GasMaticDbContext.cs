@@ -1,3 +1,4 @@
+using GasMatic.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GasMatic.Blazor.Wasm.Sqlite.Data;
